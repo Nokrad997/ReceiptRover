@@ -1,0 +1,3 @@
+ttkbootstrap==1.0
+numpy==1.26.1
+pytesseract==0.3.8
