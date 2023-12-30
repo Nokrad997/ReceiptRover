@@ -2,7 +2,7 @@ import bcrypt
 from src.models.Model import Model
 
 class Users(Model):
-    def __init__(self, name, email, password):
+    def __init__(self, name = '', email = '', password = ''):
         super().__init__()
 
         self.name = name
