@@ -10,7 +10,7 @@ class Users(Model):
         self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode("utf-8")
 
     def addUser(self):
-        self.executeQuery(f'INSERT INTO "Users" (name, email, password) VALUES (\'{self.name}\', \'{self.email}\', \'{self.password}\') RETURNING *')
+        return self.executeQuery(f'INSERT INTO "Users" (name, email, password) VALUES (\'{self.name}\', \'{self.email}\', \'{self.password}\') RETURNING *')
     
     def getUsers(self):
-        self.executeQuery('SELECT * FROM "Users"')
+        return self.executeQuery('SELECT * FROM "Users"')
