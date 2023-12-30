@@ -13,7 +13,7 @@ class Model:
             self.cur = self.conn.cursor()
 
         except Exception as e:
-            print(e)
+            return e
 
     def __del__(self):
         self.cur.close()
@@ -29,6 +29,4 @@ class Model:
             return result
         
         except Exception as e:
-            print(f"Error executing query: {e}")
-        
-            return None
+            return e
