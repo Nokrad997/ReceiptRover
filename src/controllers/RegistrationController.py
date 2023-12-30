@@ -9,7 +9,8 @@ class RegistrationController:
     def registerUser(self):
         try:
             if self.validateEmail() and self.validateName() and self.validatePassword():
-                self.userModel = Users(self.registrationView.name, self.registrationView.email, self.registrationView.password)
+
+                self.userModel = Users(0, self.registrationView.name, self.registrationView.email, self.registrationView.password)
                 res = self.userModel.addUser()
                     
                 if isinstance(res, Exception):
@@ -29,6 +30,7 @@ class RegistrationController:
 
         if re.match(email_regex, email):
             return True
+        
         else:
             raise Exception("Invalid email address!")
     
@@ -42,8 +44,12 @@ class RegistrationController:
 
     def validatePassword(self):
         pwd = self.registrationView.password
+        rePwd = self.registrationView.reTypePassword
         
         if(len(pwd) < 8 or len(pwd) > 32):
             raise Exception("Password must be between 8 and 32 characters long!")
-
+        
+        elif(pwd != rePwd):
+            raise Exception("Passwords do not match!")
+        
         return True

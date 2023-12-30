@@ -21,7 +21,6 @@ class Model:
 
     def executeQuery(self, query):
         try:
-            print(query)
             self.cur.execute(query)
             result = self.cur.fetchall()  
             self.conn.commit()
