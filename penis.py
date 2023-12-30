@@ -6,7 +6,7 @@ from src.views.RegistrationView import RegistrationView
 print("chuj")
 
 usr = Users()
-rv = RegistrationView("marek", "marucha@mare.pl", "12345678")
+rv = RegistrationView("marek", "marucha@mar.pl", "12345")
 rc = RegistrationController(rv, usr)
 
 print(rc.registerUser())
