@@ -5,11 +5,10 @@ services:
     build: 
       context: .
       dockerfile: docker/python/Dockerfile
-    restart: always
-    ports:
-      - "8000:8000"
     networks:
-        io-network:
+      - io-network
+    depends_on:
+      - db
 
   db:
     container_name: pg_container_io
@@ -23,7 +22,7 @@ services:
       - "5432:5432"
     networks:
         io-network:
-          ipv4_address: 172.19.0.3    
+          ipv4_address: 172.19.0.3
 
   pgadmin:
     container_name: pgadmin4_container_io
@@ -35,7 +34,7 @@ services:
     ports:
       - "5050:80"
     networks:
-       io-network:
+       - io-network
 
 networks:
   io-network:

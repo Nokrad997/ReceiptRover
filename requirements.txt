@@ -1,3 +1,5 @@
-ttkbootstrap==1.0
-numpy==1.26.1
-pytesseract==0.3.8
+ttkbootstrap==1.10.1
+numpy==1.26.2
+pytesseract==0.3.10
+psycopg2-binary==2.9.9
+bcrypt==4.1.2
