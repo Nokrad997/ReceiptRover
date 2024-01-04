@@ -7,9 +7,6 @@ from src.controllers.LoginController import LoginController
 from src.views.RegistrationView import RegistrationView
 from src.views.LoginView import LoginView
 
-
-print("chuj")
-
 # usr = Users()
 # rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
 # rc = RegistrationController(rv, usr)
