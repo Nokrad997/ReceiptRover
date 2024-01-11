@@ -1,6 +1,10 @@
 class RegistrationView:
-    def __init__(self, name, email, password, retypePassword):
-        self.name = name
-        self.email = email
+    def __init__(self):
+        self.username = ""
+        self.password = ""
+        self.confirm_password = ""
+
+    def set_credentials(self, username, password, confirm_password):
+        self.username = username
         self.password = password
-        self.reTypePassword = retypePassword
+        self.confirm_password = confirm_password
