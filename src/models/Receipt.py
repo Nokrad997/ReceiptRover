@@ -1,4 +1,4 @@
-from src.models.Model import Model
+from src.controllers.DatabaseController import Model
 from src.models.Product import Product
 from pydantic import BaseModel
 from typing import Self
@@ -7,7 +7,6 @@ class Receipt(Model, BaseModel):
     receipt_id: int
     key: str
     receipt: bytes
-    products: list[Product]
     
     def __init__(self, receipt_id : int = 0, key : str = '', receipt : bytes = b''):
         super().__init__()
@@ -16,25 +15,33 @@ class Receipt(Model, BaseModel):
         self.receipt = receipt
         self.products=[]
     
-    def addReceipt(self) -> list:
-        return self.executeQuery(f'INSERT INTO "Receipt" (key, receipt) VALUES (\'{self.key}\', \'{self.receipt}\') RETURNING *')
+    @property
+    def get_receipt_id(self) -> int:
+        return self.receipt_id
     
-    def getReceipts(self) -> list[Self]:
-        res = self.executeQuery('SELECT * FROM "Receipt"')
-        if (res):
-            for i in range(len(res)):
-                res[i] = Receipt(res[i][0], res[i][1], res[i][2])
-            return res
-        else:
-            return res
-        
-    def getReceiptById(self, id) -> Self:
-        res = self.executeQuery(f'SELECT * FROM "Receipt" WHERE receipt_id = \'{id}\'')
-        
-        if(res):
-            return Receipt(res[0][0], res[0][1], res[0][2])
-        else:
-            return res
+    @property
+    def get_key(self) -> str:
+        return self.key
+    
+    
+    @property
+    def get_products(self) -> list[Product]:
+        return self.products
+    
+    @get_receipt_id.setter
+    def set_receipt_id(self, value : int):
+        self.receipt_id = value
+    
+    @get_key.setter
+    def set_key(self, value : str):
+        self.key = value
+
+
+    @get_products.setter
+    def set_products(self, value : list[Product]):
+        self.products = value
+
+    
         
         
     

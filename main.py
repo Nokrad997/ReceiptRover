@@ -1,4 +1,4 @@
-from src.models.Users import Users
+from src.models.User import Users
 import bcrypt
 
 from src.controllers.RegistrationController import RegistrationController

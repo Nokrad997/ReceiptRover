@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from src.models.Product import Product
 from src.models.Receipt import Receipt
-from src.models.Transactions import Transaction
+from src.models.Transaction import Transaction
 
 
 class DownloadData():

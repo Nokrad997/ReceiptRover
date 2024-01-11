@@ -65,6 +65,8 @@ ALTER TABLE IF EXISTS public."Receipt"
 
 -- Zapytanie ktore u mnie dziala //MS 
 
+-- Zapytanie ktore u mnie dziala //MS 
+
 CREATE TABLE "User" (
     user_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -77,7 +79,7 @@ CREATE TABLE "OCRScan" (
     scanned_image BYTEA
 );
 
-CREATE TABLE "Transactions" (
+CREATE TABLE "Transaction" (
     transactions_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     date DATE NOT NULL,
@@ -91,18 +93,8 @@ CREATE TABLE "Receipt" (
     receipt_id SERIAL PRIMARY KEY,
     key TEXT NOT NULL,
     receipt BYTEA,
-    FOREIGN KEY (key) REFERENCES "Transactions" (key)
-     -- FOREIGN KEY (receipt_id) REFERENCES "Product" (product_id)
+    FOREIGN KEY (key) REFERENCES "Transaction" (key)
 );
-
-
--- CREATE TABLE "Products" (
---     product_id SERIAL PRIMARY KEY,
---     product_name NUMERIC NOT NULL,
---     product_price INTEGER NOT NULL,
---     product_quantity INTEGER NOT NULL
--- );
-
 
 INSERT INTO "User" (name, email, password) VALUES
 ('John Doe', 'johndoe@example.com', 'password123'),
