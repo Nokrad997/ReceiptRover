@@ -5,22 +5,18 @@ class TransactionController(DatabaseController):
         query = f"INSERT INTO transactions (user_id, date, scan_id, key) VALUES ({userid}, {date}, {scanid}, {key});"
         return self.executeQuery(query)
 
-    def get_transaction_by_id(self, transaction_id):
-        query = "SELECT * FROM transactions WHERE transaction_id = %s;"
-        data = (transaction_id,)
-        return self.execute_query(query, data)
+    def getTransactionById(self, transaction_id):
+        query = f"SELECT * FROM transactions WHERE transaction_id = {transaction_id};"
+        return self.executeQuery(query)
 
-    def get_transactions_by_user_id(self, user_id):
-        query = "SELECT * FROM transactions WHERE user_id = %s;"
-        data = (user_id,)
-        return self.execute_query(query, data)
+    def getTransactionsByUserId(self, user_id):
+        query = f"SELECT * FROM transactions WHERE user_id = {user_id};"
+        return self.executeQuery(query)
 
-    def update_transaction_key(self, transaction_id, new_key):
-        query = "UPDATE transactions SET key = %s WHERE transaction_id = %s;"
-        data = (new_key, transaction_id)
-        return self.execute_query(query, data)
+    def updateTransactionKey(self, transaction_id, new_key):
+        query = f"UPDATE transactions SET key = {new_key} WHERE transaction_id = {transaction_id};"
+        return self.executeQuery(query)
 
-    def delete_transaction(self, transaction_id):
-        query = "DELETE FROM transactions WHERE transaction_id = %s;"
-        data = (transaction_id,)
-        return self.execute_query(query, data)
+    def deleteTransaction(self, transaction_id):
+        query = f"DELETE FROM transactions WHERE transaction_id = {transaction_id};"
+        return self.executeQuery(query)

@@ -14,6 +14,10 @@ class UserController(DatabaseController):
     def getUserById(self, userid):
         query = f"SELECT * FROM users WHERE userid = {userid};"
         return self.executeQuery(query)
+    
+    def getUserByEmail(self, email):
+        query = f"SELECT * FROM users WHERE email = {email};"
+        return self.executeQuery(query)
 
     def updateUserPassword(self, userid, newpassword):
         newpassword = self.hashPassword(newpassword)
@@ -21,6 +25,7 @@ class UserController(DatabaseController):
         return self.executeQuery(query)
 
     def verifyPassword(self, hashedpassword, inputpassword):
+        password = query = f"SELECT password FROM users WHERE user_id = {user_id};"
         return bcrypt.checkpw(inputpassword.encode('utf-8'), hashedpassword)
 
     def hashPassword(self, password):
