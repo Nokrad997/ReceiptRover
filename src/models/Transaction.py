@@ -1,23 +1,14 @@
 from datetime import datetime
 from pydantic import BaseModel
 from datetime import date
-from typing import Self
+from typing import Self, Optional
 
 class Transaction(BaseModel):
     transactions_id: int
     user_id: int
     date: datetime
-    scan_id: int
+    scan_id: Optional[int]
     key: str
-        
-    def __init__(self, transactions_id : int = 0, user_id : int = 0, date : str = "", scan_id : int = 0, key : str = ''):
-        super().__init__()
-        self.transactions_id = transactions_id
-        self.user_id = user_id
-        self.date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f') if date != "" else datetime.now()
-        self.scan_id = scan_id
-        self.key = key
-        self.receipt= None
         
     @property
     def get_transactions_id(self) -> int:

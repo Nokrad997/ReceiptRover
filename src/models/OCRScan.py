@@ -4,11 +4,6 @@ class OCRScan(BaseModel):
     scan_id: int
     scanned_image_data: list[int]
 
-    def __init__(self, scan_id, scanned_image_data):
-        super().__init__()
-        self.scan_id = scan_id
-        self.scanned_image_data = scanned_image_data
-
     @property
     def get_scan_id(self):
         return self.scan_id

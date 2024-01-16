@@ -6,12 +6,6 @@ class Product(BaseModel):
     price: float
     quantity: float
     
-    def __init__(self,name:str="",price:float=0,quantity:int=0):
-        super().__init__()
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-    
     @property
     def get_name(self) -> str:
         return self.name
