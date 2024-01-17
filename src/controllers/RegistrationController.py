@@ -4,7 +4,7 @@ from src.repositories.UserRepository import UserRepository
 import re
 
 class RegistrationController:
-    def __init__(self, registrationView : RegistrationView, userRepository : UserRepository):
+    def __init__(self, registrationView : RegistrationView = None, userRepository : UserRepository = None):
         self.registrationView = registrationView
         self.userRepository = userRepository
 
@@ -14,7 +14,6 @@ class RegistrationController:
 
                 usr = User(id = 0, name = self.registrationView.name, email = self.registrationView.email, password = self.registrationView.password)
                 res = self.userRepository.createUser(usr)
-                print(res)
                     
                 if isinstance(res, Exception):
                     return "chyba zly email ale nw"    

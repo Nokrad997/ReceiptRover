@@ -5,6 +5,8 @@ from src.modelsOnline.Receipt import Receipt
 from src.modelsOnline.Transaction import Transaction
 
 
+# rozdzielić na kilka plików, nie może być 3 klas w jednym pliku
+
 class DownloadData():
     
     def __init__(self):
