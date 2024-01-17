@@ -1,6 +1,15 @@
 from src.modelsOnline.User import User
 import bcrypt
 
+
+'''
+
+        PISZEMY KURWA CAMEL CASEM :)
+        jebacZydow, a nie jebac_zydow
+        zrobmy to porzadnie, a nie jakies gówno
+
+'''
+
 from src.controllers.RegistrationController import RegistrationController
 from src.controllers.LoginController import LoginController
 
