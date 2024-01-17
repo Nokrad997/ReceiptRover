@@ -1,4 +1,4 @@
-from repositories.DatabaseRepository import DatabaseRepository
+from src.repositories import DatabaseRepository
 import bcrypt
 
 class UserController(DatabaseRepository):

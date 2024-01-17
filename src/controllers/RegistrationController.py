@@ -1,4 +1,5 @@
-from src.models.User import User
+from src.modelsOnline.User import User
+from src.repositories.UserRepository import UserRepository
 import re
 
 class RegistrationController:
