@@ -37,5 +37,3 @@ class User(BaseModel):
     @getPassword.setter
     def setPassword(self, value):
         self.password = value
-
-
