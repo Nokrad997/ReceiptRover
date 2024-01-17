@@ -10,12 +10,13 @@ class LoginController:
     def login(self):
         email = self.loginView.getEmail()
         password = self.loginView.getPassword()
-        usr = self.userRepository.getUserByEmail(email)
-        if(isinstance(usr, UserRepository)):
-            if(self.userRepository):
+        usr = self.userModel.getUserByEmail(email)
+        if(isinstance(usr, UserController)):
+            if(self.userModel.checkPassword(password, usr.getPassword())):
                 return "zalogowano"
             else:
                 return "zle haslo"
+            
         
         else:
             return "zly email"    
