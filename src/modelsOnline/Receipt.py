@@ -32,8 +32,3 @@ class Receipt(BaseModel):
     @getProducts.setter
     def setProducts(self, value : list[Product]):
         self.products = value
-
-    
-        
-        
-    

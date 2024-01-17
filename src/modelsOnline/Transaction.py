@@ -49,4 +49,3 @@ class Transaction(BaseModel):
     @getKey.setter
     def setKey(self, value : str):
         self.key = value
-    
