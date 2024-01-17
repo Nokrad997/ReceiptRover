@@ -12,7 +12,8 @@ from src.views.LoginView import LoginView
 
 # print(rc.registerUser())
 
-usr = User()
+usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
+
 lv = LoginView("test@log1.pl", "testtest")
 lc = LoginController(lv, usr)
 

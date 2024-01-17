@@ -1,7 +1,7 @@
-from repositories.DatabaseRepository import DatabaseRepository
+from src.repositories.Repository import Repository
 import bcrypt
 
-class UserController(DatabaseRepository):
+class UserController(Repository):
     def createUser(self, username, password):
         password = self.hashPassword(password)
         query = f"INSERT INTO user (username, password) VALUES ({username}, {password});"

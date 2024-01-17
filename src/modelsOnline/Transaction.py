@@ -1,6 +1,5 @@
 from datetime import datetime
 from pydantic import BaseModel
-from datetime import date
 from typing import Self
 
 class Transaction(BaseModel):
