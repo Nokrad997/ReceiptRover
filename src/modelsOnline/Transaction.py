@@ -3,59 +3,50 @@ from pydantic import BaseModel
 from typing import Self
 
 class Transaction(BaseModel):
-    transactions_id: int
-    user_id: int
+    transactionsId: int
+    userId: int
     date: datetime
-    scan_id: int
+    scanId: int
     key: str
-        
-    def __init__(self, transactions_id : int = 0, user_id : int = 0, date : str = "", scan_id : int = 0, key : str = ''):
-        super().__init__()
-        self.transactions_id = transactions_id
-        self.user_id = user_id
-        self.date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f') if date != "" else datetime.now()
-        self.scan_id = scan_id
-        self.key = key
-        self.receipt= None
-        
-    @property
-    def get_transactions_id(self) -> int:
-        return self.transactions_id
     
     @property
-    def get_user_id(self) -> int:
-        return self.user_id
+    def getTransactionsId(self) -> int:
+        return self.transactionsId
     
     @property
-    def get_date(self) -> datetime:
+    def getUserId(self) -> int:
+        return self.userId
+    
+    @property
+    def getDate(self) -> datetime:
         return self.date
     
     @property
-    def get_scan_id(self) -> int:
-        return self.scan_id
+    def getScanId(self) -> int:
+        return self.scanId
     
     @property
-    def get_key(self) -> str:
+    def getKey(self) -> str:
         return self.key
 
 
-    @get_transactions_id.setter
-    def set_transactions_id(self, value : int):
-        self.transactions_id = value
+    @getTransactionsId.setter
+    def setTransactionsId(self, value : int):
+        self.transactionsId = value
 
-    @get_user_id.setter
-    def set_user_id(self, value : int):
-        self.user_id = value
+    @getUserId.setter
+    def setUserId(self, value : int):
+        self.userId = value
 
-    @get_date.setter
-    def set_date(self, value : datetime):
+    @getDate.setter
+    def setDate(self, value : datetime):
         self.date = value
 
-    @get_scan_id.setter
-    def set_scan_id(self, value : int):
-        self.scan_id = value
+    @getScanId.setter
+    def setScanId(self, value : int):
+        self.scanId = value
 
-    @get_key.setter
-    def set_key(self, value : str):
+    @getKey.setter
+    def setKey(self, value : str):
         self.key = value
     
