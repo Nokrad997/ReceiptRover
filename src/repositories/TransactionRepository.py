@@ -1,6 +1,6 @@
-from controllers.DatabaseController import DatabaseController
+from src.repositories.Repository import Repository
 
-class TransactionController(DatabaseController):
+class TransactionController(Repository):
     def createTransaction(self, userid, date, scanid, key):
         query = f"INSERT INTO transactions (user_id, date, scan_id, key) VALUES ({userid}, {date}, {scanid}, {key});"
         return self.executeQuery(query)

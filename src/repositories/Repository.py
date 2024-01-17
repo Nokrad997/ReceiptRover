@@ -1,7 +1,7 @@
 import psycopg2
 import config
 
-class DatabaseController:
+class Repository:
     def __init__(self):
         try:
             self.conn = psycopg2.connect(

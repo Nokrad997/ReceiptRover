@@ -1,6 +1,6 @@
-from controllers.DatabaseController import DatabaseController
+from src.repositories.Repository import Repository
 
-class OCRScanController(DatabaseController):
+class OCRScanController(Repository):
     def createOcrScan(self, scanned_image_data):
         query = f"INSERT INTO ocr_scans (scanned_image_data) VALUES ({scanned_image_data});"
         return self.executeQuery(query)

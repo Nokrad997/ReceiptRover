@@ -1,9 +1,8 @@
-from src.controllers.DatabaseController import Model
-from src.models.Product import Product
+from src.modelsOnline.Product import Product
 from pydantic import BaseModel
 from typing import Self
 
-class Receipt(Model, BaseModel):
+class Receipt(BaseModel):
     receipt_id: int
     key: str
     receipt: bytes

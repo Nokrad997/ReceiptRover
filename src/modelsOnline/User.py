@@ -5,13 +5,6 @@ class User(BaseModel):
     name: str
     email: EmailStr
     password: str
-    def __init__(self, id = 0, name = '', email = '', password = ''):
-        super().__init__()
-
-        self.id = id
-        self.name = name
-        self.email = email
-        self.password = password
 
     @property
     def get_id(self) -> int:

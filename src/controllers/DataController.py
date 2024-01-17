@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
-from src.models.Product import Product
-from src.models.Receipt import Receipt
-from src.models.Transaction import Transaction
+from src.modelsOnline.Product import Product
+from src.modelsOnline.Receipt import Receipt
+from src.modelsOnline.Transaction import Transaction
 
 
 class DownloadData():

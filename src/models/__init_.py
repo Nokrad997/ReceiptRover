@@ -1,1 +1,0 @@
-__all__ = ['Model', 'OCRScan', 'Users','Receipts','Products']

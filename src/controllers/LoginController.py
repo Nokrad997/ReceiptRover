@@ -1,11 +1,11 @@
-from controllers.UserController import UserController
-from views.LoginView import LoginView
+from src.repositories import UserRepository
+from src.views.LoginView import LoginView
 import bcrypt
 
 class LoginController:
-    def __init__(self, loginView : LoginView, userModel : UserController):
+    def __init__(self, loginView : LoginView, userRepository : UserRepository):
         self.loginView = loginView
-        self.userModel = userModel
+        self.userRepository = UserRepository
     
     def login(self):
         email = self.loginView.getEmail()
@@ -16,6 +16,7 @@ class LoginController:
                 return "zalogowano"
             else:
                 return "zle haslo"
+            
         
         else:
             return "zly email"    
