@@ -1,4 +1,4 @@
-from controllers.DatabaseController import DatabaseController
+from repositories.DatabaseRepository import DatabaseRepository
 
 class TransactionController(DatabaseController):
     def createTransaction(self, userid, date, scanid, key):

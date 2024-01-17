@@ -1,4 +1,4 @@
-from controllers.DatabaseController import DatabaseController
+from repositories.DatabaseRepository import DatabaseRepository
 
 class OCRScanController(DatabaseController):
     def createOcrScan(self, scanned_image_data):

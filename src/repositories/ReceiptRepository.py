@@ -1,4 +1,4 @@
-from controllers.DatabaseController import DatabaseController
+from repositories.DatabaseRepository import DatabaseRepository
 
 class ReceiptController(DatabaseController):
     def createReceipt(self, key, receipt_data):
