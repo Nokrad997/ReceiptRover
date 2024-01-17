@@ -3,16 +3,16 @@ from src.views.LoginView import LoginView
 import bcrypt
 
 class LoginController:
-    def __init__(self, loginView : LoginView, userModel : UserRepository):
+    def __init__(self, loginView : LoginView, userRepository : UserRepository):
         self.loginView = loginView
-        self.userModel = userModel
+        self.userRepository = UserRepository
     
     def login(self):
         email = self.loginView.getEmail()
         password = self.loginView.getPassword()
-        usr = self.userModel.getUserByEmail(email)
+        usr = self.userRepository.getUserByEmail(email)
         if(isinstance(usr, UserRepository)):
-            if(self.userModel):
+            if(self.userRepository):
                 return "zalogowano"
             else:
                 return "zle haslo"
