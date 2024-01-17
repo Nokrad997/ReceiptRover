@@ -9,6 +9,7 @@ from src.views.LoginView import LoginView
 
 class AppController:
     def __init__(self):
+        self.loggedIn = False
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
@@ -17,7 +18,19 @@ class AppController:
         self.registrationController.registerUser()
     
     def login(self, loginView: LoginView, userRepository: UserRepository = UserRepository()):
-        self.loginController.login()
+        try:
+            self.loggedIn = self.loginController.login()
+        except ValueError as e:
+            print(e)
+        except Exception as e:
+            print(e)
+    
+    def addReceipt(self):
+        pass
+
+    def synchronize(self):
+        pass
+    
         
     
     

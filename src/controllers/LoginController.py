@@ -15,12 +15,12 @@ class LoginController:
 
         if(isinstance(usr, User)):
             if(self.checkPassword(password, usr.password)):
-                return "zalogowano"
+                return True
             else:
-                return "zle haslo"
+                raise ValueError("zle haslo")
             
         else:
-            return "zly email"    
+            raise Exception("nie ma takiego uzytkownika")   
         
     def checkPassword(self, password, hashedpassword):
         return bcrypt.checkpw(password.encode('utf-8'), hashedpassword.encode('utf-8'))
