@@ -1,16 +1,16 @@
-CREATE TABLE IF NOT EXISTS public."Users"
+CREATE TABLE IF NOT EXISTS public."User"
 (
     user_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     name text COLLATE pg_catalog."default" NOT NULL,
     email text COLLATE pg_catalog."default" NOT NULL,
     password text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT "Users_pkey" PRIMARY KEY (user_id),
+    CONSTRAINT "User_pkey" PRIMARY KEY (user_id),
     CONSTRAINT email UNIQUE (email)
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public."Users"
+ALTER TABLE IF EXISTS public."User"
     OWNER to root;
 
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS public."Transactions"
         ON DELETE NO ACTION
         NOT VALID,
     CONSTRAINT "user_id_FK" FOREIGN KEY (user_id)
-        REFERENCES public."Users" (user_id) MATCH SIMPLE
+        REFERENCES public."User" (user_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )

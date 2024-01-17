@@ -4,28 +4,28 @@ import bcrypt
 class UserController(DatabaseController):
     def createUser(self, username, password):
         password = self.hashPassword(password)
-        query = f"INSERT INTO users (username, password) VALUES ({username}, {password});"
+        query = f"INSERT INTO user (username, password) VALUES ({username}, {password});"
         return self.executeQuery(query)
 
     def getUserByUsername(self, userid):
-        query = f"SELECT * FROM users WHERE user_id = {userid};"
+        query = f"SELECT * FROM user WHERE user_id = {userid};"
         return self.executeQuery(query)
 
     def getUserById(self, userid):
-        query = f"SELECT * FROM users WHERE userid = {userid};"
+        query = f"SELECT * FROM user WHERE userid = {userid};"
         return self.executeQuery(query)
     
     def getUserByEmail(self, email):
-        query = f"SELECT * FROM users WHERE email = {email};"
+        query = f"SELECT * FROM user WHERE email = {email};"
         return self.executeQuery(query)
 
     def updateUserPassword(self, userid, newpassword):
         newpassword = self.hashPassword(newpassword)
-        query = f"UPDATE users SET password = {newpassword} WHERE user_id = {userid};"
+        query = f"UPDATE user SET password = {newpassword} WHERE user_id = {userid};"
         return self.executeQuery(query)
 
     def verifyPassword(self, hashedpassword, inputpassword):
-        password = query = f"SELECT password FROM users WHERE user_id = {user_id};"
+        password = query = f"SELECT password FROM user WHERE user_id = {user_id};"
         return bcrypt.checkpw(inputpassword.encode('utf-8'), hashedpassword)
 
     def hashPassword(self, password):

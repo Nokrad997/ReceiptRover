@@ -1,4 +1,4 @@
-from src.models.User import Users
+from src.models.User import User
 import bcrypt
 
 from src.controllers.RegistrationController import RegistrationController
@@ -7,13 +7,12 @@ from src.controllers.LoginController import LoginController
 from src.views.RegistrationView import RegistrationView
 from src.views.LoginView import LoginView
 
-# usr = Users()
 # rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
 # rc = RegistrationController(rv, usr)
 
 # print(rc.registerUser())
 
-usr = Users()
+usr = User()
 lv = LoginView("test@log1.pl", "testtest")
 lc = LoginController(lv, usr)
 
