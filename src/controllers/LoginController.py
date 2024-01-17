@@ -12,7 +12,7 @@ class LoginController:
         password = self.loginView.getPassword()
         usr = self.userModel.getUserByEmail(email)
         if(isinstance(usr, UserController)):
-            if(self.):
+            if(self.userModel.checkPassword(password, usr.getPassword())):
                 return "zalogowano"
             else:
                 return "zle haslo"
