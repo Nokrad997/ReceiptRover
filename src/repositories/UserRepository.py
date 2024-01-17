@@ -1,7 +1,7 @@
 from repositories.DatabaseRepository import DatabaseRepository
 import bcrypt
 
-class UserController(DatabaseController):
+class UserController(DatabaseRepository):
     def createUser(self, username, password):
         password = self.hashPassword(password)
         query = f"INSERT INTO user (username, password) VALUES ({username}, {password});"
@@ -25,7 +25,7 @@ class UserController(DatabaseController):
         return self.executeQuery(query)
 
     def verifyPassword(self, hashedpassword, inputpassword):
-        password = query = f"SELECT password FROM user WHERE user_id = {user_id};"
+        password = query = f"SELECT password FROM user WHERE user_id = {userid};"
         return bcrypt.checkpw(inputpassword.encode('utf-8'), hashedpassword)
 
     def hashPassword(self, password):

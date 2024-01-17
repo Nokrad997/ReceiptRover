@@ -1,6 +1,6 @@
 from repositories.DatabaseRepository import DatabaseRepository
 
-class ReceiptController(DatabaseController):
+class ReceiptController(DatabaseRepository):
     def createReceipt(self, key, receipt_data):
         query = "INSERT INTO receipts (key, receipt_data) VALUES ({key}, {receipt_data});"
         data = (key, receipt_data)
