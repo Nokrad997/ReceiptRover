@@ -35,7 +35,7 @@ class User(BaseModel):
         self.email = value
 
     @getPassword.setter
-    def set_password(self, value):
+    def setPassword(self, value):
         self.password = value
 
 
