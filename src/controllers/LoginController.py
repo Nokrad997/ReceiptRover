@@ -14,7 +14,7 @@ class LoginController:
         usr = self.userRepository.getUserByEmail(email)
 
         if(isinstance(usr, User)):
-            if(self.checkPassword(password, usr.getPassword())):
+            if(self.checkPassword(password, usr.password)):
                 return "zalogowano"
             else:
                 return "zle haslo"

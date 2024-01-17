@@ -1,5 +1,11 @@
 from src.modelsOnline.User import User
+from src.repositories.UserRepository import UserRepository
+from src.controllers.RegistrationController import RegistrationController
+from src.controllers.LoginController import LoginController
+from src.views.RegistrationView import RegistrationView
+from src.views.LoginView import LoginView
 import bcrypt
+
 
 
 '''
@@ -10,21 +16,15 @@ import bcrypt
 
 '''
 
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
+rv = RegistrationView("test2", "test@log2.pl", "testtest", "testtest")
+rc = RegistrationController(rv, UserRepository())
 
-from src.views.RegistrationView import RegistrationView
-from src.views.LoginView import LoginView
+print(rc.registerUser())
 
-# rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
-# rc = RegistrationController(rv, usr)
-
-# print(rc.registerUser())
-
-usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
+userRepository = UserRepository()
 
 lv = LoginView("test@log1.pl", "testtest")
-lc = LoginController(lv, usr)
+lc = LoginController(lv, userRepository)
 
 print(lc.login())
 
