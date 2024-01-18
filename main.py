@@ -5,7 +5,7 @@ import ttkbootstrap as ttk
 # import bcrypt
 
 # from src.controllers.RegistrationController import RegistrationController
-# from src.controllers.LoginController import LoginController
+from src.controllers.LoginController import LoginController
 
 from src.Navigator import Navigator
 from src.views.LoginView import LoginView
@@ -17,10 +17,10 @@ from src.views.RegistrationView import RegistrationView
 
 # print(rc.registerUser())
 
-usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
+# usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
 
-lv = LoginView("test@log1.pl", "testtest")
-lc = LoginController(lv, usr)
+# lv = LoginView("test@log1.pl", "testtest")
+# lc = LoginController(lv, usr)
 
 # print(lc.login())
 
