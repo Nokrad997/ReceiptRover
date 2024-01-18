@@ -1,47 +1,97 @@
+import os
 import tkinter as tk
 from tkinter import filedialog
 from ttkbootstrap import ttk
+from ttkbootstrap.scrolled import ScrolledFrame
 
 from src.Navigator import Navigator
 from src.views.View import View
 class AddReceiptView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
+        self.currentPath = os.getcwd()
 
-        self.addReceiptLabel = ttk.Label(self.canvas, text="Add Receipt")
-        self.addReceiptLabel.configure(bootstyle="primary")
+        self.shopNameEntry = ttk.Entry(self.canvas)
+        self.shopNameEntry.insert(0, "shop name")
+        self.shopNameEntry.bind("<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END))
+        self.shopNameEntry.bind("<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name"))
+        
+        self.scrollableList = ScrolledFrame(self.canvas, autohide=True)
 
-        self.addReceiptButton = ttk.Button(self.canvas, text="Add Receipt", command=lambda: self.openDialog()) 
-        self.addReceiptButton.configure(bootstyle="primary")
+        self.firstEntry = ttk.Entry(self.scrollableList)
+        self.firstEntry.insert(0, "produkt")
+        self.firstEntry.bind("<FocusIn>", lambda event: self.firstEntry.delete(0, tk.END))
+        self.firstEntry.bind("<FocusOut>", lambda event: self.firstEntry.insert(0, "produkt"))
 
-        self.pathLabel = ttk.Label(self.canvas, text="Path", wraplength=200)
+        self.firstCount = ttk.Entry(self.scrollableList)
+        self.firstCount.insert(0, "1 szt")
+        self.firstCount.bind("<FocusIn>", lambda event: self.firstCount.delete(0, tk.END))
+        self.firstCount.bind("<FocusOut>", lambda event: self.firstCount.insert(0, "1 szt"))
+
+        self.firstPrice = ttk.Entry(self.scrollableList)
+        self.firstPrice.insert(0, "1.00 zł")
+        self.firstPrice.bind("<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END))
+        self.firstPrice.bind("<FocusOut>", lambda event: self.firstPrice.insert(0, "1.00 zł"))
+
+        self.addIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\plus 30x30.png")
+        self.addItemButton = ttk.Button(self.canvas, compound=tk.TOP, image=self.addIcon, padding=3)
+        self.addItemButton.configure(bootstyle="outline")
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")
+
+        self.navbarLabel = ttk.Label(self.navbarFrame, text="Take photo of receipt or import image", anchor=tk.CENTER)
+
+        self.cameraIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\camera 30x30.png")
+        self.cameraButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.cameraIcon, padding=3)
+        self.cameraButton.configure(bootstyle="outline")
+
+        self.imageIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\image 30x30.png")
+        self.importImageButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.imageIcon, padding=3)
+        self.importImageButton.configure(bootstyle="outline", command=lambda: self.openDialog())
 
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(bootstyle="outline", command=lambda: Navigator().navigateBack())
 
     def place(self):
-        self.canvas.place(x=0, y=0, width=321, height=694)
-        
-        self.addReceiptLabel.place(x=60, y=145, width=200, height=20)
-        self.addReceiptButton.place(x=60, y=165, width=200, height=30)
+        self.canvas.place(x=0, y=0, width=320, height=700)
 
-        self.pathLabel.place(x=60, y=205, width=200, height=60)
+        self.shopNameEntry.place(x=10, y=10, width=300, height=40)
 
-        self.navbarFrame.place(x=0, y=624, width=321, height=50)
-        self.backButton.place(x=7, y=10, width=321-14, height=40)
+        self.scrollableList.place(x=0, y=60, width=320, height=450)
+
+        self.firstEntry.place(x=10, y=0, width=180, height=40)
+        self.firstCount.place(x=200, y=0, width=45, height=40)
+        self.firstPrice.place(x=255, y=0, width=45, height=40)
+
+        self.addItemButton.place(x=270, y=520, width=40, height=40)
+
+        self.navbarFrame.place(x=0, y=570, width=320, height=130)
+        self.navbarLabel.place(x=0, y=0, width=320, height=20)
+
+        self.cameraButton.place(x=10, y=30, width=145, height=40)
+        self.importImageButton.place(x=165, y=30, width=145, height=40)
+        self.backButton.place(x=10, y=80, width=300, height=40)
+
 
     def hide(self):
-        self.addReceiptLabel.place_forget()
-        self.addReceiptButton.place_forget()
+        self.shopNameEntry.place_forget()
 
-        self.pathLabel.place_forget()
+        self.scrollableList.place_forget()
 
+        self.firstEntry.place_forget()
+        self.firstCount.place_forget()
+        self.firstPrice.place_forget()
+
+        self.addItemButton.place_forget()
+        
         self.navbarFrame.place_forget()
+        self.navbarLabel.place_forget()
+
+        self.cameraButton.place_forget()
+        self.importImageButton.place_forget()
         self.backButton.place_forget()
 
     def openDialog(self):
         dialog = filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("Image files", ("*.jpg", "*.jpeg", "*.png")), ("all files", "*.*")))
-        self.pathLabel.configure(text=dialog)
+        print(dialog)

@@ -28,7 +28,7 @@ from src.views.RegistrationView import RegistrationView
 
 windows = ttk.Window(themename="superhero")
 windows.title("Test")
-windows.geometry("321x694")
+windows.geometry("320x700")
 windows.resizable(False, False)
 
 mainViewCanvas = tk.Canvas(windows)
