@@ -16,7 +16,7 @@ import bcrypt
 
 '''
 
-rv = RegistrationView("test2", "test@log2.pl", "testtest", "testtest")
+rv = RegistrationView("test1", "test@log1.pl", "testtest", "testtest")
 rc = RegistrationController(rv, UserRepository())
 
 print(rc.registerUser())
