@@ -1,6 +1,7 @@
 from src.repositories.UserRepository import UserRepository
 from src.modelsOnline.User import User
 from src.views.LoginView import LoginView
+from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistException
 import bcrypt
 
 class LoginController:
@@ -17,10 +18,10 @@ class LoginController:
             if(self.checkPassword(password, usr.password)):
                 return True
             else:
-                raise ValueError("zle haslo")
+                raise InvalidPasswordException("zle haslo")
             
         else:
-            raise Exception("nie ma takiego uzytkownika")   
+            raise UserDoesntExistException("nie ma takiego uzytkownika")   
         
     def checkPassword(self, password, hashedpassword):
         return bcrypt.checkpw(password.encode('utf-8'), hashedpassword.encode('utf-8'))
