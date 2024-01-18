@@ -36,6 +36,15 @@ services:
     networks:
        - io-network
 
+  tesseract:  
+    container_name: tesseract_container
+    image: ricktorzynski/ocr-tesseract-docker  
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - io-network
+      
 networks:
   io-network:
     driver: bridge
