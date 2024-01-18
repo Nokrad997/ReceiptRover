@@ -23,8 +23,8 @@ from src.views.RegistrationView import RegistrationView
 
 # print(lc.login())
 
-# print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$b6derw0r4Sw2wYE0C2GuU.ecVTku5uzGQtvw3YO/ZyIvYNTJTyLQW".encode('utf-8')))
-# print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$xqLrHQyUN5OOeDlCilkvFOe3GVr0/mG6tckQ2IQjiWgCTz8QhV8Bi".encode('utf-8')))
+# rv = RegistrationView("test1", "test@log1.pl", "testtest", "testtest")
+# rc = RegistrationController(rv, UserRepository())
 
 windows = ttk.Window(themename="superhero")
 windows.title("Test")
