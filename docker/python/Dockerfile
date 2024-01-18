@@ -13,6 +13,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r /app/requirements.txt
+Run pip install pydantic[email]
 RUN pip 
 
 

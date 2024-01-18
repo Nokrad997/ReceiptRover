@@ -12,15 +12,15 @@ from src.views.LoginView import LoginView
 from src.views.MainView import MainView
 from src.views.RegistrationView import RegistrationView
 
-# usr = Users()
 # rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
 # rc = RegistrationController(rv, usr)
 
 # print(rc.registerUser())
 
-# usr = Users()
-# lv = LoginView("test@log1.pl", "testtest")
-# lc = LoginController(lv, usr)
+usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
+
+lv = LoginView("test@log1.pl", "testtest")
+lc = LoginController(lv, usr)
 
 # print(lc.login())
 

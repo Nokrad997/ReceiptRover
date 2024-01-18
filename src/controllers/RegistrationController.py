@@ -1,4 +1,4 @@
-from src.models.Users import Users
+from src.modelsOnline.User import User
 import re
 
 class RegistrationController:
@@ -10,7 +10,7 @@ class RegistrationController:
         try:
             if self.validateEmail() and self.validateName() and self.validatePassword():
 
-                self.userModel = Users(0, self.registrationView.name, self.registrationView.email, self.registrationView.password)
+                self.userModel = User(0, self.registrationView.name, self.registrationView.email, self.registrationView.password)
                 res = self.userModel.addUser()
                     
                 if isinstance(res, Exception):

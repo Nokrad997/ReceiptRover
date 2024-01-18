@@ -1,7 +1,7 @@
 import psycopg2
 import config
 
-class Model:
+class Repository:
     def __init__(self):
         try:
             self.conn = psycopg2.connect(
@@ -24,7 +24,6 @@ class Model:
             self.cur.execute(query)
             result = self.cur.fetchall()  
             self.conn.commit()
-        
             return result
         
         except Exception as e:
