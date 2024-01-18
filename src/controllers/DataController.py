@@ -127,7 +127,7 @@ class DataController():
                     
             
 
-        self.save_receipe(receipt_element)
+            self.save_receipe(receipt_element)
         
         
     def save_products(self, product):
