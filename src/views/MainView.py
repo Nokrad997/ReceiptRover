@@ -4,6 +4,7 @@ import ttkbootstrap as ttk
 from src.Navigator import Navigator
 from src.views.View import View
 from src.views.LoginView import LoginView
+from src.views.AnalyseView import AnalyseView
 
 class MainView(View):
     def __init__(self, canvas):
@@ -18,7 +19,7 @@ class MainView(View):
         self.navbarFrame.configure(bootstyle="sucess")
 
         self.analyseButton = ttk.Button(self.navbarFrame, text="Analyse")
-        self.analyseButton.configure(bootstyle="outline")
+        self.analyseButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AnalyseView(self.canvas)))
 
         self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt")
         self.addReceiptButton.configure(bootstyle="outline")
