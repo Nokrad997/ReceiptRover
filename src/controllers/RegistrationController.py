@@ -1,6 +1,7 @@
 from src.modelsOnline.User import User
 from src.views.RegistrationView import RegistrationView
 from src.repositories.UserRepository import UserRepository
+from src.exceptions.Exceptions import UserAlreadyExistsException, InvalidNameException, InvalidPasswordException
 import re
 
 class RegistrationController:
@@ -16,11 +17,17 @@ class RegistrationController:
                 res = self.userRepository.createUser(usr)
                     
                 if isinstance(res, Exception):
-                    return "chyba zly email ale nw"    
+                    raise UserAlreadyExistsException("User already exists!")  
                 
                 else:
-                    return "zydek dodany"
+                    return True
         
+        except UserAlreadyExistsException as e:
+            return e
+        except InvalidNameException as e:
+            return e
+        except InvalidPasswordException as e:
+            return e
         except Exception as e:
             return e
             
@@ -29,7 +36,7 @@ class RegistrationController:
         name = self.registrationView.name
         
         if(len(name) < 3 or len(name) > 32):
-            raise ValueError("Name must be between 3 and 32 characters long!")
+            raise InvalidNameException("Name must be between 3 and 32 characters long!")
 
         return True
 
@@ -38,9 +45,9 @@ class RegistrationController:
         rePwd = self.registrationView.reTypePassword
         
         if(len(pwd) < 8 or len(pwd) > 32):
-            raise ValueError("Password must be between 8 and 32 characters long!")
+            raise InvalidPasswordException("Password must be between 8 and 32 characters long!")
         
         elif(pwd != rePwd):
-            raise ValueError("Passwords do not match!")
+            raise InvalidPasswordException("Passwords do not match!")
         
         return True
