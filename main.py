@@ -10,6 +10,7 @@ from src.controllers.LoginController import LoginController
 from src.Navigator import Navigator
 from src.views.LoginView import LoginView
 from src.views.MainView import MainView
+<<<<<<< Updated upstream
 from src.views.RegistrationView import RegistrationView
 
 # rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
@@ -27,6 +28,9 @@ from src.views.RegistrationView import RegistrationView
 # print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$xqLrHQyUN5OOeDlCilkvFOe3GVr0/mG6tckQ2IQjiWgCTz8QhV8Bi".encode('utf-8')))
 
 windows = ttk.Window(themename="superhero")
+=======
+windows = Window(themename="superhero")
+>>>>>>> Stashed changes
 windows.title("Test")
 windows.geometry("320x700")
 windows.resizable(False, False)

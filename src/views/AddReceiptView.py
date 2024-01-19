@@ -91,7 +91,10 @@ class AddReceiptView(View):
         self.cameraButton.place_forget()
         self.importImageButton.place_forget()
         self.backButton.place_forget()
+<<<<<<< Updated upstream
 
     def openDialog(self):
         dialog = filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("Image files", ("*.jpg", "*.jpeg", "*.png")), ("all files", "*.*")))
         print(dialog)
+=======
+>>>>>>> Stashed changes
