@@ -22,10 +22,8 @@ class DataController():
             else:
                 self.root = ET.Element("root")
                 tree = ET.ElementTree(self.root)
-                try:
-                    tree.write(path)
-                except Exception as e:
-                    raise ErrorSavingXmlException(f"Nie można zapisać danych do pliku: \n{e}")
+                
+                self._save_tree(tree)
                 
         except ErrorReadingXmlException as e:
             raise e
@@ -34,39 +32,40 @@ class DataController():
         except Exception as e:
             raise e
 
+    def _save_tree(self, tree):
+        try:
+            tree.write(self.path)
+        except Exception as e:
+            raise ErrorSavingXmlException(f"Nie można zapisać danych do pliku: \n{e}")
+
+
     def save_receipe(self, receipe_element):
         try:
             if os.path.exists(self.path):
                 try:
                     tree = ET.parse(self.path)
-                    root = tree.getroot()
+                    self.root = tree.getroot()
                 except ET.ParseError as e:
                     raise ErrorReadingXmlException(f"Problem z odczytaniem(parsowaniem) danych: \n{e}")
 
-                receipes_element = root.find("Receipes")
+                receipes_element = self.root.find("Receipes")
                 if receipes_element is None:
                     receipes_element = ET.Element("Receipes")
-                    root.append(receipes_element)
+                    self.root.append(receipes_element)
                 
                 receipes_element.append(receipe_element)
                 
-                try:
-                    tree.write(self.path)
-                except Exception as e:
-                    raise ErrorSavingXmlException(f"Nie można zapisać danych do pliku: \n{e}")
+                self._save_tree(tree)
 
             else:
-                root = ET.Element("root")
+                self.root = ET.Element("root")
                 receipes_element = ET.Element("Receipes")
-                root.append(receipes_element)
-                root.append(receipe_element)
+                self.root.append(receipes_element)
+                self.root.append(receipe_element)
 
-                tree = ET.ElementTree(root)
+                tree = ET.ElementTree(self.root)
                 
-                try:
-                    tree.write(self.path)
-                except Exception as e:
-                    raise ErrorSavingXmlException(f"Nie można zapisać danych do pliku: \n{e}")
+                self._save_tree(tree)
                 
         except ErrorSavingXmlException as e:
             raise e
