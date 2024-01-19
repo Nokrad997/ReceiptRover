@@ -74,6 +74,32 @@ class DataController():
         except Exception as e:
             raise e
         
+        
+    def save(self,receipts):
+        for receipt in receipts:
+            receipt_element = ET.Element("Receipe")
+            ET.SubElement(receipt_element, "key").text = str(receipt.key)
+            ET.SubElement(receipt_element, "shop").text = str(receipt.shop)
+            
+            products=receipt.products
+            if products is not None:
+                for product in products:
+                    product_element = self.save_products(product)
+                    receipt_element.append(product_element)
+                    
+            
+
+            self.save_receipe(receipt_element)
+        
+        
+    def save_products(self, product):
+        product_element = ET.Element("Product")
+        ET.SubElement(product_element, "name").text = str(product.name)
+        ET.SubElement(product_element, "price").text = str(product.price)
+        ET.SubElement(product_element, "quantity").text = str(product.quantity)
+        return product_element
+
+
     def downland(self):
         receipts=[]
         try:
@@ -111,29 +137,5 @@ class DataController():
         except ValueError as e:
             raise ErrorValueParsingException(f"Blad podczas parsowania danych i zapisywania do modeli produktu \n{e}")
         
-
-    def save(self,receipts):
-        for receipt in receipts:
-            receipt_element = ET.Element("Receipe")
-            ET.SubElement(receipt_element, "key").text = str(receipt.key)
-            ET.SubElement(receipt_element, "shop").text = str(receipt.shop)
-            
-            products=receipt.products
-            if products is not None:
-                for product in products:
-                    product_element = self.save_products(product)
-                    receipt_element.append(product_element)
-                    
-            
-
-            self.save_receipe(receipt_element)
-        
-        
-    def save_products(self, product):
-        product_element = ET.Element("Product")
-        ET.SubElement(product_element, "name").text = str(product.name)
-        ET.SubElement(product_element, "price").text = str(product.price)
-        ET.SubElement(product_element, "quantity").text = str(product.quantity)
-        return product_element
 
 

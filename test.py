@@ -17,11 +17,11 @@ r2=ReceiptR.createReceipt("k2", "s2", [p3,p4])
 
 data=DataController("r.xml")
 try:
-
+    # data.save([r1,r2,r1])
     list=data.downland()
     for r in list:
-        print(r.shop)
+        print(r.shop,":")
         for p in r.products:
-            print(p.name)
+            print(' ',p.name)
 except Exception as e:
     print(e)
