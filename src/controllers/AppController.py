@@ -1,3 +1,5 @@
+from tkinter import filedialog
+
 from src.controllers.RegistrationController import RegistrationController
 from src.controllers.LoginController import LoginController
 from src.controllers.SynchronizationController import SynchronizationController
@@ -46,7 +48,11 @@ class AppController:
     @staticmethod
     def synchronize(self):
         pass
-    
+ 
+    @staticmethod
+    def openDialog(addReceiptView):
+        dialog = filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("Image files", ("*.jpg", "*.jpeg", "*.png")), ("all files", "*.*")))
+        print(dialog)
         
     
     

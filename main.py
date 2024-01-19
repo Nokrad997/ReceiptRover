@@ -1,15 +1,10 @@
 import tkinter as tk
-import ttkbootstrap as ttk
-
-# from src.models.Users import Users
-# import bcrypt
-
-# from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
+from ttkbootstrap import Window
 
 from src.Navigator import Navigator
-from src.views.LoginView import LoginView
+
 from src.views.MainView import MainView
+<<<<<<< Updated upstream
 from src.views.RegistrationView import RegistrationView
 
 # rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
@@ -27,6 +22,9 @@ from src.views.RegistrationView import RegistrationView
 # rc = RegistrationController(rv, UserRepository())
 
 windows = ttk.Window(themename="superhero")
+=======
+windows = Window(themename="superhero")
+>>>>>>> Stashed changes
 windows.title("Test")
 windows.geometry("321x694")
 windows.resizable(False, False)
@@ -34,11 +32,5 @@ windows.resizable(False, False)
 mainViewCanvas = tk.Canvas(windows)
 mainView = MainView(mainViewCanvas)
 Navigator().navigateTo(mainView)
-
-# loginViewCanvas = tk.Canvas(windows)
-# loginView = LoginView(loginViewCanvas, "email", "password")
-
-# registerViewCanvas = tk.Canvas(windows)
-# registerView = RegistrationView(registerViewCanvas, "chuj", "chuj", "chuj", "chuj")
 
 windows.mainloop()
