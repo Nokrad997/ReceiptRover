@@ -18,7 +18,7 @@ r2=ReceiptR.createReceipt("k2", "s2", [p3,p4])
 
 data=DataController("r.xml")
 try:
-    # data.save([r1,r1])
+    # data.save([r1,r2])
     list=data.downland()
     for r in list:
         print(r.shop,":")
