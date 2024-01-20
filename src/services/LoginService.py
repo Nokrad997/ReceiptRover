@@ -9,8 +9,8 @@ class LoginService:
         self.userRepository = UserRepository()
 
     def login(self, loginView : View):
-        email = loginView.getEmail()
-        password = loginView.getPassword()
+        email = loginView.email
+        password = loginView.password
         usr = self.userRepository.getUserByEmail(email)
 
         if(isinstance(usr, User)):

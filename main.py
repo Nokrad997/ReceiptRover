@@ -13,3 +13,9 @@ mainView = MainView(mainViewCanvas)
 Navigator().navigateTo(mainView)
 
 windows.mainloop()
+
+# from src.controllers.AppController import AppController
+# from src.views.RegistrationView import RegistrationView
+
+# ragistartionView = RegistrationView("test", "test@test.com", "testtest", "testtest")
+# AppController().register(registrationView=ragistartionView)

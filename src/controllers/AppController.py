@@ -10,17 +10,13 @@ from src.views.View import View
 from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistException, UserAlreadyExistsException, InvalidNameException
 
 class AppController:
-    def __init__(self):
-        self.loggedIn = False
-        self.addReceiptController = AddReceiptController()
-        self.registrationController = RegistrationController()
-        self.loginController = LoginController()
-        self.synchronizationController = SynchronizationController()
+    loggedin = False
     
     @staticmethod
-    def register(self, registrationView: View):
+    def register(registrationView: View):
         try:
-            self.registrationController.registerUser(registrationView)
+            registrationController = RegistrationController()
+            registrationController.registerUser(registrationView)
         
         except UserAlreadyExistsException as e:
             print(e)
@@ -32,9 +28,11 @@ class AppController:
             print(e)
     
     @staticmethod
-    def login(self, loginView: View):
+    def login(loginView: View):
         try:
-            self.loggedIn = self.loginController.login(loginView)
+            loginController = LoginController()
+            AppController.loggedIn = loginController.loginUser(loginView)
+            print(AppController.loggedIn)
         except UserDoesntExistException as e:
             print(e)
         except InvalidPasswordException as e:
@@ -51,8 +49,9 @@ class AppController:
         pass
  
     @staticmethod
-    def openDialog(self, addReceiptView: View):
-        self.addReceiptController.openDialog(addReceiptView)
+    def openDialog(addReceiptView: View):
+        addReceiptController = AddReceiptController()
+        addReceiptController.openDialog(addReceiptView)
         
     
     

@@ -17,6 +17,7 @@ class LoginView(View):
         self.passwordEntry = ttk.Entry(self.canvas)
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
+        self.loginButton.configure(bootstyle="outline", command=lambda: AppController.login(self))
         self.registerButton = ttk.Button(self.canvas, text="Register")
         self.registerButton.configure(bootstyle="outline")
 

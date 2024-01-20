@@ -18,6 +18,7 @@ class UserRepository(Repository):
     def getUserByEmail(self, email):
         query = f'SELECT * FROM "User" WHERE email = \'{email}\''
         userArray = self.executeQuery(query)
+        print(userArray)
         return self.returnUser(int(userArray[0][0]), str(userArray[0][1]), str(userArray[0][2]), str(userArray[0][3]))
 
     def updateUserPassword(self, userid, newpassword):
