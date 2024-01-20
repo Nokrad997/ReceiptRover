@@ -34,7 +34,7 @@ class AddReceiptView(View):
         self.firstPrice.bind("<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END))
         self.firstPrice.bind("<FocusOut>", lambda event: self.firstPrice.insert(0, "1.00 zł"))
 
-        self.addIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\plus 30x30.png")
+        self.addIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/plus 30x30.png")
         self.addItemButton = ttk.Button(self.canvas, compound=tk.TOP, image=self.addIcon, padding=3)
         self.addItemButton.configure(bootstyle="outline")
 
@@ -43,11 +43,11 @@ class AddReceiptView(View):
 
         self.navbarLabel = ttk.Label(self.navbarFrame, text="Take photo of receipt or import image", anchor=tk.CENTER)
 
-        self.cameraIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\camera 30x30.png")
+        self.cameraIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/camera 30x30.png")
         self.cameraButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.cameraIcon, padding=3)
         self.cameraButton.configure(bootstyle="outline")
 
-        self.imageIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\image 30x30.png")
+        self.imageIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/image 30x30.png")
         self.importImageButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.imageIcon, padding=3)
         self.importImageButton.configure(bootstyle="outline", command=lambda: AppController.openDialog(addReceiptView=self))
 
