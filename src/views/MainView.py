@@ -3,6 +3,8 @@ import ttkbootstrap as ttk
 
 from src.Navigator import Navigator
 from src.views.View import View
+from src.views.AnalyseView import AnalyseView
+from src.views.AddReceiptView import AddReceiptView
 from src.views.LoginView import LoginView
 from src.views.AnalyseView import AnalyseView
 
@@ -22,7 +24,7 @@ class MainView(View):
         self.analyseButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AnalyseView(self.canvas)))
 
         self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt")
-        self.addReceiptButton.configure(bootstyle="outline")
+        self.addReceiptButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)))
         
         self.accountButton = ttk.Button(self.navbarFrame, text="Login")
         self.accountButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(LoginView(self.canvas, "email", "password")))
@@ -30,13 +32,13 @@ class MainView(View):
 
 
     def place(self):
-        self.canvas.place(x=0, y=0, width=321, height=694)
+        self.canvas.place(x=0, y=0, width=320, height=700)
 
-        self.navbarFrame.place(x=0, y=624, width=321, height=50)
+        self.navbarFrame.place(x=0, y=550, width=320, height=150)
 
-        self.analyseButton.place(x=3.5, y=10, width=100, height=40)
-        self.addReceiptButton.place(x=110.5, y=10, width=100, height=40)
-        self.accountButton.place(x=217.5, y=10, width=100, height=40)
+        self.analyseButton.place(x=10, y=0, width=300, height=40)
+        self.addReceiptButton.place(x=10, y=50, width=300, height=40)
+        self.accountButton.place(x=10, y=100, width=300, height=40)
 
     def hide(self):
         # self.canvas.place_forget()

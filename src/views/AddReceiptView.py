@@ -37,4 +37,4 @@ class AddReceiptView(View):
         self.backButton.place_forget()
 
     def openDialog(self):
-        dialog = 
+        pass
