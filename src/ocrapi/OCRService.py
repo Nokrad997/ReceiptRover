@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/ocr', methods=['POST'])
+@app.route('/', methods=['POST'])
 def ocr():
     """
     Performs Optical Character Recognition (OCR) on an image file.

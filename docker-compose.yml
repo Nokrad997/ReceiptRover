@@ -11,43 +11,46 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     networks:
       - io-network
-    depends_on:
-      - db
+    # depends_on:
+      # - db
 
-  db:
-    container_name: pg_container_io
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: io
-    ports:
-      - "5432:5432"
-    networks:
-        io-network:
-          ipv4_address: 172.19.0.3
-
-  pgadmin:
-    container_name: pgadmin4_container_io
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
-    networks:
-       - io-network
-
-  tesseract:  
-    container_name: tesseract_container
-    image: ricktorzynski/ocr-tesseract-docker  
-    restart: always
+  pythontess:
+    container_name: pythonTess_container
+    build: 
+      context: .
+      dockerfile: docker/tesseract/Dockerfile
     ports:
       - "5000:5000"
     networks:
       - io-network
+
+
+  # db:
+  #   container_name: pg_container_io
+  #   image: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: root
+  #     POSTGRES_DB: io
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #       io-network:
+  #         ipv4_address: 172.19.0.3
+
+  # pgadmin:
+  #   container_name: pgadmin4_container_io
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #     - "5050:80"
+  #   networks:
+  #      - io-network
+
       
 networks:
   io-network:
@@ -56,3 +59,4 @@ networks:
       driver: default
       config:
         - subnet: 172.19.0.0/16
+

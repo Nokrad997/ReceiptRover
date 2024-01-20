@@ -94,6 +94,9 @@ RUN pip install pydantic[email]
 
 COPY . /app
 
+
+
+
 # Final stage
 FROM python:3.11
 
