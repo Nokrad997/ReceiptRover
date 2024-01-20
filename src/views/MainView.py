@@ -1,6 +1,7 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 
+from src.views.AddReceiptView import AddReceiptView
 from src.Navigator import Navigator
 from src.views.View import View
 from src.views.LoginView import LoginView
@@ -21,7 +22,7 @@ class MainView(View):
         self.analyseButton.configure(bootstyle="outline")
 
         self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt")
-        self.addReceiptButton.configure(bootstyle="outline")
+        self.addReceiptButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)))
         
         self.accountButton = ttk.Button(self.navbarFrame, text="Login")
         self.accountButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(LoginView(self.canvas, "email", "password")))

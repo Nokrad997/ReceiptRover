@@ -1,17 +1,21 @@
 from tkinter import filedialog
 
+from src.controllers.AddReceiptController import AddReceiptController
 from src.controllers.RegistrationController import RegistrationController
 from src.controllers.LoginController import LoginController
 from src.controllers.SynchronizationController import SynchronizationController
 
+# from src.views.AddReceiptView import AddReceiptView
 from src.views.RegistrationView import RegistrationView
 from src.views.LoginView import LoginView
+from src.views.View import View
 
 from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistException, UserAlreadyExistsException, InvalidNameException
 
 class AppController:
     def __init__(self):
         self.loggedIn = False
+        self.addReceiptController = AddReceiptController()
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
@@ -50,9 +54,8 @@ class AppController:
         pass
  
     @staticmethod
-    def openDialog(addReceiptView):
-        dialog = filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("Image files", ("*.jpg", "*.jpeg", "*.png")), ("all files", "*.*")))
-        print(dialog)
+    def openDialog(self, addReceiptView: View):
+        self.addReceiptController.openDialog(addReceiptView)
         
     
     
