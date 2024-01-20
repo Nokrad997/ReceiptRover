@@ -12,7 +12,7 @@ from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistE
 class AppController:
     def __init__(self):
         self.loggedIn = False
-        self.addReceiptController = AddReceiptController()
+        # self.addReceiptController = AddReceiptController()
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
@@ -51,8 +51,9 @@ class AppController:
         pass
  
     @staticmethod
-    def openDialog(self, addReceiptView: View):
-        self.addReceiptController.openDialog(addReceiptView)
+    def openDialog(addReceiptView: View):
+        addReceiptController = AddReceiptController(addReceiptView)
+        addReceiptController.openDialog()
         
     
     

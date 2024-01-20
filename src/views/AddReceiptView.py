@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+from PIL import Image, ImageTk
 from ttkbootstrap import ttk
 from ttkbootstrap.scrolled import ScrolledFrame
 
@@ -11,11 +12,14 @@ class AddReceiptView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
         self.currentPath = os.getcwd()
+        self.tkImageReference = None
 
         self.shopNameEntry = ttk.Entry(self.canvas)
         self.shopNameEntry.insert(0, "shop name")
         self.shopNameEntry.bind("<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END))
         self.shopNameEntry.bind("<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name"))
+
+        self.imageLabel = ttk.Label(self.canvas)
         
         self.scrollableList = ScrolledFrame(self.canvas, autohide=True)
 
@@ -78,6 +82,8 @@ class AddReceiptView(View):
     def hide(self):
         self.shopNameEntry.place_forget()
 
+        self.imageLabel.place_forget()
+
         self.scrollableList.place_forget()
 
         self.firstEntry.place_forget()
@@ -92,3 +98,20 @@ class AddReceiptView(View):
         self.cameraButton.place_forget()
         self.importImageButton.place_forget()
         self.backButton.place_forget()
+
+    def hideFrame(self):
+        self.scrollableList.place_forget()
+        self.addItemButton.place_forget()
+    
+    def showFrame(self):
+        self.scrollableList.place(x=0, y=60, width=320, height=450)
+        self.addItemButton.place(x=270, y=520, width=40, height=40)
+
+    def hideImage(self):
+        self.imageLabel.place_forget()
+
+    def showImage(self, image: Image):
+        imageCopy = image.copy()
+        self.tkImageReference = ImageTk.PhotoImage(imageCopy)
+        self.imageLabel.place(x=0, y=60, width=320, height=500)
+        self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)
