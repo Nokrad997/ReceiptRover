@@ -1,23 +1,15 @@
-from src.modelsOnline.User import User
-import bcrypt
+import tkinter as tk
+import ttkbootstrap as ttk
+from src.Navigator import Navigator
+from src.views.MainView import MainView
 
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
+root = ttk.Window(themename="superhero")
+root.title("Test")
+root.geometry("320x700")
+root.resizable(False, False)
 
-from src.views.RegistrationView import RegistrationView
-from src.views.LoginView import LoginView
+mainViewCanvas = tk.Canvas(root)
+mainView = MainView(mainViewCanvas, root)
+Navigator().navigateTo(mainView)
 
-# rv = RegistrationView("test", "test@log1.pl", "testtest", "testtest")
-# rc = RegistrationController(rv, usr)
-
-# print(rc.registerUser())
-
-usr = User(id=1, name="cipa", email="test@test.pl", password="testtest")
-
-lv = LoginView("test@log1.pl", "testtest")
-lc = LoginController(lv, usr)
-
-print(lc.login())
-
-# print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$b6derw0r4Sw2wYE0C2GuU.ecVTku5uzGQtvw3YO/ZyIvYNTJTyLQW".encode('utf-8')))
-# print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$xqLrHQyUN5OOeDlCilkvFOe3GVr0/mG6tckQ2IQjiWgCTz8QhV8Bi".encode('utf-8')))
+root.mainloop()

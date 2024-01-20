@@ -7,35 +7,33 @@ class User(BaseModel):
     password: str
 
     @property
-    def get_id(self) -> int:
+    def getId(self) -> int:
         return self.id
     
     @property
-    def get_name(self) -> str:
+    def getName(self) -> str:
         return self.name
     
     @property
-    def get_email(self) -> EmailStr:
+    def getEmail(self) -> EmailStr:
         return self.email
     
     @property
-    def get_password(self) -> str:
+    def getPassword(self) -> str:
         return self.password
     
-    @get_id.setter
-    def set_id(self, value):
+    @getId.setter
+    def setId(self, value):
         self.id = value
 
-    @get_name.setter
-    def set_name(self, value):
+    @getName.setter
+    def setName(self, value):
         self.name = value
 
-    @get_email.setter
-    def set_email(self, value):
+    @getEmail.setter
+    def setEmail(self, value):
         self.email = value
 
-    @get_password.setter
-    def set_password(self, value):
+    @getPassword.setter
+    def setPassword(self, value):
         self.password = value
-
-

@@ -1,21 +1,55 @@
-CREATE TABLE IF NOT EXISTS public."User"
-(
-    user_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
-    email text COLLATE pg_catalog."default" NOT NULL,
-    password text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT "User_pkey" PRIMARY KEY (user_id),
+
+-- Zapytanie ktore u mnie dziala //MS 
+
+-- Zapytanie ktore u mnie dziala //MS 
+
+CREATE TABLE "User" (
+    user_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL
     CONSTRAINT email UNIQUE (email)
-)
+);
 
-TABLESPACE pg_default;
+CREATE TABLE "OCRScan" (
+    scan_id SERIAL PRIMARY KEY,
+    scanned_image BYTEA
+);
 
-ALTER TABLE IF EXISTS public."User"
-    OWNER to root;
+CREATE TABLE "Transaction" (
+    transactions_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    date DATE NOT NULL,
+    scan_id INTEGER,
+    key TEXT UNIQUE,
+    FOREIGN KEY (user_id) REFERENCES "User" (user_id),
+    FOREIGN KEY (scan_id) REFERENCES "OCRScan" (scan_id)
+);
 
+CREATE TABLE "Receipt" (
+    receipt_id SERIAL PRIMARY KEY,
+    key TEXT NOT NULL,
+    receipt BYTEA,
+    FOREIGN KEY (key) REFERENCES "Transaction" (key)
+);
 
+INSERT INTO "User" (name, email, password) VALUES
+('John Doe', 'johndoe@example.com', 'password123'),
+('Jane Smith', 'janesmith@example.com', 'smithpassword'),
+('Alice Johnson', 'alicej@example.com', 'alicepass');
 
+INSERT INTO "OCRScan" (scanned_image) VALUES
+('\xdeadbeef'),
+('\xcafebabe'),
+('\xbaddcafe');
 
+<<<<<<< HEAD
+INSERT INTO "Transaction" (user_id, date, scan_id, key) VALUES
+(1, '2024-01-10', 1, 'TXN123'),
+(2, '2024-01-11', 2, 'TXN124'),
+(1, '2024-01-12', 3, 'TXN125');
+
+=======
 CREATE TABLE IF NOT EXISTS public."Transactions"
 (
     transaction_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
@@ -111,6 +145,7 @@ INSERT INTO "Transactions" (user_id, date, scan_id, key) VALUES
 (2, '2024-01-11', 2, 'TXN124'),
 (1, '2024-01-12', 3, 'TXN125');
 
+>>>>>>> login-view
 INSERT INTO "Receipt" (key, receipt) VALUES
 ('TXN123', '\xdeadbeef'),
 ('TXN124', '\xcafebabe'),

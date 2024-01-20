@@ -1,22 +1,12 @@
-from src.repositories import UserRepository
-from src.views.LoginView import LoginView
+from src.views.View import View
+from src.services.LoginService import LoginService
 import bcrypt
 
 class LoginController:
-    def __init__(self, loginView : LoginView, userRepository : UserRepository):
-        self.loginView = loginView
-        self.userRepository = UserRepository
-    
-    def login(self):
-        email = self.loginView.getEmail()
-        password = self.loginView.getPassword()
-        usr = self.userModel.getUserByEmail(email)
-        if(isinstance(usr, UserController)):
-            if(self.userModel.checkPassword(password, usr.getPassword())):
-                return "zalogowano"
-            else:
-                return "zle haslo"
-            
+    def __init__(self):
+        self.loginService = LoginService()
         
-        else:
-            return "zly email"    
+    def loginUser(self, loginView : View):
+        result = self.loginService.login(loginView)
+        
+        return result
