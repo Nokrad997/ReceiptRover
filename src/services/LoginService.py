@@ -1,14 +1,14 @@
 import bcrypt
 from src.repositories.UserRepository import UserRepository
 from src.modelsOnline.User import User
-from src.views.LoginView import LoginView
+from src.views.View import View
 from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistException
 
 class LoginService:
     def __init__(self):
         self.userRepository = UserRepository()
 
-    def login(self, loginView : LoginView):
+    def login(self, loginView : View):
         email = loginView.getEmail()
         password = loginView.getPassword()
         usr = self.userRepository.getUserByEmail(email)

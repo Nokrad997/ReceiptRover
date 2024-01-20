@@ -3,15 +3,17 @@ from ttkbootstrap import ttk
 
 from src.Navigator import Navigator
 from src.views.View import View
+from src.controllers.AppController import AppController
+
 class LoginView(View):
     def __init__(self, canvas, email, password):
         super().__init__(canvas)
         self.email = email
         self.password = password
 
-        self.loginLabel = ttk.Label(self.canvas, text="Login")
+        self.loginLabel = ttk.Label(self.canvas, text="Email")
         self.loginEntry = ttk.Entry(self.canvas)
-        self.passwordLabel = ttk.Label(self.canvas, text="Email")
+        self.passwordLabel = ttk.Label(self.canvas, text="Password")
         self.passwordEntry = ttk.Entry(self.canvas)
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
