@@ -19,3 +19,7 @@ class Navigator():
             Navigator.stack[-1].hide()
             Navigator.stack.pop()
             Navigator.stack[-1].place()
+
+    @staticmethod
+    def quit():
+        pass
