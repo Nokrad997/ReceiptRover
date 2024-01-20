@@ -5,9 +5,6 @@ from src.controllers.RegistrationController import RegistrationController
 from src.controllers.LoginController import LoginController
 from src.controllers.SynchronizationController import SynchronizationController
 
-# from src.views.AddReceiptView import AddReceiptView
-from src.views.RegistrationView import RegistrationView
-from src.views.LoginView import LoginView
 from src.views.View import View
 
 from src.exceptions.Exceptions import InvalidPasswordException, UserDoesntExistException, UserAlreadyExistsException, InvalidNameException
@@ -21,9 +18,9 @@ class AppController:
         self.synchronizationController = SynchronizationController()
     
     @staticmethod
-    def register(self, registrationView: RegistrationView):
+    def register(self, registrationView: View):
         try:
-            self.registrationController.registerUser()
+            self.registrationController.registerUser(registrationView)
         
         except UserAlreadyExistsException as e:
             print(e)
@@ -35,9 +32,9 @@ class AppController:
             print(e)
     
     @staticmethod
-    def login(self, loginView: LoginView):
+    def login(self, loginView: View):
         try:
-            self.loggedIn = self.loginController.login()
+            self.loggedIn = self.loginController.login(loginView)
         except UserDoesntExistException as e:
             print(e)
         except InvalidPasswordException as e:
