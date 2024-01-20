@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from xml.dom import minidom
+#from xml.dom import minidom
 import os
 
 from src.exceptions.Exceptions import ErrorReadingXmlException, ErrorSavingXmlException,ErrorValueParsingException

@@ -1,3 +1,4 @@
+# __init__.py 
 from src.repositories.ProductOfflineRepository import ProductOfflineRepository
 from src.repositories.ReceiptOfflineRepository import ReceiptOfflineRepository 
 from src.controllers.DataController import DataController
@@ -17,7 +18,7 @@ r2=ReceiptR.createReceipt("k2", "s2", [p3,p4])
 
 data=DataController("r.xml")
 try:
-    # data.save([r1,r2,r1])
+    # data.save([r1,r1])
     list=data.downland()
     for r in list:
         print(r.shop,":")
