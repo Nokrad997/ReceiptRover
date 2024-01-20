@@ -22,13 +22,8 @@ class MainView(View):
         self.analyseButton = ttk.Button(self.navbarFrame, text="Analyse")
         self.analyseButton.configure(bootstyle="outline")
 
-<<<<<<< HEAD
         self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt")
         self.addReceiptButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)))
-=======
-        self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt", command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)))
-        self.addReceiptButton.configure(bootstyle="outline")
->>>>>>> add-receipt-view
         
         self.accountButton = ttk.Button(self.navbarFrame, text="Login")
         self.accountButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(LoginView(self.canvas, "email", "password")))
