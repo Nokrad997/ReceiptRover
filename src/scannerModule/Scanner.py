@@ -1,4 +1,4 @@
-from ImageTransformation import TransformImage
+from src.scannerModule.ImageTransformation import TransformImage
 
 
 class Scanner:
@@ -31,6 +31,6 @@ class Scanner:
 
     def saveScanned(self, file_path):
         try:
-            self.transform.saveImage(file_path)
+            return self.transform.saveImage(file_path)
         except Exception as e:
             raise ValueError(f"Error occurred while saving image: {e}")
