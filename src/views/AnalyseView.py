@@ -10,7 +10,7 @@ class AnalyseView(View):
         super().__init__(canvas)
 
         self.monthLabel = ttk.Label(self.canvas, text="Month")
-        self.monthLabel.configure(bootstyle="primary", justify=tk.CENTER)
+        self.monthLabel.configure(justify=tk.CENTER)
 
         self.selected_month = tk.StringVar()  # Create a Tkinter variable
         # Category combobox
@@ -51,14 +51,14 @@ class AnalyseView(View):
 
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(
-            bootstyle="outline", command=lambda: Navigator().navigateBack()
+            bootstyle="outline-danger", command=lambda: Navigator().navigateBack()
         )
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)
 
-        self.monthLabel.place(x=10, y=165, width=300, height=20)
-        self.monthMenuButton.place(x=10, y=185, width=300, height=30)
+        self.monthLabel.place(x=60, y=170, width=200, height=20)
+        self.monthMenuButton.place(x=60, y=190, width=200, height=30)
 
         self.chartFrame.place(x=10, y=225, width=300, height=300)
 

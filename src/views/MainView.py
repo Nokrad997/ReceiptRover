@@ -42,7 +42,7 @@ class MainView(View):
         )
 
         self.quitButton = ttk.Button(self.navbarFrame, text="Quit")
-        self.quitButton.configure(bootstyle="outline", command=lambda: self.root.quit())
+        self.quitButton.configure(bootstyle="outline-danger", command=lambda: self.root.quit())
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)

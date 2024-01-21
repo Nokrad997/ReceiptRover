@@ -97,9 +97,12 @@ class AddReceiptView(View):
             command=lambda: AppController.openDialog(addReceiptView=self),
         )
 
+        self.saveButton = ttk.Button(self.navbarFrame, text="Save")
+        self.saveButton.configure(bootstyle="outline-success")
+
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(
-            bootstyle="outline", command=lambda: Navigator().navigateBack()
+            bootstyle="outline-danger", command=lambda: Navigator().navigateBack()
         )
 
     def place(self):
@@ -107,20 +110,21 @@ class AddReceiptView(View):
 
         self.shopNameEntry.place(x=10, y=10, width=300, height=40)
 
-        self.scrollableList.place(x=0, y=60, width=320, height=450)
+        self.scrollableList.place(x=0, y=60, width=320, height=400)
 
         self.firstEntry.place(x=10, y=0, width=180, height=40)
         self.firstCount.place(x=200, y=0, width=45, height=40)
         self.firstPrice.place(x=255, y=0, width=45, height=40)
 
-        self.addItemButton.place(x=270, y=520, width=40, height=40)
+        self.addItemButton.place(x=270, y=470, width=40, height=40)
 
-        self.navbarFrame.place(x=0, y=570, width=320, height=130)
+        self.navbarFrame.place(x=0, y=520, width=320, height=180)
         self.navbarLabel.place(x=0, y=0, width=320, height=20)
 
         self.cameraButton.place(x=10, y=30, width=145, height=40)
         self.importImageButton.place(x=165, y=30, width=145, height=40)
-        self.backButton.place(x=10, y=80, width=300, height=40)
+        self.saveButton.place(x=10, y=80, width=300, height=40)
+        self.backButton.place(x=10, y=130, width=300, height=40)
 
     def hide(self):
         self.shopNameEntry.place_forget()

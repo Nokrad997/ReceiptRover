@@ -26,22 +26,22 @@ class LoginView(View):
 
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(
-            bootstyle="outline", command=lambda: Navigator().navigateBack()
+            bootstyle="outline-danger", command=lambda: Navigator().navigateBack()
         )
 
     def place(self):
-        self.canvas.place(x=0, y=0, width=321, height=694)
+        self.canvas.place(x=0, y=0, width=320, height=700)
 
-        self.loginLabel.place(x=60, y=145, width=200, height=20)
-        self.loginEntry.place(x=60, y=165, width=200, height=30)
-        self.passwordLabel.place(x=60, y=205, width=200, height=20)
-        self.passwordEntry.place(x=60, y=225, width=200, height=30)
+        self.loginLabel.place(x=60, y=150, width=200, height=20)
+        self.loginEntry.place(x=60, y=170, width=200, height=30)
+        self.passwordLabel.place(x=60, y=210, width=200, height=20)
+        self.passwordEntry.place(x=60, y=230, width=200, height=30)
 
-        self.loginButton.place(x=60, y=285, width=200, height=30)
-        self.registerButton.place(x=60, y=325, width=200, height=30)
+        self.loginButton.place(x=60, y=290, width=200, height=30)
+        self.registerButton.place(x=60, y=330, width=200, height=30)
 
-        self.navbarFrame.place(x=0, y=624, width=321, height=50)
-        self.backButton.place(x=7, y=10, width=321 - 14, height=40)
+        self.navbarFrame.place(x=0, y=640, width=320, height=50)
+        self.backButton.place(x=10, y=10, width=300, height=40)
 
     def hide(self):
         # self.canvas.place_forget()
