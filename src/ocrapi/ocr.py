@@ -46,15 +46,19 @@ class Ocr(BaseModel):
         """
         try:
             product_pattern = re.compile(r"(?P<item>.*\w+.)(?P<ilosc> \d.*x|X)(?P<cena>\d+\.\d+)")
-            self.products = product_pattern.findall(self.text)
-            for element, i in zip(self.products, range(len(self.products))):
-                self.products[i] = list(element)
-                self.products[i][1] = self.products[i][1].replace('x', '')
-                self.products[i][1] = self.products[i][1].replace('X', '')
-                self.products[i][1] = self.products[i][1].replace(' ', '')
-                self.products[i][2] = self.products[i][2].replace(' ', '')
+            products = product_pattern.findall(self.text)
+
+            for element, i in zip(products, range(len(products))):
+                products[i] = list(element)
+                products[i][1] = products[i][1].replace('x', '')
+                products[i][1] = products[i][1].replace('X', '')
+                products[i][1] = products[i][1].replace(' ', '')
+                products[i][1] = products[i][1].replace(' x', '')
+                products[i][1] = products[i][1].replace('0-', '')
+                products[i][2] = products[i][2].replace(' ', '')
                 item_pattern = r"\d+$"
-                self.products[i][0] = re.sub(item_pattern, '', self.products[i][0])
+                products[i][0] = re.sub(item_pattern, '', products[i][0])
+            self.products = products
         except Exception as e:
             print(f"Error occurred while extracting products: {e}")
             self.products = []
@@ -71,8 +75,8 @@ class Ocr(BaseModel):
         Extracts the shop name from the extracted text using regular expressions.
         """
         try:
-            shop_pattern = re.compile(r"(?P<shop>.*\w+.)")
-            self.shop = shop_pattern.search(self.text).group("shop")
+            shop_pattern = self.text.splitlines()[2]
+            self.shop = str(shop_pattern)
         except Exception as e:
             self.shop = f'Error occurred while extracting shop: {e}'
 
