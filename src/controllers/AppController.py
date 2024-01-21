@@ -59,11 +59,18 @@ class AppController:
     @staticmethod
     def openDialog(addReceiptView: View):
         addReceiptController = AddReceiptController(addReceiptView)
-        addReceiptController.openDialog()
+        results = addReceiptController.openDialog()
+        AppController.addProductFromList(addReceiptView, results)
 
     @staticmethod
     def addProduct(addReceiptView: View):
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addProduct()
+
+    @staticmethod
+    def addProductFromList(addReceiptView: View, results):
+        addReceiptController = AddReceiptController(addReceiptView)
+        addReceiptController.addProductFromList(results)
+
 
     # canva(AppController) -> mainmenu -> registerButton1 -> registerView -> registerBurron2 -> AppController -> register(registerView)
