@@ -6,6 +6,7 @@ from src.views.View import View
 from src.views.AnalyseView import AnalyseView
 from src.views.AddReceiptView import AddReceiptView
 from src.views.LoginView import LoginView
+from src.views.AnalyseView import AnalyseView
 
 class MainView(View):
     def __init__(self, canvas, root):
