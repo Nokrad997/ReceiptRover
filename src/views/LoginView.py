@@ -37,9 +37,12 @@ class LoginView(View):
         self.passwordLabel.place(x=60, y=210, width=200, height=20)
         self.passwordEntry.place(x=60, y=230, width=200, height=30)
 
+<<<<<<< HEAD
         self.loginButton.place(x=60, y=290, width=200, height=30)
         self.registerButton.place(x=60, y=330, width=200, height=30)
 
+=======
+>>>>>>> main-view
         self.navbarFrame.place(x=0, y=640, width=320, height=50)
         self.backButton.place(x=10, y=10, width=300, height=40)
 
