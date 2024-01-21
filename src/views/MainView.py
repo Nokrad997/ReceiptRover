@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 import ttkbootstrap as ttk
 
@@ -13,10 +14,10 @@ class MainView(View):
     def __init__(self, canvas, root):
         super().__init__(canvas)
         self.root = root
-        self.navbar = []
 
-        # self.historyButton = ttk.Button(self.localCanvas, text="History")
-        # self.historyButton.configure(bootstyle="outline")
+        currentDir = os.getcwd()
+        image = tk.PhotoImage(file=f"{currentDir}\\src\\icons\\logo 256x256.png")
+        self.logoLabel = ttk.Label(self.canvas, image=image, padding=0, justify=tk.CENTER)
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")
@@ -47,6 +48,8 @@ class MainView(View):
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)
 
+        self.logoLabel.place(x=30, y=50, width=260, height=260)
+
         self.navbarFrame.place(x=0, y=500, width=320, height=200)
 
         self.analyseButton.place(x=10, y=0, width=300, height=40)
@@ -55,9 +58,9 @@ class MainView(View):
         self.quitButton.place(x=10, y=150, width=300, height=40)
 
     def hide(self):
-        # self.canvas.place_forget()
-
         self.navbarFrame.place_forget()
+
+        self.logoLabel.place_forget()
 
         self.analyseButton.place_forget()
         self.addReceiptButton.place_forget()
