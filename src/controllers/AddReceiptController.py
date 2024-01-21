@@ -1,11 +1,13 @@
 import json
 import tkinter as tk
 
+from datetime import datetime
 from ttkbootstrap import ttk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 
 from src.controllers.ApiController import ApiController
+from src.controllers.ScannerController import ScannerController
 from src.views.View import View
 
 
@@ -55,11 +57,16 @@ class AddReceiptController:
     def takeImageFromUser(self) -> None:
         path = self.openDialog()
 
-        self.image = Image.open(fp=path, mode="r")
-        self.addReceiptView.hideFrame()
-        self.addReceiptView.showImage(self.image)
+        scannerController = ScannerController(path)
+        scannerController.scan()
+        pathForApi = scannerController.saveScanned(f"scanned_{datetime.now()}.jpg")
+        print(pathForApi)
 
-        self.addProductFromList(path)
+        self.image = Image.open(fp=pathForApi, mode="r")
+        # self.addReceiptView.hideFrame()
+        # self.addReceiptView.showImage(self.image)
+
+        self.addProductFromList(pathForApi)
 
     """
         Method to adding new entrys for user to manual write.
@@ -95,4 +102,6 @@ class AddReceiptController:
     """
 
     def addProductFromList(self, path: str):
-        pass
+        apiController = ApiController()
+        result = apiController.getReceiptData(path)
+        print(result)

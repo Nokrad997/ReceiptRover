@@ -7,6 +7,6 @@ class ScannerController:
     def scan(self):
         self.scannerService.scan()
         
-    def saveScanned(self, filename, filePath = "scanned/"):
+    def saveScanned(self, filename, filePath = "scanned/") -> str:
         filePath = filePath + filename
         return self.scannerService.saveScanned(filePath)

@@ -16,7 +16,7 @@ class MainView(View):
         self.root = root
 
         currentDir = os.getcwd()
-        image = tk.PhotoImage(file=f"{currentDir}\\src\\icons\\logo 256x256.png")
+        image = tk.PhotoImage(file=f"{currentDir}/src/icons/logo 256x256.png")
         self.logoLabel = ttk.Label(self.canvas, image=image, padding=0, justify=tk.CENTER)
 
         self.navbarFrame = ttk.Frame(self.canvas)
