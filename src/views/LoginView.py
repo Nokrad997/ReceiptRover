@@ -17,7 +17,7 @@ class LoginView(View):
         self.passwordEntry = ttk.Entry(self.canvas)
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
-        self.loginButton.configure(bootstyle="outline", command=lambda: AppController.login(self))
+        self.loginButton.configure(bootstyle="outline", command=lambda: self.loginClicked())
         self.registerButton = ttk.Button(self.canvas, text="Register")
         self.registerButton.configure(bootstyle="outline")
 
@@ -56,3 +56,8 @@ class LoginView(View):
 
         self.navbarFrame.place_forget()
         self.backButton.place_forget()
+
+    def loginClicked(self):
+        self.email = self.loginEntry.get()
+        self.password = self.passwordEntry.get()
+        AppController().login(self)
