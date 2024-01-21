@@ -11,7 +11,9 @@ class MainView(View):
     def __init__(self, canvas, root):
         super().__init__(canvas)
         self.root = root
-        self.navbar = []
+
+        image = tk.PhotoImage(file="src\icons\logo 256x256.png")
+        self.logoLabel = ttk.Label(self.canvas, image=image)
 
         # self.historyButton = ttk.Button(self.localCanvas, text="History")
         # self.historyButton.configure(bootstyle="outline")
@@ -34,6 +36,8 @@ class MainView(View):
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)
+
+        self.logoLabel.place(x=32, y=50, width=256, height=256)
 
         self.navbarFrame.place(x=0, y=500, width=320, height=200)
 
