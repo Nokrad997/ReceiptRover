@@ -7,19 +7,18 @@ from src.modelsOnline.Transaction import Transaction
 
 # rozdzielić na kilka plików, nie może być 3 klas w jednym pliku
 
-class DownloadData():
-    
+
+class DownloadData:
     def __init__(self):
         pass
-        
+
     def download(self, path):
         tree = ET.parse(path)
         root = tree.getroot()
         return root
-            
-            
-class Parser():
-    
+
+
+class Parser:
     def __init__(self, root):
         self.root = root
         pass
@@ -57,46 +56,57 @@ class Parser():
         instance = Receipt(receipt_id, key, receipt_data)
         instance.products = products
         return instance
-    
+
     def product_parser(self, product):
         product_id = int(product.find("product_id").text)
         name = product.find("name").text
         price = float(product.find("price").text)
         quantity = int(product.find("quantity").text)
         return Product(product_id, name, price, quantity)
-    
-class SaveData():
+
+
+class SaveData:
     def __init__(self):
         pass
-    
+
     def save(self, path, transactions):
         transactions_element = ET.Element("Transactions")
         for transaction in transactions:
             transaction_element = ET.Element("Transaction")
-            ET.SubElement(transaction_element, "transactions_id").text = str(transaction.transactions_id)
-            ET.SubElement(transaction_element, "user_id").text = str(transaction.user_id)
+            ET.SubElement(transaction_element, "transactions_id").text = str(
+                transaction.transactions_id
+            )
+            ET.SubElement(transaction_element, "user_id").text = str(
+                transaction.user_id
+            )
             ET.SubElement(transaction_element, "date").text = str(transaction.date)
-            ET.SubElement(transaction_element, "scan_id").text = str(transaction.scan_id)
+            ET.SubElement(transaction_element, "scan_id").text = str(
+                transaction.scan_id
+            )
             ET.SubElement(transaction_element, "key").text = str(transaction.key)
 
             if transaction.receipt is not None:
-                receipt=transaction.receipt
+                receipt = transaction.receipt
                 receipt_element = self.save_receipt(receipt)
                 transaction_element.append(receipt_element)
-                    
+
             transactions_element.append(transaction_element)
 
-        xml_str = ET.tostring(transactions_element, encoding="utf-8", method="xml").decode()
+        xml_str = ET.tostring(
+            transactions_element, encoding="utf-8", method="xml"
+        ).decode()
         xml_str = minidom.parseString(xml_str).toprettyxml(indent="    ")
-    
+
         with open(path, "w", encoding="utf-8") as xml_file:
             xml_file.write(xml_str)
-            
+
     def save_receipt(self, receipt):
         receipt_element = ET.Element("Receipt")
         ET.SubElement(receipt_element, "receipt_id").text = str(receipt.receipt_id)
         ET.SubElement(receipt_element, "key").text = str(receipt.key)
-        ET.SubElement(receipt_element, "receipt").text = str(receipt.receipt, encoding="utf-8")
+        ET.SubElement(receipt_element, "receipt").text = str(
+            receipt.receipt, encoding="utf-8"
+        )
 
         if receipt.products:
             for product in receipt.products:
@@ -104,7 +114,7 @@ class SaveData():
                 receipt_element.append(product_element)
 
         return receipt_element
-    
+
     def save_products(self, product):
         product_element = ET.Element("Product")
         ET.SubElement(product_element, "product_id").text = str(product.product_id)
@@ -112,7 +122,6 @@ class SaveData():
         ET.SubElement(product_element, "price").text = str(product.price)
         ET.SubElement(product_element, "quantity").text = str(product.quantity)
         return product_element
-
 
 
 # product1 = Product(1, "Product A", 10.99,1)

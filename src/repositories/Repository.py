@@ -1,6 +1,7 @@
 import psycopg2
 import config
 
+
 class Repository:
     def __init__(self):
         # try:
@@ -23,9 +24,9 @@ class Repository:
     def executeQuery(self, query):
         try:
             self.cur.execute(query)
-            result = self.cur.fetchall()  
+            result = self.cur.fetchall()
             self.conn.commit()
             return result
-        
+
         except Exception as e:
             return e

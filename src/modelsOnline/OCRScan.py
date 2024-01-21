@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class OCRScan(BaseModel):
     scanId: int
     scannedImageData: list[int]
