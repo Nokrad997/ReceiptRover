@@ -1,12 +1,13 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 
+from src.views.AddReceiptView import AddReceiptView
 from src.Navigator import Navigator
 from src.views.View import View
 from src.views.AnalyseView import AnalyseView
 from src.views.AddReceiptView import AddReceiptView
 from src.views.LoginView import LoginView
-from src.views.AnalyseView import AnalyseView
+
 
 class MainView(View):
     def __init__(self, canvas, root):
@@ -21,17 +22,27 @@ class MainView(View):
         self.navbarFrame.configure(bootstyle="sucess")
 
         self.analyseButton = ttk.Button(self.navbarFrame, text="Analyse")
-        self.analyseButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AnalyseView(self.canvas)))
+        self.analyseButton.configure(
+            bootstyle="outline",
+            command=lambda: Navigator().navigateTo(AnalyseView(self.canvas)),
+        )
 
         self.addReceiptButton = ttk.Button(self.navbarFrame, text="Add receipt")
-        self.addReceiptButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)))
-        
+        self.addReceiptButton.configure(
+            bootstyle="outline",
+            command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)),
+        )
+
         self.accountButton = ttk.Button(self.navbarFrame, text="Login")
-        self.accountButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(LoginView(self.canvas, "email", "password")))
+        self.accountButton.configure(
+            bootstyle="outline",
+            command=lambda: Navigator().navigateTo(
+                LoginView(self.canvas, "email", "password")
+            ),
+        )
 
         self.quitButton = ttk.Button(self.navbarFrame, text="Quit")
-        self.quitButton.configure(bootstyle="outline", command=lambda: self.root.quit())
-
+        self.quitButton.configure(bootstyle="outline-danger", command=lambda: self.root.quit())
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)

@@ -1,1 +1,1 @@
-__all__ = ['OCRScan', 'User','Receipt','Product','Transaction']
+__all__ = ["OCRScan", "User", "Receipt", "Product", "Transaction"]

@@ -4,6 +4,7 @@ from datetime import datetime
 import random
 import string
 
+
 class ReceiptOfflineRepository(Repository):
     def createReceipt(self, shop, products):
         key = self.generateKey()
