@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   pythontess:
     container_name: pythonTess_container
     build: 
@@ -8,7 +9,9 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - io-network
+      io-network:
+          ipv4_address: 172.19.0.2
+
   python:
     container_name: python_container
     build: 
@@ -49,7 +52,8 @@ services:
     ports:
       - "5050:80"
     networks:
-       - io-network
+       io-network:
+          ipv4_address: 172.19.0.4
 
       
 networks:
