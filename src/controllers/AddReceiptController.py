@@ -1,6 +1,6 @@
 import tkinter as tk
 from ttkbootstrap import ttk
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 
 # from src.views.AddReceiptView import AddReceiptView
@@ -26,10 +26,16 @@ class AddReceiptController:
         self.addReceiptView.showImage(self.image)
 
     def addProduct(self):
-        childrensLength = len(self.addReceiptView.scrollableList.children)
-        pixelsToAdd = 50 * (childrensLength // 3)
 
         try:
+            childrensLength = len(self.addReceiptView.scrollableList.children)
+            pixelsToAdd = 50 * (childrensLength // 3)
+            if pixelsToAdd > 6000:
+                messagebox.showerror(
+                    title="Error", message="Too many products on the receipt"
+                )
+                raise Exception("Too many products")
+
             entry = ttk.Entry(self.addReceiptView.scrollableList)
             count = ttk.Entry(self.addReceiptView.scrollableList)
             price = ttk.Entry(self.addReceiptView.scrollableList)
