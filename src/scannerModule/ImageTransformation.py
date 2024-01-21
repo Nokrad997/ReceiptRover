@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 from skimage.filters import threshold_local
 from PIL import Image
+import os
 
 class TransformImage():
     def __init__(self, input_data):
@@ -164,6 +165,9 @@ class TransformImage():
     
     def saveImage(self, file_path):
         """Save the final processed image to a file."""
+        if not os.path.exists(file_path):
+            os.makedirs('scanned')
         if self.bw_scanned is None:
             raise ValueError("No black and white scanned image to save")
         cv2.imwrite(file_path, self.bw_scanned)
+        return file_path
