@@ -15,8 +15,13 @@ class MainView(View):
         self.root = root
 
         currentDir = os.getcwd()
-        image = tk.PhotoImage(file=f"{currentDir}\\src\\icons\\logo 256x256.png")
-        self.logoLabel = ttk.Label(self.canvas, image=image, padding=0, justify=tk.CENTER)
+        # print(currentDir)
+        # print(f"{currentDir}/src/icons/logo 256x256.png")
+        self.logo = tk.PhotoImage(file=f"{currentDir}/src/icons/logo 256x256.png")
+        # print(self.logo)
+        self.logoLabel = ttk.Label(
+            self.canvas, image=self.logo, padding=0, justify=tk.CENTER
+        )
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")
@@ -31,8 +36,9 @@ class MainView(View):
         self.accountButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(LoginView(self.canvas, "email", "password")))
 
         self.quitButton = ttk.Button(self.navbarFrame, text="Quit")
-        self.quitButton.configure(bootstyle="outline", command=lambda: self.root.quit())
-
+        self.quitButton.configure(
+            bootstyle="outline-danger", command=lambda: self.root.quit()
+        )
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)

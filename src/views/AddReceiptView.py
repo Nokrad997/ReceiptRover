@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from ttkbootstrap import ttk
 
@@ -6,6 +7,9 @@ from src.views.View import View
 class AddReceiptView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
+        self.currentPath = os.getcwd()
+        # print(self.currentPath)
+        self.tkImageReference = None
 
         self.addReceiptLabel = ttk.Label(self.canvas, text="Add Receipt")
         self.addReceiptLabel.configure(bootstyle="primary")
