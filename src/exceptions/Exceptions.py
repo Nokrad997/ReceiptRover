@@ -18,4 +18,8 @@ class InvalidNameException(Exception):
 class InvalidEmailException(Exception):
     def __init__(self, message):
         super().__init__(message)
+        
+class InvalidApiException(Exception):
+    def __init__(self, message):
+        super().__init__(message)
     
