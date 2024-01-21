@@ -10,7 +10,8 @@ class ApiService:
     def post(self, file_path):
         try:
             response = requests.post(self.url, files={'file': open(file_path, 'rb')})
-            response = response.json()      
+            response = response.json()
+            return response
         except Exception as e:
             raise InvalidApiException(f'Error occurred while sending image to api: {e}')
             

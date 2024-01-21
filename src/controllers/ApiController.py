@@ -1,11 +1,12 @@
-from src.Services.ApiService import ApiService
+from src.services.ApiService import ApiService
 
 class ApiController:
     def __init__(self):
         self.apiService = ApiService()
         
     def getReceiptData(self, filePath):
-        return self.apiService.post(filePath)
+        result = self.apiService.post(filePath)
+        return result
         
         
     
