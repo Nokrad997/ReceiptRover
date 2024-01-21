@@ -1,22 +1,22 @@
 from src.repositories.Repository import Repository
 
 class TransactionController(Repository):
-    def createTransaction(self, userid, date, scanid, key):
-        query = f"INSERT INTO transactions (user_id, date, scan_id, key) VALUES ({userid}, {date}, {scanid}, {key});"
+    def createTransaction(self, userId, date, scanId, key):
+        query = f'INSERT INTO Transactions (user_id, date, scan_id, key) VALUES ({userId}, {date}, {scanId}, {key});'
         return self.executeQuery(query)
 
-    def getTransactionById(self, transaction_id):
-        query = f"SELECT * FROM transactions WHERE transaction_id = {transaction_id};"
+    def getTransactionById(self, transactionId):
+        query = f'SELECT * FROM Transactions WHERE transaction_id = {transactionId};'
         return self.executeQuery(query)
 
-    def getTransactionsByUserId(self, user_id):
-        query = f"SELECT * FROM transactions WHERE user_id = {user_id};"
+    def getTransactionsByUserId(self, userId):
+        query = f'SELECT * FROM Transactions WHERE user_id = {userId};'
         return self.executeQuery(query)
 
-    def updateTransactionKey(self, transaction_id, new_key):
-        query = f"UPDATE transactions SET key = {new_key} WHERE transaction_id = {transaction_id};"
+    def updateTransactionKey(self, transactionId, newKey):
+        query = f'UPDATE Transactions SET key = {newKey} WHERE transaction_id = {transactionId};'
         return self.executeQuery(query)
 
-    def deleteTransaction(self, transaction_id):
-        query = f"DELETE FROM transactions WHERE transaction_id = {transaction_id};"
+    def deleteTransaction(self, transactionId):
+        query = f'DELETE FROM Transactions WHERE transaction_id = {transactionId};'
         return self.executeQuery(query)

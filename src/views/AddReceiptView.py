@@ -1,8 +1,10 @@
 import os
 import tkinter as tk
-from tkinter import filedialog
+from PIL import Image, ImageTk
 from ttkbootstrap import ttk
 from ttkbootstrap.scrolled import ScrolledFrame
+
+from src.controllers.AppController import AppController
 
 from src.Navigator import Navigator
 from src.views.View import View
@@ -10,11 +12,14 @@ class AddReceiptView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
         self.currentPath = os.getcwd()
+        self.tkImageReference = None
 
         self.shopNameEntry = ttk.Entry(self.canvas)
         self.shopNameEntry.insert(0, "shop name")
         self.shopNameEntry.bind("<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END))
         self.shopNameEntry.bind("<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name"))
+
+        self.imageLabel = ttk.Label(self.canvas)
         
         self.scrollableList = ScrolledFrame(self.canvas, autohide=True)
 
@@ -33,7 +38,7 @@ class AddReceiptView(View):
         self.firstPrice.bind("<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END))
         self.firstPrice.bind("<FocusOut>", lambda event: self.firstPrice.insert(0, "1.00 zł"))
 
-        self.addIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\plus 30x30.png")
+        self.addIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/plus 30x30.png")
         self.addItemButton = ttk.Button(self.canvas, compound=tk.TOP, image=self.addIcon, padding=3)
         self.addItemButton.configure(bootstyle="outline")
 
@@ -42,13 +47,13 @@ class AddReceiptView(View):
 
         self.navbarLabel = ttk.Label(self.navbarFrame, text="Take photo of receipt or import image", anchor=tk.CENTER)
 
-        self.cameraIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\camera 30x30.png")
+        self.cameraIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/camera 30x30.png")
         self.cameraButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.cameraIcon, padding=3)
         self.cameraButton.configure(bootstyle="outline")
 
-        self.imageIcon = tk.PhotoImage(file=f"{self.currentPath}\src\icons\image 30x30.png")
+        self.imageIcon = tk.PhotoImage(file=f"{self.currentPath}/src/icons/image 30x30.png")
         self.importImageButton = ttk.Button(self.navbarFrame, compound=tk.TOP, image=self.imageIcon, padding=3)
-        self.importImageButton.configure(bootstyle="outline", command=lambda: self.openDialog())
+        self.importImageButton.configure(bootstyle="outline", command=lambda: AppController.openDialog(addReceiptView=self))
 
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(bootstyle="outline", command=lambda: Navigator().navigateBack())
@@ -77,6 +82,8 @@ class AddReceiptView(View):
     def hide(self):
         self.shopNameEntry.place_forget()
 
+        self.imageLabel.place_forget()
+
         self.scrollableList.place_forget()
 
         self.firstEntry.place_forget()
@@ -91,3 +98,20 @@ class AddReceiptView(View):
         self.cameraButton.place_forget()
         self.importImageButton.place_forget()
         self.backButton.place_forget()
+
+    def hideFrame(self):
+        self.scrollableList.place_forget()
+        self.addItemButton.place_forget()
+    
+    def showFrame(self):
+        self.scrollableList.place(x=0, y=60, width=320, height=450)
+        self.addItemButton.place(x=270, y=520, width=40, height=40)
+
+    def hideImage(self):
+        self.imageLabel.place_forget()
+
+    def showImage(self, image: Image):
+        imageCopy = image.copy()
+        self.tkImageReference = ImageTk.PhotoImage(imageCopy)
+        self.imageLabel.place(x=0, y=60, width=320, height=500)
+        self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)
