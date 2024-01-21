@@ -3,7 +3,8 @@ import ttkbootstrap as ttk
 
 from src.views.View import View
 
-class Navigator():
+
+class Navigator:
     stack = []
 
     @staticmethod

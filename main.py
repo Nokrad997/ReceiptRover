@@ -4,7 +4,7 @@ from src.Navigator import Navigator
 from src.views.MainView import MainView
 
 root = ttk.Window(themename="superhero")
-root.title("Test")
+root.title("ReceiptRover")
 root.geometry("320x700")
 root.resizable(False, False)
 

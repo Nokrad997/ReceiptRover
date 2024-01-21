@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 
+
 class User(BaseModel):
     id: int
     name: str
@@ -9,19 +10,19 @@ class User(BaseModel):
     @property
     def getId(self) -> int:
         return self.id
-    
+
     @property
     def getName(self) -> str:
         return self.name
-    
+
     @property
     def getEmail(self) -> EmailStr:
         return self.email
-    
+
     @property
     def getPassword(self) -> str:
         return self.password
-    
+
     @getId.setter
     def setId(self, value):
         self.id = value

@@ -3,43 +3,43 @@ from image import Image
 import pytesseract
 import re
 
+
 class Ocr(BaseModel):
     """
     Class for performing OCR (Optical Character Recognition) on an image.
     """
 
-    class Config():
+    class Config:
         arbitrary_types_allowed = True
-        
-    file : str 
-    text: str = ''
-    shop: str = ''
+
+    file: str
+    text: str = ""
+    shop: str = ""
     products: list[str] = []
     ammount: float = 0.0
     img: Image = None
-    
 
     @root_validator(pre=True)
     def create_image(cls, values):
         """
         Root validator to create an Image object from the provided file path.
         """
-        file_path = values.get('file')
+        file_path = values.get("file")
         if file_path:
-            values['img'] = Image(file_path)
+            values["img"] = Image(file_path)
         return values
-        
+
     def getText(self):
         """
         Extracts text from the image using pytesseract library.
         """
         try:
-            self.text = pytesseract.image_to_string(self.img.getImage(), lang='pol')
-            self.text = self.text.replace(',', '.')
-            self.text = self.text.replace(' I ', '1')
+            self.text = pytesseract.image_to_string(self.img.getImage(), lang="pol")
+            self.text = self.text.replace(",", ".")
+            self.text = self.text.replace(" I ", "1")
         except Exception as e:
-            self.text = f'Error occurred while extracting text: {e}'
-       
+            self.text = f"Error occurred while extracting text: {e}"
+
     def extractProducts(self):
         """
         Extracts products from the extracted text using regular expressions.
@@ -62,14 +62,13 @@ class Ocr(BaseModel):
         except Exception as e:
             print(f"Error occurred while extracting products: {e}")
             self.products = []
-            
-     
+
     def getProducts(self):
         """
         Returns the extracted products.
         """
         return self.products
-    
+
     def extractShop(self):
         """
         Extracts the shop name from the extracted text using regular expressions.
@@ -78,7 +77,7 @@ class Ocr(BaseModel):
             shop_pattern = self.text.splitlines()[2]
             self.shop = str(shop_pattern)
         except Exception as e:
-            self.shop = f'Error occurred while extracting shop: {e}'
+            self.shop = f"Error occurred while extracting shop: {e}"
 
     def getShop(self):
         """
@@ -93,4 +92,3 @@ class Ocr(BaseModel):
         for product in self.products:
             self.ammount += float(product[1]) * float(product[2])
         return self.ammount
-    
