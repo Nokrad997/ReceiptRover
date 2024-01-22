@@ -28,7 +28,7 @@ class AddReceiptView(View):
 
         self.imageLabel = ttk.Label(self.canvas)
 
-        self.scrollableList = ScrolledFrame(self.canvas, height=6000)
+        self.scrollableList = ScrolledFrame(self.canvas)
 
         self.firstEntry = ttk.Entry(self.scrollableList)
         self.firstEntry.insert(0, "produkt")
@@ -146,19 +146,24 @@ class AddReceiptView(View):
         self.importImageButton.place_forget()
         self.backButton.place_forget()
 
-    def hideFrame(self):
-        self.scrollableList.place_forget()
-        self.addItemButton.place_forget()
+    def hideFirstLine(self):
+        self.firstEntry.place_forget()
+        self.firstCount.place_forget()
+        self.firstPrice.place_forget()
 
-    def showFrame(self):
-        self.scrollableList.place(x=0, y=60, width=320, height=450)
-        self.addItemButton.place(x=270, y=520, width=40, height=40)
+    # def hideFrame(self):
+    #     self.scrollableList.place_forget()
+    #     self.addItemButton.place_forget()
 
-    def hideImage(self):
-        self.imageLabel.place_forget()
+    # def showFrame(self):
+    #     self.scrollableList.place(x=0, y=60, width=320, height=450)
+    #     self.addItemButton.place(x=270, y=520, width=40, height=40)
 
-    def showImage(self, image: Image):
-        imageCopy = image.copy()
-        self.tkImageReference = ImageTk.PhotoImage(imageCopy)
-        self.imageLabel.place(x=0, y=60, width=320, height=500)
-        self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)
+    # def hideImage(self):
+    #     self.imageLabel.place_forget()
+
+    # def showImage(self, image: Image):
+    #     imageCopy = image.copy()
+    #     self.tkImageReference = ImageTk.PhotoImage(imageCopy)
+    #     self.imageLabel.place(x=0, y=60, width=320, height=500)
+    #     self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)

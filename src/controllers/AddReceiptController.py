@@ -56,11 +56,11 @@ class AddReceiptController:
 
     def takeImageFromUser(self) -> None:
         path = self.openDialog()
+        print(path)
 
         scannerController = ScannerController(path)
         scannerController.scan()
         pathForApi = scannerController.saveScanned(f"scanned_{datetime.now()}.jpg")
-        print(pathForApi)
 
         self.image = Image.open(fp=pathForApi, mode="r")
         # self.addReceiptView.hideFrame()
@@ -76,11 +76,8 @@ class AddReceiptController:
         try:
             childrensLength = len(self.addReceiptView.scrollableList.children)
             pixelsToAdd = 50 * (childrensLength // 3)
-            if pixelsToAdd > 6000:
-                messagebox.showerror(
-                    title="Error", message="Too many products on the receipt"
-                )
-                raise Exception("Too many products")
+            
+            self.addReceiptView.scrollableList.configure(height=pixelsToAdd + 50)
 
             entry = ttk.Entry(self.addReceiptView.scrollableList)
             count = ttk.Entry(self.addReceiptView.scrollableList)
@@ -105,3 +102,28 @@ class AddReceiptController:
         apiController = ApiController()
         result = apiController.getReceiptData(path)
         print(result)
+        shopName = result["shop"]
+        print(shopName)
+        self.addReceiptView.shopNameEntry.delete(0, tk.END)
+        self.addReceiptView.shopNameEntry.insert(0, shopName)
+
+        self.addReceiptView.hideFirstLine()
+
+        products = result["products"]
+        productsCount = len(products)
+
+        self.addReceiptView.scrollableList.configure(height=productsCount * 50)
+        
+        for number, product in enumerate(products):
+            productName = ttk.Entry(self.addReceiptView.scrollableList)
+            productCount = ttk.Entry(self.addReceiptView.scrollableList)
+            productPrice = ttk.Entry(self.addReceiptView.scrollableList)
+
+            productName.insert(0, product[0])
+            productCount.insert(0, f"{product[1]} szt.")
+            productPrice.insert(0, f"{product[2]} zł")
+
+            productName.place(x=10, y=50 * number, width=180, height=40)
+            productCount.place(x=200, y=50 * number, width=45, height=40)
+            productPrice.place(x=255, y=50 * number, width=45, height=40)
+
