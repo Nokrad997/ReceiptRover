@@ -1,6 +1,10 @@
+from src.services.SynchronizationService import SynchronizationService
+
 class SynchronizationController:
     def __init__(self):
-        pass
+        self.synchronizationService = SynchronizationService()
 
-    def synchronize(self):
-        pass
+    def synchronizeData(self, userId: int):
+        if self.synchronizationService.checkData(userId):
+            self.synchronizationService.synchronizeLocal()
+            self.synchronizationService.synchronize_database()

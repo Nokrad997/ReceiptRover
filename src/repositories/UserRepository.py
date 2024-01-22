@@ -9,7 +9,7 @@ class UserRepository(Repository):
 
     def createUser(self, user: User):
         password = self.hashPassword(user.password).decode("utf-8")
-        query = f"INSERT INTO \"User\" (name, email, password) VALUES ('{user.name}', '{user.email}', '{password}') RETURNING *"
+        query = f'INSERT INTO "User" (name, email, password) VALUES (\'{user.name}\', \'{user.email}\', \'{password}\') RETURNING *'
         return self.executeQuery(query)
 
     def getUserById(self, userid):
@@ -17,7 +17,7 @@ class UserRepository(Repository):
         return self.executeQuery(query)
 
     def getUserByEmail(self, email):
-        query = f"SELECT * FROM \"User\" WHERE email = '{email}'"
+        query = f'SELECT * FROM "User" WHERE email = \'{email}\''
         userArray = self.executeQuery(query)
         return self.returnUser(
             int(userArray[0][0]),
@@ -28,7 +28,7 @@ class UserRepository(Repository):
 
     def updateUserPassword(self, userid, newpassword):
         newpassword = self.hashPassword(newpassword)
-        query = f"UPDATE \"User\" SET password = '{newpassword}' WHERE user_id = {userid} RETURNING *"
+        query = f'UPDATE "User" SET password = \'{newpassword.decode("utf-8")}\' WHERE user_id = {userid} RETURNING *'
         return self.executeQuery(query)
 
     def hashPassword(self, password):

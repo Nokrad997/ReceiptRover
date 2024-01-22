@@ -7,7 +7,7 @@ from src.modelsOffline.Receipt import Receipt
 
 class DataProvider:
     def __init__(self):
-        pass
+        self.filePath: str = "src/localData/Receipts.xml"
     
     def receiptToXmlElement(self, receipt: Receipt) -> ET.Element:
         receiptElement = ET.Element("Receipt")
@@ -38,9 +38,9 @@ class DataProvider:
 
         return Receipt(key=key, shop=shop, products=products)
 
-    def addReceiptToXmlFile(self, receipt: Receipt, filePath: str = "src/localData/Receipts.xml"):
-        if os.path.exists(filePath):
-            tree = ET.parse(filePath)
+    def addReceiptToXmlFile(self, receipt: Receipt):
+        if os.path.exists(self.filePath):
+            tree = ET.parse(self.filePath)
             root = tree.getroot()
         else:
             root = ET.Element("Receipts")
@@ -54,11 +54,42 @@ class DataProvider:
         xml_lines = [line for line in parsed_xml.toprettyxml(indent="    ").split('\n') if line.strip()]
         formatted_xml = '\n'.join(xml_lines)
 
-        with open(filePath, "w", encoding="utf-8") as xmlfile:
+        with open(self.filePath, "w", encoding="utf-8") as xmlfile:
             xmlfile.write(formatted_xml)
 
-    def loadReceiptsFromXmlFile(self, filePath: str) -> List[Receipt]:
-        tree = ET.parse(filePath)
+    def loadReceiptsFromXmlFile(self) -> List[Receipt]:
+        tree = ET.parse(self.filePath)
         root = tree.getroot()
 
         return [self.xmlElementToReceipt(receiptElement) for receiptElement in root.findall("Receipt")]
+
+    def getkeysFromXML(self) -> List[str]:
+        tree = ET.parse(self.filePath)
+        root = tree.getroot()
+
+        return [receiptElement.find("Key").text for receiptElement in root.findall("Receipt")]
+    
+    def getkeyFromXMLByKey(self, key: str) -> str:
+        tree = ET.parse(self.file_path)
+        root = tree.getroot()
+
+        for reciptElement in root.findall("Receipt"):
+            if reciptElement.find("Key").text == key:
+                return key
+
+        return None
+    
+    def xmlElementToReceipt(self, xmlElement: ET.Element) -> Receipt:
+        key = xmlElement.find("Key").text
+        shop = xmlElement.find("Shop").text
+
+        productsElement = xmlElement.find("Products")
+        products = []
+        for productElement in productsElement.findall("Product"):
+            name = productElement.find("Name").text
+            price = float(productElement.find("Price").text)
+            quantity = float(productElement.find("Quantity").text)
+
+            products.append(Product(name=name, price=price, quantity=quantity))
+
+        return Receipt(key=key, shop=shop, products=products)

@@ -4,8 +4,11 @@ class DataController:
     def __init__(self):
         self.dataProvider = DataProvider()
 
-    def addReceipt(self, receipt, filePath = "src/localData/Receipts.xml"):
-        self.dataProvider.addReceiptToXmlFile(receipt, filePath)
+    def addReceipt(self, receipt):
+        self.dataProvider.addReceiptToXmlFile(receipt)
 
-    def loadReceipts(self, filePath = "src/localData/Receipts.xml"):
-        return self.dataProvider.loadReceiptsFromXmlFile(filePath)
+    def loadReceipts(self):
+        return self.dataProvider.loadReceiptsFromXmlFile()
+
+    def getUsersLocalKeys(self):
+        return self.dataProvider.getkeysFromXML()

@@ -53,8 +53,8 @@ class AppController:
         pass
 
     @staticmethod
-    def synchronize(self):
-        pass
+    def synchronize(self, userId: int):
+        self.synchronizationController.synchronizeData(userId)
 
     @staticmethod
     def openDialog(addReceiptView: View):
