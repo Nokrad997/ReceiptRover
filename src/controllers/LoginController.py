@@ -8,6 +8,15 @@ class LoginController:
         self.loginService = LoginService()
 
     def loginUser(self, loginView: View):
+        """
+        Logs in a user using the provided login view.
+
+        Parameters:
+        - loginView (View): The login view containing user credentials.
+
+        Returns:
+        - result: The result of the login operation.
+        """
         result = self.loginService.login(loginView)
 
         return result

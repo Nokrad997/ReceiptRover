@@ -11,15 +11,21 @@ from src.views.LoginView import LoginView
 
 
 class MainView(View):
+    """A class representing the main view of the application."""
+
     def __init__(self, canvas, root):
+        """
+        Initialize the MainView.
+
+        Args:
+            canvas (tk.Canvas): The canvas on which the view will be placed.
+            root (tk.Tk): The root window of the application.
+        """
         super().__init__(canvas)
         self.root = root
 
         currentDir = os.getcwd()
-        # print(currentDir)
-        # print(f"{currentDir}/src/icons/logo 256x256.png")
         self.logo = tk.PhotoImage(file=f"{currentDir}/src/icons/logo 256x256.png")
-        # print(self.logo)
         self.logoLabel = ttk.Label(
             self.canvas, image=self.logo, padding=0, justify=tk.CENTER
         )
@@ -53,6 +59,7 @@ class MainView(View):
         )
 
     def place(self):
+        """Place the main view elements on the canvas."""
         self.canvas.place(x=0, y=0, width=320, height=700)
 
         self.logoLabel.place(x=30, y=50, width=260, height=260)
@@ -65,6 +72,7 @@ class MainView(View):
         self.quitButton.place(x=10, y=150, width=300, height=40)
 
     def hide(self):
+        """Hide the main view elements from the canvas."""
         self.navbarFrame.place_forget()
 
         self.logoLabel.place_forget()

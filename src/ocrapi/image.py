@@ -1,5 +1,6 @@
 import cv2
 
+
 class Image:
     """
     Represents an image object.
@@ -20,16 +21,16 @@ class Image:
         try:
             self.image = cv2.imread(self.file)
         except Exception as e:
-            self.image = f'Error occurred while opening image: {e}'
-        
+            self.image = f"Error occurred while opening image: {e}"
+
     def getImage(self):
         return self.image
-    
+
     def setImage(self, image):
         self.image = image
-        
+
     def getFile(self):
         return self.file
-    
+
     def setFile(self, file):
         self.file = file

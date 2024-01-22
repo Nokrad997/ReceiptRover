@@ -4,6 +4,29 @@ from typing import Self
 
 
 class Transaction(BaseModel):
+    """
+    Represents a transaction.
+
+    Attributes:
+        transactionsId (int): The ID of the transaction.
+        userId (int): The ID of the user associated with the transaction.
+        date (datetime): The date of the transaction.
+        scanId (int): The ID of the scan associated with the transaction.
+        key (str): The key associated with the transaction.
+
+    Methods:
+        getTransactionsId() -> int: Returns the ID of the transaction.
+        getUserId() -> int: Returns the ID of the user associated with the transaction.
+        getDate() -> datetime: Returns the date of the transaction.
+        getScanId() -> int: Returns the ID of the scan associated with the transaction.
+        getKey() -> str: Returns the key associated with the transaction.
+        setTransactionsId(value: int): Sets the ID of the transaction.
+        setUserId(value: int): Sets the ID of the user associated with the transaction.
+        setDate(value: datetime): Sets the date of the transaction.
+        setScanId(value: int): Sets the ID of the scan associated with the transaction.
+        setKey(value: str): Sets the key associated with the transaction.
+    """
+
     transactionsId: int
     userId: int
     date: datetime

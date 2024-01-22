@@ -59,10 +59,18 @@ class AddReceiptController:
     def processImage(self, path: str) -> str:
         scannerController = ScannerController(path)
         scannerController.scan()
-        date = str(datetime.now()).replace(" ", "_").replace(":", "_").replace(".", "_").replace("-", "_")
+        date = (
+            str(datetime.now())
+            .replace(" ", "_")
+            .replace(":", "_")
+            .replace(".", "_")
+            .replace("-", "_")
+        )
         messagebox.showinfo("Date", date)
         pathForApi = scannerController.saveScanned(f"scanned_{date}.jpg")
-        messagebox.showinfo("Info", f"Image processed successfully. Name: \'{pathForApi}\'")
+        messagebox.showinfo(
+            "Info", f"Image processed successfully. Name: '{pathForApi}'"
+        )
 
         return pathForApi
 
@@ -74,7 +82,7 @@ class AddReceiptController:
         try:
             childrensLength = len(self.scroll.children)
             pixelsToAdd = 50 * (childrensLength // 3)
-            
+
             self.addReceiptView.scrollableList.configure(height=pixelsToAdd + 50)
 
             entry = ttk.Entry(self.scroll)
@@ -122,7 +130,7 @@ class AddReceiptController:
         productsCount = len(products)
 
         self.scroll.configure(height=productsCount * 50)
-        
+
         for number, product in enumerate(products):
             productName = ttk.Entry(self.scroll)
             productCount = ttk.Entry(self.scroll)

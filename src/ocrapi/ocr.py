@@ -45,19 +45,21 @@ class Ocr(BaseModel):
         Extracts products from the extracted text using regular expressions.
         """
         try:
-            product_pattern = re.compile(r"(?P<item>.*\w+.)(?P<ilosc> \d.*x|X)(?P<cena>\d+\.\d+)")
+            product_pattern = re.compile(
+                r"(?P<item>.*\w+.)(?P<ilosc> \d.*x|X)(?P<cena>\d+\.\d+)"
+            )
             products = product_pattern.findall(self.text)
 
             for element, i in zip(products, range(len(products))):
                 products[i] = list(element)
-                products[i][1] = products[i][1].replace('x', '')
-                products[i][1] = products[i][1].replace('X', '')
-                products[i][1] = products[i][1].replace(' ', '')
-                products[i][1] = products[i][1].replace(' x', '')
-                products[i][1] = products[i][1].replace('0-', '')
-                products[i][2] = products[i][2].replace(' ', '')
+                products[i][1] = products[i][1].replace("x", "")
+                products[i][1] = products[i][1].replace("X", "")
+                products[i][1] = products[i][1].replace(" ", "")
+                products[i][1] = products[i][1].replace(" x", "")
+                products[i][1] = products[i][1].replace("0-", "")
+                products[i][2] = products[i][2].replace(" ", "")
                 item_pattern = r"\d+$"
-                products[i][0] = re.sub(item_pattern, '', products[i][0])
+                products[i][0] = re.sub(item_pattern, "", products[i][0])
             self.products = products
         except Exception as e:
             print(f"Error occurred while extracting products: {e}")

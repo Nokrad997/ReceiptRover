@@ -4,6 +4,25 @@ from typing import Self
 
 
 class Receipt(BaseModel):
+    """
+    Represents a receipt object.
+
+    Attributes:
+        receiptId (int): The ID of the receipt.
+        key (str): The key associated with the receipt.
+        receipt (bytes): The receipt data.
+
+    Properties:
+        getReceiptId (int): Getter method for receiptId.
+        getKey (str): Getter method for key.
+        getProducts (list[Product]): Getter method for products.
+
+    Setters:
+        setReceiptId (int): Setter method for receiptId.
+        setKey (str): Setter method for key.
+        setProducts (list[Product]): Setter method for products.
+    """
+
     receiptId: int
     key: str
     receipt: bytes

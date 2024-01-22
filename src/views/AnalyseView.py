@@ -6,7 +6,15 @@ from src.views.View import View
 
 
 class AnalyseView(View):
+    """A class representing the AnalyseView in the ReceiptRover application."""
+
     def __init__(self, canvas):
+        """
+        Initialize the AnalyseView.
+
+        Args:
+            canvas (tk.Canvas): The canvas on which the view will be placed.
+        """
         super().__init__(canvas)
 
         self.monthLabel = ttk.Label(self.canvas, text="Month")
@@ -55,6 +63,7 @@ class AnalyseView(View):
         )
 
     def place(self):
+        """Place the AnalyseView on the canvas."""
         self.canvas.place(x=0, y=0, width=320, height=700)
 
         self.monthLabel.place(x=60, y=170, width=200, height=20)
@@ -66,6 +75,7 @@ class AnalyseView(View):
         self.backButton.place(x=10, y=10, width=300, height=40)
 
     def hide(self):
+        """Hide the AnalyseView."""
         self.monthLabel.place_forget()
         self.monthMenuButton.place_forget()
 
@@ -75,4 +85,10 @@ class AnalyseView(View):
         self.backButton.place_forget()
 
     def prepareChart(self, month):
+        """
+        Prepare the chart for the selected month.
+
+        Args:
+            month (str): The selected month.
+        """
         print(month)
