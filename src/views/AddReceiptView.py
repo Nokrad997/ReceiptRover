@@ -11,6 +11,33 @@ from src.views.View import View
 
 
 class AddReceiptView(View):
+    """
+    A class representing the view for adding a receipt.
+
+    Attributes:
+    - canvas: The canvas on which the view is placed.
+    - currentPath: The current working directory path.
+    - tkImageReference: A reference to the Tkinter image.
+    - shopNameEntry: The entry widget for entering the shop name.
+    - imageLabel: The label widget for displaying the image.
+    - scrollableList: The scrolled frame widget for displaying the list of products.
+    - firstEntry: The entry widget for entering the first product.
+    - firstCount: The entry widget for entering the count of the first product.
+    - firstPrice: The entry widget for entering the price of the first product.
+    - addItemButton: The button for adding a product.
+    - navbarFrame: The frame widget for the navigation bar.
+    - navbarLabel: The label widget for displaying the navigation bar text.
+    - cameraButton: The button for taking a photo of the receipt.
+    - importImageButton: The button for importing an image of the receipt.
+    - saveButton: The button for saving the receipt.
+    - backButton: The button for navigating back.
+
+    Methods:
+    - place(): Places the view on the canvas.
+    - hide(): Hides the view.
+    - hideFirstLine(): Hides the first line of the product list.
+    """
+
     def __init__(self, canvas):
         super().__init__(canvas)
         self.currentPath = os.getcwd()
@@ -20,10 +47,16 @@ class AddReceiptView(View):
         self.shopNameEntry = ttk.Entry(self.canvas)
         self.shopNameEntry.insert(0, "shop name")
         self.shopNameEntry.bind(
-            "<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END) if self.shopNameEntry.get() == "shop name" else None
+            "<FocusIn>",
+            lambda event: self.shopNameEntry.delete(0, tk.END)
+            if self.shopNameEntry.get() == "shop name"
+            else None,
         )
         self.shopNameEntry.bind(
-            "<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name") if self.shopNameEntry.get() == "" else None
+            "<FocusOut>",
+            lambda event: self.shopNameEntry.insert(0, "shop name")
+            if self.shopNameEntry.get() == ""
+            else None,
         )
 
         self.imageLabel = ttk.Label(self.canvas)
@@ -33,28 +66,46 @@ class AddReceiptView(View):
         self.firstEntry = ttk.Entry(self.scrollableList)
         self.firstEntry.insert(0, "product")
         self.firstEntry.bind(
-            "<FocusIn>", lambda event: self.firstEntry.delete(0, tk.END) if self.firstEntry.get() == "product" else None
+            "<FocusIn>",
+            lambda event: self.firstEntry.delete(0, tk.END)
+            if self.firstEntry.get() == "product"
+            else None,
         )
         self.firstEntry.bind(
-            "<FocusOut>", lambda event: self.firstEntry.insert(0, "product") if self.firstEntry.get() == "" else None
+            "<FocusOut>",
+            lambda event: self.firstEntry.insert(0, "product")
+            if self.firstEntry.get() == ""
+            else None,
         )
 
         self.firstCount = ttk.Entry(self.scrollableList)
         self.firstCount.insert(0, "count")
         self.firstCount.bind(
-            "<FocusIn>", lambda event: self.firstCount.delete(0, tk.END) if self.firstCount.get() == "count" else None
+            "<FocusIn>",
+            lambda event: self.firstCount.delete(0, tk.END)
+            if self.firstCount.get() == "count"
+            else None,
         )
         self.firstCount.bind(
-            "<FocusOut>", lambda event: self.firstCount.insert(0, "count") if self.firstCount.get() == "" else None
+            "<FocusOut>",
+            lambda event: self.firstCount.insert(0, "count")
+            if self.firstCount.get() == ""
+            else None,
         )
 
         self.firstPrice = ttk.Entry(self.scrollableList)
         self.firstPrice.insert(0, "price")
         self.firstPrice.bind(
-            "<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END) if self.firstPrice.get() == "price" else None
+            "<FocusIn>",
+            lambda event: self.firstPrice.delete(0, tk.END)
+            if self.firstPrice.get() == "price"
+            else None,
         )
         self.firstPrice.bind(
-            "<FocusOut>", lambda event: self.firstPrice.insert(0, "price") if self.firstPrice.get() == "" else None
+            "<FocusOut>",
+            lambda event: self.firstPrice.insert(0, "price")
+            if self.firstPrice.get() == ""
+            else None,
         )
 
         self.addIcon = tk.PhotoImage(
@@ -106,6 +157,9 @@ class AddReceiptView(View):
         )
 
     def place(self):
+        """
+        Places the view on the canvas.
+        """
         self.canvas.place(x=0, y=0, width=320, height=700)
 
         self.shopNameEntry.place(x=10, y=10, width=300, height=40)
@@ -127,6 +181,9 @@ class AddReceiptView(View):
         self.backButton.place(x=10, y=130, width=300, height=40)
 
     def hide(self):
+        """
+        Hides the view.
+        """
         self.shopNameEntry.place_forget()
 
         self.imageLabel.place_forget()
@@ -143,23 +200,9 @@ class AddReceiptView(View):
         self.backButton.place_forget()
 
     def hideFirstLine(self):
+        """
+        Hides the first line of the product list.
+        """
         self.firstEntry.place_forget()
         self.firstCount.place_forget()
         self.firstPrice.place_forget()
-
-    # def hideFrame(self):
-    #     self.scrollableList.place_forget()
-    #     self.addItemButton.place_forget()
-
-    # def showFrame(self):
-    #     self.scrollableList.place(x=0, y=60, width=320, height=450)
-    #     self.addItemButton.place(x=270, y=520, width=40, height=40)
-
-    # def hideImage(self):
-    #     self.imageLabel.place_forget()
-
-    # def showImage(self, image: Image):
-    #     imageCopy = image.copy()
-    #     self.tkImageReference = ImageTk.PhotoImage(imageCopy)
-    #     self.imageLabel.place(x=0, y=60, width=320, height=500)
-    #     self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)

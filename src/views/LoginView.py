@@ -7,6 +7,15 @@ from src.controllers.AppController import AppController
 
 
 class LoginView(View):
+    """
+    A class representing the login view of the application.
+
+    Args:
+        canvas (tkinter.Canvas): The canvas on which the view will be placed.
+        email (str): The email entered by the user.
+        password (str): The password entered by the user.
+    """
+
     def __init__(self, canvas, email, password):
         super().__init__(canvas)
         self.email = email
@@ -30,6 +39,9 @@ class LoginView(View):
         )
 
     def place(self):
+        """
+        Places the login view on the canvas.
+        """
         self.canvas.place(x=0, y=0, width=320, height=700)
 
         self.loginLabel.place(x=60, y=150, width=200, height=20)
@@ -44,8 +56,9 @@ class LoginView(View):
         self.backButton.place(x=10, y=10, width=300, height=40)
 
     def hide(self):
-        # self.canvas.place_forget()
-
+        """
+        Hides the login view from the canvas.
+        """
         self.loginLabel.place_forget()
         self.loginEntry.place_forget()
         self.passwordLabel.place_forget()

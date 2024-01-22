@@ -10,6 +10,19 @@ class LoginService:
         self.userRepository = UserRepository()
 
     def login(self, loginView: View):
+        """
+        Logs in a user by checking the provided email and password against the stored user credentials.
+
+        Args:
+            loginView (View): The login view containing the email and password.
+
+        Returns:
+            bool: True if the login is successful, False otherwise.
+
+        Raises:
+            InvalidPasswordException: If the provided password is incorrect.
+            UserDoesntExistException: If the user does not exist.
+        """
         email = loginView.getEmail()
         password = loginView.getPassword()
         usr = self.userRepository.getUserByEmail(email)
@@ -24,4 +37,14 @@ class LoginService:
             raise UserDoesntExistException("nie ma takiego uzytkownika")
 
     def checkPassword(self, password, hashedpassword):
+        """
+        Checks if the provided password matches the hashed password.
+
+        Args:
+            password (str): The plain text password.
+            hashedpassword (str): The hashed password.
+
+        Returns:
+            bool: True if the password matches, False otherwise.
+        """
         return bcrypt.checkpw(password.encode("utf-8"), hashedpassword.encode("utf-8"))

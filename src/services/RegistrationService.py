@@ -9,10 +9,23 @@ from src.exceptions.Exceptions import (
 
 
 class RegistrationService:
+    """
+    Service class for user registration.
+    """
+
     def __init__(self):
         self.userRepository = UserRepository()
 
     def register(self, registrationView: RegistrationView):
+        """
+        Registers a new user.
+
+        Args:
+            registrationView (RegistrationView): The registration view containing user details.
+
+        Returns:
+            bool or Exception: True if registration is successful, otherwise an exception is raised.
+        """
         try:
             if self.validateName(registrationView) and self.validatePassword(
                 registrationView
@@ -42,6 +55,18 @@ class RegistrationService:
             return e
 
     def validateName(self, registrationView: RegistrationView):
+        """
+        Validates the user's name.
+
+        Args:
+            registrationView (RegistrationView): The registration view containing user details.
+
+        Raises:
+            InvalidNameException: If the name is not between 3 and 32 characters long.
+
+        Returns:
+            bool: True if the name is valid.
+        """
         name = registrationView.name
 
         if len(name) < 3 or len(name) > 32:
@@ -50,6 +75,19 @@ class RegistrationService:
         return True
 
     def validatePassword(self, registrationView: RegistrationView):
+        """
+        Validates the user's password.
+
+        Args:
+            registrationView (RegistrationView): The registration view containing user details.
+
+        Raises:
+            InvalidPasswordException: If the password is not between 8 and 32 characters long,
+                or if the password and re-typed password do not match.
+
+        Returns:
+            bool: True if the password is valid.
+        """
         pwd = registrationView.password
         rePwd = registrationView.reTypePassword
 
