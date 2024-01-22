@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import os
-from typing import List
+from xml.dom import minidom
+from typing import List  
 from src.modelsOffline.Product import Product
 from src.modelsOffline.Receipt import Receipt
 
@@ -37,7 +38,7 @@ class DataProvider:
 
         return Receipt(key=key, shop=shop, products=products)
 
-    def addReceiptToXmlFile(self, receipt: Receipt, filePath: str):
+    def addReceiptToXmlFile(self, receipt: Receipt, filePath: str = "src/localData/Receipts.xml"):
         if os.path.exists(filePath):
             tree = ET.parse(filePath)
             root = tree.getroot()
@@ -46,7 +47,15 @@ class DataProvider:
             tree = ET.ElementTree(root)
 
         root.append(self.receiptToXmlElement(receipt))
-        tree.write(filePath)
+
+        xmlstr = ET.tostring(root, encoding="utf-8")
+        parsed_xml = minidom.parseString(xmlstr)
+
+        xml_lines = [line for line in parsed_xml.toprettyxml(indent="    ").split('\n') if line.strip()]
+        formatted_xml = '\n'.join(xml_lines)
+
+        with open(filePath, "w", encoding="utf-8") as xmlfile:
+            xmlfile.write(formatted_xml)
 
     def loadReceiptsFromXmlFile(self, filePath: str) -> List[Receipt]:
         tree = ET.parse(filePath)
