@@ -205,8 +205,9 @@ class TransformImage:
 
     def saveImage(self, file_path):
         """Save the final processed image to a file."""
-        if not os.path.exists(file_path):
-            os.makedirs('scanned')
+        directory = file_path.rsplit("/", 1)[0]
+        if not os.path.exists(directory):
+            os.makedirs(directory)
         if self.bw_scanned is None:
             raise ValueError("No black and white scanned image to save")
         cv2.imwrite(file_path, self.bw_scanned)
