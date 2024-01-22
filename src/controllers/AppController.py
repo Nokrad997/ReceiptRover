@@ -57,13 +57,15 @@ class AppController:
         self.synchronizationController.synchronizeData(userId)
 
     @staticmethod
-    def openDialog(addReceiptView: View):
+    def addReceiptController(addReceiptView: View):
         addReceiptController = AddReceiptController(addReceiptView)
-        addReceiptController.openDialog()
+        addReceiptController.addReceiptController()
 
     @staticmethod
     def addProduct(addReceiptView: View):
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addProduct()
+
+
 
     # canva(AppController) -> mainmenu -> registerButton1 -> registerView -> registerBurron2 -> AppController -> register(registerView)

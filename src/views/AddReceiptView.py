@@ -20,41 +20,41 @@ class AddReceiptView(View):
         self.shopNameEntry = ttk.Entry(self.canvas)
         self.shopNameEntry.insert(0, "shop name")
         self.shopNameEntry.bind(
-            "<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END)
+            "<FocusIn>", lambda event: self.shopNameEntry.delete(0, tk.END) if self.shopNameEntry.get() == "shop name" else None
         )
         self.shopNameEntry.bind(
-            "<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name")
+            "<FocusOut>", lambda event: self.shopNameEntry.insert(0, "shop name") if self.shopNameEntry.get() == "" else None
         )
 
         self.imageLabel = ttk.Label(self.canvas)
 
-        self.scrollableList = ScrolledFrame(self.canvas, height=6000)
+        self.scrollableList = ScrolledFrame(self.canvas)
 
         self.firstEntry = ttk.Entry(self.scrollableList)
-        self.firstEntry.insert(0, "produkt")
+        self.firstEntry.insert(0, "product")
         self.firstEntry.bind(
-            "<FocusIn>", lambda event: self.firstEntry.delete(0, tk.END)
+            "<FocusIn>", lambda event: self.firstEntry.delete(0, tk.END) if self.firstEntry.get() == "product" else None
         )
         self.firstEntry.bind(
-            "<FocusOut>", lambda event: self.firstEntry.insert(0, "produkt")
+            "<FocusOut>", lambda event: self.firstEntry.insert(0, "product") if self.firstEntry.get() == "" else None
         )
 
         self.firstCount = ttk.Entry(self.scrollableList)
-        self.firstCount.insert(0, "1 szt")
+        self.firstCount.insert(0, "count")
         self.firstCount.bind(
-            "<FocusIn>", lambda event: self.firstCount.delete(0, tk.END)
+            "<FocusIn>", lambda event: self.firstCount.delete(0, tk.END) if self.firstCount.get() == "count" else None
         )
         self.firstCount.bind(
-            "<FocusOut>", lambda event: self.firstCount.insert(0, "1 szt")
+            "<FocusOut>", lambda event: self.firstCount.insert(0, "count") if self.firstCount.get() == "" else None
         )
 
         self.firstPrice = ttk.Entry(self.scrollableList)
-        self.firstPrice.insert(0, "1.00 zł")
+        self.firstPrice.insert(0, "price")
         self.firstPrice.bind(
-            "<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END)
+            "<FocusIn>", lambda event: self.firstPrice.delete(0, tk.END) if self.firstPrice.get() == "price" else None
         )
         self.firstPrice.bind(
-            "<FocusOut>", lambda event: self.firstPrice.insert(0, "1.00 zł")
+            "<FocusOut>", lambda event: self.firstPrice.insert(0, "price") if self.firstPrice.get() == "" else None
         )
 
         self.addIcon = tk.PhotoImage(
@@ -94,7 +94,7 @@ class AddReceiptView(View):
         )
         self.importImageButton.configure(
             bootstyle="outline",
-            command=lambda: AppController.openDialog(addReceiptView=self),
+            command=lambda: AppController.addReceiptController(addReceiptView=self),
         )
 
         self.saveButton = ttk.Button(self.navbarFrame, text="Save")
@@ -112,9 +112,9 @@ class AddReceiptView(View):
 
         self.scrollableList.place(x=0, y=60, width=320, height=400)
 
-        self.firstEntry.place(x=10, y=0, width=180, height=40)
-        self.firstCount.place(x=200, y=0, width=45, height=40)
-        self.firstPrice.place(x=255, y=0, width=45, height=40)
+        self.firstEntry.place(x=10, y=0, width=145, height=40)
+        self.firstCount.place(x=165, y=0, width=50, height=40)
+        self.firstPrice.place(x=225, y=0, width=70, height=40)
 
         self.addItemButton.place(x=270, y=470, width=40, height=40)
 
@@ -133,10 +133,6 @@ class AddReceiptView(View):
 
         self.scrollableList.place_forget()
 
-        self.firstEntry.place_forget()
-        self.firstCount.place_forget()
-        self.firstPrice.place_forget()
-
         self.addItemButton.place_forget()
 
         self.navbarFrame.place_forget()
@@ -146,19 +142,24 @@ class AddReceiptView(View):
         self.importImageButton.place_forget()
         self.backButton.place_forget()
 
-    def hideFrame(self):
-        self.scrollableList.place_forget()
-        self.addItemButton.place_forget()
+    def hideFirstLine(self):
+        self.firstEntry.place_forget()
+        self.firstCount.place_forget()
+        self.firstPrice.place_forget()
 
-    def showFrame(self):
-        self.scrollableList.place(x=0, y=60, width=320, height=450)
-        self.addItemButton.place(x=270, y=520, width=40, height=40)
+    # def hideFrame(self):
+    #     self.scrollableList.place_forget()
+    #     self.addItemButton.place_forget()
 
-    def hideImage(self):
-        self.imageLabel.place_forget()
+    # def showFrame(self):
+    #     self.scrollableList.place(x=0, y=60, width=320, height=450)
+    #     self.addItemButton.place(x=270, y=520, width=40, height=40)
 
-    def showImage(self, image: Image):
-        imageCopy = image.copy()
-        self.tkImageReference = ImageTk.PhotoImage(imageCopy)
-        self.imageLabel.place(x=0, y=60, width=320, height=500)
-        self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)
+    # def hideImage(self):
+    #     self.imageLabel.place_forget()
+
+    # def showImage(self, image: Image):
+    #     imageCopy = image.copy()
+    #     self.tkImageReference = ImageTk.PhotoImage(imageCopy)
+    #     self.imageLabel.place(x=0, y=60, width=320, height=500)
+    #     self.imageLabel.configure(image=self.tkImageReference, justify=tk.CENTER)
