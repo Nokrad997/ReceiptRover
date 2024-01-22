@@ -29,6 +29,7 @@ from src.views.View import View
 class AddReceiptController:
     def __init__(self, addReceiptView: View):
         self.addReceiptView = addReceiptView
+        self.scroll = self.addReceiptView.scrollableList
         self.image = None
 
     """
@@ -44,6 +45,7 @@ class AddReceiptController:
             title="Select file",
             filetypes=(
                 ("Image files", ("*.jpg", "*.jpeg", "*.png")),
+                ("JSON files", "*.json"),
                 ("all files", "*.*"),
             ),
         )
@@ -54,19 +56,15 @@ class AddReceiptController:
         Adds a products entry to the view for manual write by user.
     """
 
-    def takeImageFromUser(self) -> None:
-        path = self.openDialog()
-        print(path)
-
+    def processImage(self, path: str) -> str:
         scannerController = ScannerController(path)
         scannerController.scan()
-        pathForApi = scannerController.saveScanned(f"scanned_{datetime.now()}.jpg")
+        date = str(datetime.now()).replace(" ", "_").replace(":", "_").replace(".", "_").replace("-", "_")
+        messagebox.showinfo("Date", date)
+        pathForApi = scannerController.saveScanned(f"scanned_{date}.jpg")
+        messagebox.showinfo("Info", f"Image processed successfully. Name: \'{pathForApi}\'")
 
-        self.image = Image.open(fp=pathForApi, mode="r")
-        # self.addReceiptView.hideFrame()
-        # self.addReceiptView.showImage(self.image)
-
-        self.addProductFromList(pathForApi)
+        return pathForApi
 
     """
         Method to adding new entrys for user to manual write.
@@ -74,14 +72,14 @@ class AddReceiptController:
 
     def addProduct(self) -> None:
         try:
-            childrensLength = len(self.addReceiptView.scrollableList.children)
+            childrensLength = len(self.scroll.children)
             pixelsToAdd = 50 * (childrensLength // 3)
             
             self.addReceiptView.scrollableList.configure(height=pixelsToAdd + 50)
 
-            entry = ttk.Entry(self.addReceiptView.scrollableList)
-            count = ttk.Entry(self.addReceiptView.scrollableList)
-            price = ttk.Entry(self.addReceiptView.scrollableList)
+            entry = ttk.Entry(self.scroll)
+            count = ttk.Entry(self.scroll)
+            price = ttk.Entry(self.scroll)
 
         except tk.TclError as e:
             print(f"An error occurred during widget creation: {e}")
@@ -90,40 +88,71 @@ class AddReceiptController:
             print(f"An unexpected error occurred: {e}")
 
         else:
-            entry.place(x=10, y=pixelsToAdd, width=180, height=40)
-            count.place(x=200, y=pixelsToAdd, width=45, height=40)
-            price.place(x=255, y=pixelsToAdd, width=45, height=40)
+            entry.place(x=10, y=pixelsToAdd, width=145, height=40)
+            count.place(x=165, y=pixelsToAdd, width=50, height=40)
+            price.place(x=225, y=pixelsToAdd, width=70, height=40)
+
+    """
+        Method to adding new entrys for user to manual write.
+        
+        Returns:
+            dict: The json data from the api.
+    """
+
+    def iamgeToJSON(self, path: str) -> dict:
+        apiController = ApiController()
+        result = apiController.getReceiptData(path)
+        print(result)
+        return result
 
     """
         Adds a product from the json list to the view.
     """
 
-    def addProductFromList(self, path: str):
-        apiController = ApiController()
-        result = apiController.getReceiptData(path)
-        print(result)
-        shopName = result["shop"]
+    def addProductFromList(self, json: dict) -> None:
+        shopName = json["shop"]
         print(shopName)
+        for child in self.scroll.winfo_children():
+            child.destroy()
+
         self.addReceiptView.shopNameEntry.delete(0, tk.END)
         self.addReceiptView.shopNameEntry.insert(0, shopName)
 
-        self.addReceiptView.hideFirstLine()
-
-        products = result["products"]
+        products = json["products"]
         productsCount = len(products)
 
-        self.addReceiptView.scrollableList.configure(height=productsCount * 50)
+        self.scroll.configure(height=productsCount * 50)
         
         for number, product in enumerate(products):
-            productName = ttk.Entry(self.addReceiptView.scrollableList)
-            productCount = ttk.Entry(self.addReceiptView.scrollableList)
-            productPrice = ttk.Entry(self.addReceiptView.scrollableList)
+            productName = ttk.Entry(self.scroll)
+            productCount = ttk.Entry(self.scroll)
+            productPrice = ttk.Entry(self.scroll)
 
             productName.insert(0, product[0])
             productCount.insert(0, f"{product[1]} szt.")
             productPrice.insert(0, f"{product[2]} zł")
 
-            productName.place(x=10, y=50 * number, width=180, height=40)
-            productCount.place(x=200, y=50 * number, width=45, height=40)
-            productPrice.place(x=255, y=50 * number, width=45, height=40)
+            productName.place(x=10, y=50 * number, width=145, height=40)
+            productCount.place(x=165, y=50 * number, width=50, height=40)
+            productPrice.place(x=225, y=50 * number, width=70, height=40)
 
+    """
+        Method to control the view.
+    """
+
+    def addReceiptController(self) -> None:
+        path = self.openDialog()
+
+        if not path:
+            return
+
+        if path.endswith(".json"):
+            self.addProductFromList(json.open(path))
+        elif path.endswith((".jpg", ".jpeg", ".png")):
+            pathForAPI = self.processImage(path)
+            result = self.iamgeToJSON(pathForAPI)
+            self.addProductFromList(result)
+        else:
+            messagebox.showerror("Error", "Invalid file format.")
+
+        return
