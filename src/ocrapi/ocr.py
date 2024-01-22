@@ -55,6 +55,7 @@ class Ocr(BaseModel):
                 products[i][1] = products[i][1].replace(' ', '')
                 products[i][1] = products[i][1].replace(' x', '')
                 products[i][1] = products[i][1].replace('0-', '')
+                products[i][1] = products[i][1].replace('847300t', '1')
                 products[i][2] = products[i][2].replace(' ', '')
                 item_pattern = r"\d+$"
                 products[i][0] = re.sub(item_pattern, '', products[i][0])
