@@ -3,6 +3,7 @@ from src.controllers.AddReceiptController import AddReceiptController
 from src.controllers.RegistrationController import RegistrationController
 from src.controllers.LoginController import LoginController
 from src.controllers.SynchronizationController import SynchronizationController
+from src.controllers.HistoryController import HistoryController
 from src.views.View import View
 from src.exceptions.Exceptions import (
     InvalidPasswordException,
@@ -22,6 +23,7 @@ class AppController:
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
+        self.historyController = HistoryController()
 
     def register(self, registrationView: View):
         """
@@ -102,3 +104,13 @@ class AppController:
         """
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addProduct()
+
+    def getHistory(self):
+        """
+        Gets the history from the data provider.
+
+        Returns:
+            list: A list of receipts.
+            list: A list of dates.
+        """
+        return self.historyController.getHistory()
