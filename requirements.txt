@@ -8,3 +8,4 @@ Flask==3.0.0
 opencv-python==4.8.1.78
 requests==2.31.0
 scikit-image==0.22.0
+matplotlib==3.7.1

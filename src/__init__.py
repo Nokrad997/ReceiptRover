@@ -1,5 +1,6 @@
 from .modelsOnline import User, OCRScan, Product, Receipt, Transaction
 from .controllers import (
+    DataAnalysisController,
     RegistrationController,
     LoginController,
     DataController,
@@ -13,4 +14,6 @@ from .repositories import (
     OCRScanRepository,
     ReceiptRepository,
     TransactionRepository,
+    ProductOfflineRepository,
+    ReceiptOfflineRepository,
 )
