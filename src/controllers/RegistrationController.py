@@ -1,53 +1,21 @@
-from src.modelsOnline.User import User
-from src.views.RegistrationView import RegistrationView
-from src.repositories.UserRepository import UserRepository
-from src.exceptions.Exceptions import UserAlreadyExistsException, InvalidNameException, InvalidPasswordException
-import re
+from src.views.View import View
+from src.services.RegistrationService import RegistrationService
+
 
 class RegistrationController:
-    def __init__(self, registrationView : RegistrationView = None, userRepository : UserRepository = None):
-        self.registrationView = registrationView
-        self.userRepository = userRepository
+    def __init__(self):
+        self.registrationService = RegistrationService()
 
-    def registerUser(self):
-        try:
-            if self.validateName() and self.validatePassword():
+    def registerUser(self, registrationView: View):
+        """
+        Register a user using the provided registration view.
 
-                usr = User(id = 0, name = self.registrationView.name, email = self.registrationView.email, password = self.registrationView.password)
-                res = self.userRepository.createUser(usr)
-                    
-                if isinstance(res, Exception):
-                    raise UserAlreadyExistsException("User already exists!")  
-                
-                else:
-                    return True
-        
-        except UserAlreadyExistsException as e:
-            return e
-        except InvalidNameException as e:
-            return e
-        except InvalidPasswordException as e:
-            return e
-        except Exception as e:
-            return e
-            
-    
-    def validateName(self):
-        name = self.registrationView.name
-        
-        if(len(name) < 3 or len(name) > 32):
-            raise InvalidNameException("Name must be between 3 and 32 characters long!")
+        Args:
+            registrationView (View): The registration view containing user information.
 
-        return True
+        Returns:
+            bool: True if the user is successfully registered, False otherwise.
+        """
+        result = self.registrationService.register(registrationView)
 
-    def validatePassword(self):
-        pwd = self.registrationView.password
-        rePwd = self.registrationView.reTypePassword
-        
-        if(len(pwd) < 8 or len(pwd) > 32):
-            raise InvalidPasswordException("Password must be between 8 and 32 characters long!")
-        
-        elif(pwd != rePwd):
-            raise InvalidPasswordException("Passwords do not match!")
-        
-        return True
+        return result
