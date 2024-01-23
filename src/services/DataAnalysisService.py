@@ -8,8 +8,7 @@ class DataAnalysisService:
         
     
     def getMounthlyStatement(self,receipt):
-        # troche nie wiem jak to brać skoro klucz sie generuje na podstawie daty kiedy wczytujemy dane
-        # pózniej to sie ogarnie
+
         pass
     
     def getShopStatement(self,receipts) ->str:
