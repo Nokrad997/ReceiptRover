@@ -48,15 +48,20 @@ class AppController:
             self.registrationController.registerUser(registrationView)
         except UserAlreadyExistsException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except InvalidNameException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except InvalidPasswordException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except Exception as e:
             print(e)
-        
+            messagebox.showerror("Registration", f"Unexpected error: {e}")
+        else:
+            messagebox.showinfo("Success", "You have successfully registered!")
+
         Navigator().navigateBack()
-        messagebox.showinfo("Success", "You have successfully registered!")
 
     def login(self, loginView: View):
         """
@@ -74,16 +79,23 @@ class AppController:
             AppController.loggedIn = self.loginController.loginUser(loginView)
         except UserDoesntExistException as e:
             print(e)
-            messagebox.showerror("Login", "User doesn't exist")
+            messagebox.showerror("Login", e)
         except InvalidPasswordException as e:
             print(e)
-            messagebox.showerror("Login", "Invalid password")
+            messagebox.showerror("Login", e)
         except Exception as e:
             print(e)
             messagebox.showerror("Login", f"Unexpected error: {e}")
-
+        else:
+            messagebox.showinfo("Login", "Login successful")
+        
         Navigator().navigateBack()
-        messagebox.showinfo("Login", "Login successful")
+
+    @staticmethod
+    def logout(mainView : View):
+        AppController.loggedIn = False
+        mainView.hide()
+        mainView.place()
 
     def addReceipt(self):
         """

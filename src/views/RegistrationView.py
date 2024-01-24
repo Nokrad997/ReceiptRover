@@ -44,9 +44,9 @@ class RegistrationView(View):
         self.emailLabel = ttk.Label(self.canvas, text="Email")
         self.emailEntry = ttk.Entry(self.canvas)
         self.passwordLabel = ttk.Label(self.canvas, text="Password")
-        self.passwordEntry = ttk.Entry(self.canvas)
+        self.passwordEntry = ttk.Entry(self.canvas, show="*")
         self.reTypePasswordLabel = ttk.Label(self.canvas, text="Repeat password")
-        self.reTypePasswordEntry = ttk.Entry(self.canvas)
+        self.reTypePasswordEntry = ttk.Entry(self.canvas, show="*")
 
         self.registerButton = ttk.Button(self.canvas, text="Register")
         self.registerButton.configure(bootstyle="primary", command=lambda: AppController().register(self))

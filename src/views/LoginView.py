@@ -29,7 +29,7 @@ class LoginView(View):
         self.loginLabel = ttk.Label(self.canvas, text="Email")
         self.loginEntry = ttk.Entry(self.canvas)
         self.passwordLabel = ttk.Label(self.canvas, text="Password")
-        self.passwordEntry = ttk.Entry(self.canvas)
+        self.passwordEntry = ttk.Entry(self.canvas, show="*")
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
         self.loginButton.configure(command=lambda: AppController().login(self))

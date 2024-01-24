@@ -4,6 +4,8 @@ import ttkbootstrap as ttk
 
 from src.Navigator import Navigator
 
+from src.controllers.AppController import AppController
+
 from src.views.AnalyseView import AnalyseView
 from src.views.AddReceiptView import AddReceiptView
 from src.views.HistoryView import HistoryView
@@ -60,6 +62,12 @@ class MainView(View):
             ),
         )
 
+        self.logoutButton = ttk.Button(self.navbarFrame, text="Logout")
+        self.logoutButton.configure(
+            bootstyle="outline-danger",
+            command=lambda: AppController.logout(mainView = self),
+        )
+
         self.quitButton = ttk.Button(self.navbarFrame, text="Quit")
         self.quitButton.configure(
             bootstyle="outline-danger", command=lambda: self.root.quit()
@@ -76,7 +84,12 @@ class MainView(View):
         self.analyseButton.place(x=10, y=0, width=300, height=40)
         self.addReceiptButton.place(x=10, y=50, width=300, height=40)
         self.historyButton.place(x=10, y=100, width=300, height=40)
-        self.loginButton.place(x=10, y=150, width=300, height=40)
+
+        if AppController.loggedIn:
+            self.logoutButton.place(x=10, y=150, width=300, height=40)
+        else:
+            self.loginButton.place(x=10, y=150, width=300, height=40)
+
         self.quitButton.place(x=10, y=200, width=300, height=40)
 
     def hide(self):
@@ -89,4 +102,5 @@ class MainView(View):
         self.addReceiptButton.place_forget()
         self.historyButton.place_forget()
         self.loginButton.place_forget()
+        self.logoutButton.place_forget()
         self.quitButton.place_forget()
