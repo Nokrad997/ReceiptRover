@@ -24,7 +24,7 @@ class LoginView(View):
         self.email = email
         self.password = password
 
-        self.loginMainLabel = ttk.Label(self.canvas, text="Login")
+        self.loginMainLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="Login")
 
         self.loginLabel = ttk.Label(self.canvas, text="Email")
         self.loginEntry = ttk.Entry(self.canvas)

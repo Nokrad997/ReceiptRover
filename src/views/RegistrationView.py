@@ -37,7 +37,7 @@ class RegistrationView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
 
-        self.registrationLabel = ttk.Label(self.canvas, text="Registration")
+        self.registrationLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="Registration")
 
         self.nameLabel = ttk.Label(self.canvas, text="Username")
         self.nameEntry = ttk.Entry(self.canvas)

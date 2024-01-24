@@ -20,9 +20,9 @@ class HistoryView(View):
             canvas (tk.Canvas): The canvas on which the view will be placed.
         """
         super().__init__(canvas)
-        self.fontDict = {"small": ("Arial", 12), "medium": ("Arial", 16), "large": ("Arial", 20)}
+        # self.fontDict = {"small": ("Arial", 12), "medium": ("Arial", 16), "large": ("Arial", 20)}
 
-        self.historyLabel = ttk.Label(self.canvas, font=self.fontDict['medium'], text="History")
+        self.historyLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="History")
 
         self.monthLabel = ttk.Label(self.canvas, text="Month")
         self.monthLabel.configure(justify=tk.CENTER)
