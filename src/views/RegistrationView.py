@@ -37,6 +37,8 @@ class RegistrationView(View):
     def __init__(self, canvas):
         super().__init__(canvas)
 
+        self.registrationLabel = ttk.Label(self.canvas, text="Registration")
+
         self.nameLabel = ttk.Label(self.canvas, text="Username")
         self.nameEntry = ttk.Entry(self.canvas)
         self.loginLabel = ttk.Label(self.canvas, text="Email")
@@ -62,16 +64,18 @@ class RegistrationView(View):
         """
         self.canvas.place(x=0, y=0, width=320, height=700)
 
-        self.nameLabel.place(x=60, y=90, width=200, height=20)
-        self.nameEntry.place(x=60, y=110, width=200, height=30)
-        self.loginLabel.place(x=60, y=150, width=200, height=20)
-        self.loginEntry.place(x=60, y=170, width=200, height=30)
-        self.passwordLabel.place(x=60, y=210, width=200, height=20)
-        self.passwordEntry.place(x=60, y=230, width=200, height=30)
-        self.secondPasswordLabel.place(x=60, y=270, width=200, height=20)
-        self.secondPasswordEntry.place(x=60, y=290, width=200, height=30)
+        self.registrationLabel.place(x=10, y=10, width=300, height=40)
 
-        self.registerButton.place(x=60, y=330, width=200, height=30)
+        self.nameLabel.place(x=60, y=150, width=200, height=20)
+        self.nameEntry.place(x=60, y=170, width=200, height=30)
+        self.loginLabel.place(x=60, y=210, width=200, height=20)
+        self.loginEntry.place(x=60, y=230, width=200, height=30)
+        self.passwordLabel.place(x=60, y=270, width=200, height=20)
+        self.passwordEntry.place(x=60, y=290, width=200, height=30)
+        self.secondPasswordLabel.place(x=60, y=330, width=200, height=20)
+        self.secondPasswordEntry.place(x=60, y=350, width=200, height=30)
+
+        self.registerButton.place(x=60, y=410, width=200, height=30)
 
         self.navbarFrame.place(x=0, y=640, width=320, height=50)
         self.backButton.place(x=10, y=10, width=300, height=40)
