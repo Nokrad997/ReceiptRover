@@ -1,4 +1,7 @@
+import calendar
 import tkinter as tk
+from datetime import datetime
+from tkinter import messagebox
 from ttkbootstrap import ttk
 
 from src.Navigator import Navigator
@@ -16,6 +19,34 @@ class AnalyseView(View):
             canvas (tk.Canvas): The canvas on which the view will be placed.
         """
         super().__init__(canvas)
+
+        self.analyseLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="Analyse")
+
+        self.selectedYear = tk.StringVar()  # Create a Tkinter variable
+        self.selectedMonth = tk.StringVar()  # Create a Tkinter variable
+
+        self.yearLabel = ttk.Label(self.canvas, text="Year")
+        self.yearLabel.configure(justify=tk.CENTER)
+
+        # Category combobox
+        self.yearMenuButton = ttk.Menubutton(
+            self.canvas,
+            bootstyle="outline-primary",
+            state="readonly",
+            textvariable=self.selectedYear,  # Link the variable to the Menubutton
+        )
+        self.yearMenuButton.menu = tk.Menu(self.yearMenuButton, tearoff=0)
+        self.yearMenuButton["menu"] = self.yearMenuButton.menu
+        for year in [
+            2023,
+            2024,
+        ]:
+            self.yearMenuButton.menu.add_radiobutton(
+                label=year,
+                value=year,
+                variable=self.selectedYear,
+                command=lambda: self.unlockMonths(int(self.selectedYear.get())),
+            )
 
         self.monthLabel = ttk.Label(self.canvas, text="Month")
         self.monthLabel.configure(justify=tk.CENTER)
@@ -84,6 +115,27 @@ class AnalyseView(View):
         self.navbarFrame.place_forget()
         self.backButton.place_forget()
 
+    def unlockMonths(self, year: int):
+        self.monthMenuButton.configure(state="readonly")
+
+        self.monthMenuButton.menu.delete(0, tk.END)
+
+        if year == datetime.now().year:
+            currentMonthIndex = datetime.now().month
+            availableMonths = calendar.month_name[1:currentMonthIndex+1]
+            messagebox.showinfo("Info", list(year, currentMonthIndex, availableMonths))
+        else:
+            availableMonths = calendar.month_name[1:]
+            messagebox.showinfo("Info", availableMonths)
+
+        for month in availableMonths:
+            self.monthMenuButton.menu.add_radiobutton(
+                label=month,
+                value=month,
+                variable=self.selectedMonth,
+                command=lambda: self.prepareChart(self.selectedMonth.get()),
+            )
+
     def prepareChart(self, month):
         """
         Prepare the chart for the selected month.
@@ -91,4 +143,4 @@ class AnalyseView(View):
         Args:
             month (str): The selected month.
         """
-        print(month)
+        print(month) 
