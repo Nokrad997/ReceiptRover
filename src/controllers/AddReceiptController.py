@@ -35,7 +35,7 @@ class AddReceiptController:
 
     def addProduct(self) -> None:
         """
-        Adds a product to the receipt.
+        Adds input to the frame so that the user can manually add a product to the list.
         """
         self.addReceiptService.addProduct()
 
@@ -62,6 +62,6 @@ class AddReceiptController:
 
     def addReceiptController(self) -> None:
         """
-        Adds the receipt to the system.
+        Adds the receipt to the view.
         """
         self.addReceiptService.addReceiptController()

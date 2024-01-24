@@ -1,6 +1,12 @@
-from src.modelsOnline.User import User
-from src.repositories.Repository import Repository
 import bcrypt
+
+from src.exceptions.Exceptions import (
+    UserDoesntExistException,
+)
+
+from src.modelsOnline.User import User
+
+from src.repositories.Repository import Repository
 
 
 class UserRepository(Repository):
@@ -46,12 +52,15 @@ class UserRepository(Repository):
         """
         query = f"SELECT * FROM \"User\" WHERE email = '{email}'"
         userArray = self.executeQuery(query)
-        return self.returnUser(
-            int(userArray[0][0]),
-            str(userArray[0][1]),
-            str(userArray[0][2]),
-            str(userArray[0][3]),
-        )
+        try: 
+            return self.returnUser(
+                int(userArray[0][0]),
+                str(userArray[0][1]),
+                str(userArray[0][2]),
+                str(userArray[0][3]),
+            )
+        except IndexError:
+            raise UserDoesntExistException("User doesn't exist")
 
     def updateUserPassword(self, userid, newpassword):
         """

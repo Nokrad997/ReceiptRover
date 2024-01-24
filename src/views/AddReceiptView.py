@@ -7,6 +7,9 @@ from ttkbootstrap.scrolled import ScrolledFrame
 from src.controllers.AppController import AppController
 
 from src.Navigator import Navigator
+
+from src.controllers.AppController import AppController
+
 from src.views.View import View
 
 

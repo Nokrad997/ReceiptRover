@@ -1,10 +1,7 @@
-from tkinter import filedialog
-from src.controllers.AddReceiptController import AddReceiptController
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
-from src.controllers.SynchronizationController import SynchronizationController
-from src.controllers.HistoryController import HistoryController
-from src.views.View import View
+from tkinter import messagebox
+
+from src.Navigator import Navigator
+
 from src.exceptions.Exceptions import (
     InvalidPasswordException,
     UserDoesntExistException,
@@ -12,14 +9,23 @@ from src.exceptions.Exceptions import (
     InvalidNameException,
 )
 
+from src.controllers.AddReceiptController import AddReceiptController
+from src.controllers.RegistrationController import RegistrationController
+from src.controllers.LoginController import LoginController
+from src.controllers.SynchronizationController import SynchronizationController
+from src.controllers.HistoryController import HistoryController
+
+from src.views.View import View
+
 
 class AppController:
     """
     Controller class for the application.
     """
 
+    loggedIn = False
+    
     def __init__(self):
-        self.loggedIn = False
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
@@ -42,12 +48,20 @@ class AppController:
             self.registrationController.registerUser(registrationView)
         except UserAlreadyExistsException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except InvalidNameException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except InvalidPasswordException as e:
             print(e)
+            messagebox.showerror("Registration", e)
         except Exception as e:
             print(e)
+            messagebox.showerror("Registration", f"Unexpected error: {e}")
+        else:
+            messagebox.showinfo("Success", "You have successfully registered!")
+
+        Navigator().navigateBack()
 
     def login(self, loginView: View):
         """
@@ -61,14 +75,27 @@ class AppController:
             InvalidPasswordException: If the password is invalid.
             Exception: If an unexpected error occurs.
         """
-        try:
-            self.loggedIn = self.loginController.login(loginView)
+        try:    
+            AppController.loggedIn = self.loginController.loginUser(loginView)
         except UserDoesntExistException as e:
             print(e)
+            messagebox.showerror("Login", e)
         except InvalidPasswordException as e:
             print(e)
+            messagebox.showerror("Login", e)
         except Exception as e:
             print(e)
+            messagebox.showerror("Login", f"Unexpected error: {e}")
+        else:
+            messagebox.showinfo("Login", "Login successful")
+        
+        Navigator().navigateBack()
+
+    @staticmethod
+    def logout(mainView : View):
+        AppController.loggedIn = False
+        mainView.hide()
+        mainView.place()
 
     def addReceipt(self):
         """
@@ -85,7 +112,8 @@ class AppController:
         """
         self.synchronizationController.synchronizeData(userId)
 
-    def addReceiptController(self, addReceiptView: View):
+    @staticmethod
+    def addReceiptController(addReceiptView: View):
         """
         Creates an instance of AddReceiptController and calls its addReceiptController method.
 
@@ -95,7 +123,8 @@ class AppController:
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addReceiptController()
 
-    def addProduct(self, addReceiptView: View):
+    @staticmethod
+    def addProduct(addReceiptView: View):
         """
         Creates an instance of AddReceiptController and calls its addProduct method.
 

@@ -2,6 +2,10 @@ import tkinter as tk
 from ttkbootstrap import ttk
 
 from src.Navigator import Navigator
+
+from src.controllers.AppController import AppController
+
+from src.views.RegistrationView import RegistrationView
 from src.views.View import View
 from src.controllers.AppController import AppController
 
@@ -21,14 +25,18 @@ class LoginView(View):
         self.email = email
         self.password = password
 
+        self.loginMainLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="Login")
+
         self.loginLabel = ttk.Label(self.canvas, text="Email")
         self.loginEntry = ttk.Entry(self.canvas)
         self.passwordLabel = ttk.Label(self.canvas, text="Password")
-        self.passwordEntry = ttk.Entry(self.canvas)
+        self.passwordEntry = ttk.Entry(self.canvas, show="*")
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
+        self.loginButton.configure(command=lambda: AppController().login(self))
+        
         self.registerButton = ttk.Button(self.canvas, text="Register")
-        self.registerButton.configure(bootstyle="outline")
+        self.registerButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(RegistrationView(self.canvas)))
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")
@@ -43,6 +51,8 @@ class LoginView(View):
         Places the login view on the canvas.
         """
         self.canvas.place(x=0, y=0, width=320, height=700)
+
+        self.loginMainLabel.place(x=10, y=10, width=300, height=40)
 
         self.loginLabel.place(x=60, y=150, width=200, height=20)
         self.loginEntry.place(x=60, y=170, width=200, height=30)
@@ -59,6 +69,8 @@ class LoginView(View):
         """
         Hides the login view from the canvas.
         """
+        self.loginMainLabel.place_forget()
+
         self.loginLabel.place_forget()
         self.loginEntry.place_forget()
         self.passwordLabel.place_forget()

@@ -4,10 +4,15 @@ import ttkbootstrap as ttk
 
 from src.views.AddReceiptView import AddReceiptView
 from src.Navigator import Navigator
-from src.views.View import View
+
+from src.controllers.AppController import AppController
+
 from src.views.AnalyseView import AnalyseView
 from src.views.AddReceiptView import AddReceiptView
+from src.views.HistoryView import HistoryView
 from src.views.LoginView import LoginView
+from src.views.View import View
+
 
 
 class MainView(View):
@@ -45,12 +50,24 @@ class MainView(View):
             command=lambda: Navigator().navigateTo(AddReceiptView(self.canvas)),
         )
 
-        self.accountButton = ttk.Button(self.navbarFrame, text="Login")
-        self.accountButton.configure(
+        self.historyButton = ttk.Button(self.navbarFrame, text="History")
+        self.historyButton.configure(
+            bootstyle="outline",
+            command=lambda: Navigator().navigateTo(HistoryView(self.canvas)),
+        )
+
+        self.loginButton = ttk.Button(self.navbarFrame, text="Login")
+        self.loginButton.configure(
             bootstyle="outline",
             command=lambda: Navigator().navigateTo(
                 LoginView(self.canvas, "email", "password")
             ),
+        )
+
+        self.logoutButton = ttk.Button(self.navbarFrame, text="Logout")
+        self.logoutButton.configure(
+            bootstyle="outline-danger",
+            command=lambda: AppController.logout(mainView = self),
         )
 
         self.quitButton = ttk.Button(self.navbarFrame, text="Quit")
@@ -64,12 +81,18 @@ class MainView(View):
 
         self.logoLabel.place(x=30, y=50, width=260, height=260)
 
-        self.navbarFrame.place(x=0, y=500, width=320, height=200)
+        self.navbarFrame.place(x=0, y=450, width=320, height=250)
 
         self.analyseButton.place(x=10, y=0, width=300, height=40)
         self.addReceiptButton.place(x=10, y=50, width=300, height=40)
-        self.accountButton.place(x=10, y=100, width=300, height=40)
-        self.quitButton.place(x=10, y=150, width=300, height=40)
+        self.historyButton.place(x=10, y=100, width=300, height=40)
+
+        if AppController.loggedIn:
+            self.logoutButton.place(x=10, y=150, width=300, height=40)
+        else:
+            self.loginButton.place(x=10, y=150, width=300, height=40)
+
+        self.quitButton.place(x=10, y=200, width=300, height=40)
 
     def hide(self):
         """Hide the main view elements from the canvas."""
@@ -79,5 +102,7 @@ class MainView(View):
 
         self.analyseButton.place_forget()
         self.addReceiptButton.place_forget()
-        self.accountButton.place_forget()
+        self.historyButton.place_forget()
+        self.loginButton.place_forget()
+        self.logoutButton.place_forget()
         self.quitButton.place_forget()

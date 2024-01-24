@@ -23,8 +23,8 @@ class LoginService:
             InvalidPasswordException: If the provided password is incorrect.
             UserDoesntExistException: If the user does not exist.
         """
-        email = loginView.getEmail()
-        password = loginView.getPassword()
+        email = loginView.loginEntry.get()
+        password = loginView.passwordEntry.get()
         usr = self.userRepository.getUserByEmail(email)
 
         if isinstance(usr, User):
