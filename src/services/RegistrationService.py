@@ -33,9 +33,9 @@ class RegistrationService:
                 res = self.userRepository.createUser(
                     User(
                         id=0,
-                        name=registrationView.name,
-                        email=registrationView.email,
-                        password=registrationView.password,
+                        name=registrationView.nameEntry.get(),
+                        email=registrationView.emailEntry.get(),
+                        password=registrationView.passwordEntry.get(),
                     )
                 )
 
@@ -67,7 +67,7 @@ class RegistrationService:
         Returns:
             bool: True if the name is valid.
         """
-        name = registrationView.name
+        name = registrationView.nameEntry.get()
 
         if len(name) < 3 or len(name) > 32:
             raise InvalidNameException("Name must be between 3 and 32 characters long!")
@@ -88,8 +88,8 @@ class RegistrationService:
         Returns:
             bool: True if the password is valid.
         """
-        pwd = registrationView.password
-        rePwd = registrationView.reTypePassword
+        pwd = registrationView.passwordEntry.get()
+        rePwd = registrationView.reTypePasswordEntry.get()
 
         if len(pwd) < 8 or len(pwd) > 32:
             raise InvalidPasswordException(

@@ -18,7 +18,6 @@ from src.controllers.HistoryController import HistoryController
 from src.views.View import View
 
 
-
 class AppController:
     """
     Controller class for the application.
@@ -55,6 +54,9 @@ class AppController:
             print(e)
         except Exception as e:
             print(e)
+        
+        Navigator().navigateBack()
+        messagebox.showinfo("Success", "You have successfully registered!")
 
     def login(self, loginView: View):
         """
