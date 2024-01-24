@@ -85,7 +85,8 @@ class AppController:
         """
         self.synchronizationController.synchronizeData(userId)
 
-    def addReceiptController(self, addReceiptView: View):
+    @staticmethod
+    def addReceiptController(addReceiptView: View):
         """
         Creates an instance of AddReceiptController and calls its addReceiptController method.
 
@@ -95,7 +96,8 @@ class AppController:
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addReceiptController()
 
-    def addProduct(self, addReceiptView: View):
+    @staticmethod
+    def addProduct(addReceiptView: View):
         """
         Creates an instance of AddReceiptController and calls its addProduct method.
 
