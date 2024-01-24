@@ -11,6 +11,8 @@ class LoginView(View):
         self.email = email
         self.password = password
 
+        self.loginLabel = ttk.Label(self.canvas, text="Login")
+
         self.loginLabel = ttk.Label(self.canvas, text="Email")
         self.loginEntry = ttk.Entry(self.canvas)
         self.passwordLabel = ttk.Label(self.canvas, text="Password")
@@ -30,6 +32,8 @@ class LoginView(View):
 
     def place(self):
         self.canvas.place(x=0, y=0, width=320, height=700)
+
+        self.loginLabel.place(x=10, y=10, width=300, height=40)
         
         self.loginLabel.place(x=60, y=145, width=200, height=20)
         self.loginEntry.place(x=60, y=165, width=200, height=30)
@@ -43,7 +47,7 @@ class LoginView(View):
         self.backButton.place(x=10, y=10, width=300, height=40)
 
     def hide(self):
-        # self.canvas.place_forget()
+        self.loginLabel.place_forget()
         
         self.loginLabel.place_forget()
         self.loginEntry.place_forget()
