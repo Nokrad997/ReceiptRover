@@ -159,12 +159,41 @@ class AddReceiptService:
             return
 
         if path.endswith(".json"):
-            self.addProductFromList(json.open(path))
+            resultList = json.open(path)
+            self.addProductFromList(resultList)
+            return resultList
+        
         elif path.endswith((".jpg", ".jpeg", ".png")):
             pathForAPI = self.processImage(path)
-            result = self.iamgeToJSON(pathForAPI)
-            self.addProductFromList(result)
+            resultList = self.iamgeToJSON(pathForAPI)
+            self.addProductFromList(resultList)
+            return resultList
+        
         else:
             messagebox.showerror("Error", "Invalid file format.")
+        
+        return None
+    
+    # def saveReceipt(self, resultList: list) -> None:
+    #     """
+    #     Save the receipt to the database.
 
-        return
+    #     Parameters:
+    #     - resultList (list): The list of products.
+    #     """
+    #     shopName = resultList['shop']
+    #     products = resultList['products']
+    #     print(products)
+    #     print(shopName)
+    #     if not shopName:
+    #         messagebox.showerror("Error", "Shop name cannot be empty.")
+    #         return
+
+    #     if not products:
+    #         messagebox.showerror("Error", "Products cannot be empty.")
+    #         return
+
+
+
+    #     self.addReceiptView.hide()
+    #     self.addReceiptView.place()

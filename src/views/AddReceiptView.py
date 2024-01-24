@@ -138,6 +138,8 @@ class AddReceiptView(View):
         )
         self.cameraButton.configure(bootstyle="outline")
 
+        self.resultList = []
+
         self.imageIcon = tk.PhotoImage(
             file=f"{self.currentPath}/src/icons/image 30x30.png"
         )
@@ -146,11 +148,11 @@ class AddReceiptView(View):
         )
         self.importImageButton.configure(
             bootstyle="outline",
-            command=lambda: AppController.addReceiptController(addReceiptView=self),
+            command=lambda: self.productList(),
         )
 
         self.saveButton = ttk.Button(self.navbarFrame, text="Save")
-        self.saveButton.configure(bootstyle="outline-success")
+        self.saveButton.configure(bootstyle="outline-success", command=lambda: AppController.saveReceipt(addReceiptView=self, resultList=self.resultList))
 
         self.backButton = ttk.Button(self.navbarFrame, text="Back")
         self.backButton.configure(
@@ -207,3 +209,12 @@ class AddReceiptView(View):
         self.firstEntry.place_forget()
         self.firstCount.place_forget()
         self.firstPrice.place_forget()
+
+    def productList(self):
+        """
+        Returns the list of products.
+
+        Returns:
+        - list: The list of products.
+        """
+        self.resultList = AppController.addReceiptController(addReceiptView=self)
