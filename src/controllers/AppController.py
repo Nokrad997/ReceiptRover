@@ -11,9 +11,13 @@ from src.exceptions.Exceptions import (
 
 from src.controllers.AddReceiptController import AddReceiptController
 from src.controllers.RegistrationController import RegistrationController
+from src.controllers.DataController import DataController
 from src.controllers.LoginController import LoginController
 from src.controllers.SynchronizationController import SynchronizationController
 from src.controllers.HistoryController import HistoryController
+
+from src.repositories.ProductOfflineRepository import ProductOfflineRepository
+from src.repositories.ReceiptOfflineRepository import ReceiptOfflineRepository
 
 from src.views.View import View
 
@@ -121,7 +125,7 @@ class AppController:
             addReceiptView (View): The add receipt view.
         """
         addReceiptController = AddReceiptController(addReceiptView)
-        addReceiptController.addReceiptController()
+        return addReceiptController.addReceiptController()
 
     @staticmethod
     def addProduct(addReceiptView: View):
@@ -133,6 +137,21 @@ class AppController:
         """
         addReceiptController = AddReceiptController(addReceiptView)
         addReceiptController.addProduct()
+
+    @staticmethod
+    def saveReceipt(addReceiptView: View, resultList: list):
+        """
+        Creates an instance of AddReceiptController and calls its saveReceipt method.
+
+        Args:
+            addReceiptView (View): The add receipt view.
+            resultList (list): The list of products.
+        """
+        receiptOfflineRepository = ReceiptOfflineRepository()
+        receipt = receiptOfflineRepository.createReceipt(resultList['shop'], ProductOfflineRepository.createListOfProduct(resultList['products']))
+
+        dataController = DataController()
+        dataController.addReceipt(receipt)
 
     def getHistory(self):
         """

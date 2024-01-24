@@ -3,7 +3,7 @@ from src.modelsOffline.Product import Product
 
 
 class ProductOfflineRepository(Repository):
-    def createProduct(self, name, price, quantity):
+    def createProduct(self, name: str, price: float, quantity: int):
         """
         Create a new product with the given name, price, and quantity.
 
@@ -16,3 +16,16 @@ class ProductOfflineRepository(Repository):
             Product: The newly created product object.
         """
         return Product(name, price, quantity)
+
+    @staticmethod
+    def createListOfProduct(products: list):
+        """
+        Create a list of products with the given list of products.
+
+        Args:
+            products (list): A list of products.
+
+        Returns:
+            list: The newly created list of products.
+        """
+        return [Product(name = product[0], price = product[2], quantity = product[1]) for product in products]
