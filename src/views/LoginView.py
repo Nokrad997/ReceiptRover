@@ -32,9 +32,10 @@ class LoginView(View):
         self.passwordEntry = ttk.Entry(self.canvas)
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
+        self.loginButton.configure(command=lambda: AppController().login(self))
         
-        self.registerButton = ttk.Button(self.canvas, text="Register", command=lambda: Navigator().navigateTo(RegistrationView(self.canvas)))
-        self.registerButton.configure(bootstyle="outline")
+        self.registerButton = ttk.Button(self.canvas, text="Register")
+        self.registerButton.configure(bootstyle="outline", command=lambda: Navigator().navigateTo(RegistrationView(self.canvas)))
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")

@@ -1,16 +1,22 @@
-from tkinter import filedialog
-from src.controllers.AddReceiptController import AddReceiptController
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
-from src.controllers.SynchronizationController import SynchronizationController
-from src.controllers.HistoryController import HistoryController
-from src.views.View import View
+from tkinter import messagebox
+
+from src.Navigator import Navigator
+
 from src.exceptions.Exceptions import (
     InvalidPasswordException,
     UserDoesntExistException,
     UserAlreadyExistsException,
     InvalidNameException,
 )
+
+from src.controllers.AddReceiptController import AddReceiptController
+from src.controllers.RegistrationController import RegistrationController
+from src.controllers.LoginController import LoginController
+from src.controllers.SynchronizationController import SynchronizationController
+from src.controllers.HistoryController import HistoryController
+
+from src.views.View import View
+
 
 
 class AppController:
@@ -62,13 +68,19 @@ class AppController:
             Exception: If an unexpected error occurs.
         """
         try:
-            self.loggedIn = self.loginController.login(loginView)
+            self.loggedIn = self.loginController.loginUser(loginView)
         except UserDoesntExistException as e:
             print(e)
+            messagebox.showerror("Login", "User doesn't exist")
         except InvalidPasswordException as e:
             print(e)
+            messagebox.showerror("Login", "Invalid password")
         except Exception as e:
             print(e)
+            messagebox.showerror("Login", f"Unexpected error: {e}")
+        else:
+            messagebox.showinfo("Login", "Login successful")
+            Navigator().navigateBack()
 
     def addReceipt(self):
         """
