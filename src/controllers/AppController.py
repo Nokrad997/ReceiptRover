@@ -24,8 +24,9 @@ class AppController:
     Controller class for the application.
     """
 
+    loggedIn = False
+    
     def __init__(self):
-        self.loggedIn = False
         self.registrationController = RegistrationController()
         self.loginController = LoginController()
         self.synchronizationController = SynchronizationController()
@@ -67,8 +68,8 @@ class AppController:
             InvalidPasswordException: If the password is invalid.
             Exception: If an unexpected error occurs.
         """
-        try:
-            self.loggedIn = self.loginController.loginUser(loginView)
+        try:    
+            AppController.loggedIn = self.loginController.loginUser(loginView)
         except UserDoesntExistException as e:
             print(e)
             messagebox.showerror("Login", "User doesn't exist")
@@ -78,9 +79,9 @@ class AppController:
         except Exception as e:
             print(e)
             messagebox.showerror("Login", f"Unexpected error: {e}")
-        else:
-            messagebox.showinfo("Login", "Login successful")
-            Navigator().navigateBack()
+
+        Navigator().navigateBack()
+        messagebox.showinfo("Login", "Login successful")
 
     def addReceipt(self):
         """
