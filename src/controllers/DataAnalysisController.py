@@ -2,7 +2,7 @@ from src.services.DataAnalysisService import DataAnalysisService
 class DataAnalysisController():
     def __init__(self):
         self.service = DataAnalysisService()
-    
+    # jeszcze nie zaimplementowane
     def getMounthlyStatement(self,receipt,year,month):
         """
         Generates a chart base on Monthly expenses
@@ -17,7 +17,7 @@ class DataAnalysisController():
         
     def getShopStatement(self,receipt,year,month):
         """
-        Generates a chart base on expensys from particular shops
+        Generates a chart base on expensys from particular shops in selected month
         Args:
             receipt: The receipt to be analysed.
             year: The year
