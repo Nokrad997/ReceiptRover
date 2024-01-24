@@ -2,8 +2,11 @@ import tkinter as tk
 from ttkbootstrap import ttk
 
 from src.Navigator import Navigator
-from src.views.View import View
+
 from src.controllers.AppController import AppController
+
+from src.views.RegistrationView import RegistrationView
+from src.views.View import View
 
 
 class LoginView(View):
@@ -27,7 +30,7 @@ class LoginView(View):
         self.passwordEntry = ttk.Entry(self.canvas)
 
         self.loginButton = ttk.Button(self.canvas, text="Login")
-        self.registerButton = ttk.Button(self.canvas, text="Register")
+        self.registerButton = ttk.Button(self.canvas, text="Register", command=lambda: Navigator().navigateTo(RegistrationView(self.canvas)))
         self.registerButton.configure(bootstyle="outline")
 
         self.navbarFrame = ttk.Frame(self.canvas)
