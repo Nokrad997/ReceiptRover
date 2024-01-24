@@ -84,6 +84,8 @@ class RegistrationView(View):
         """
         Hides the login view from the canvas.
         """
+        self.registrationLabel.place_forget()
+        
         self.nameLabel.place_forget()
         self.nameEntry.place_forget()
         self.loginLabel.place_forget()

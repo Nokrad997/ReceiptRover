@@ -17,6 +17,8 @@ class AnalyseView(View):
         """
         super().__init__(canvas)
 
+        self.analyseLabel = ttk.Label(self.canvas, font=("Helvetica", 16), text="Analyse")
+
         self.monthLabel = ttk.Label(self.canvas, text="Month")
         self.monthLabel.configure(justify=tk.CENTER)
 
@@ -66,6 +68,8 @@ class AnalyseView(View):
         """Place the AnalyseView on the canvas."""
         self.canvas.place(x=0, y=0, width=320, height=700)
 
+        self.analyseLabel.place(x=10, y=10, width=300, height=40)
+
         self.monthLabel.place(x=60, y=170, width=200, height=20)
         self.monthMenuButton.place(x=60, y=190, width=200, height=30)
 
@@ -76,6 +80,8 @@ class AnalyseView(View):
 
     def hide(self):
         """Hide the AnalyseView."""
+        self.analyseLabel.place_forget()
+        
         self.monthLabel.place_forget()
         self.monthMenuButton.place_forget()
 
