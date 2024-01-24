@@ -11,11 +11,6 @@ root.resizable(False, False)
 # print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$b6derw0r4Sw2wYE0C2GuU.ecVTku5uzGQtvw3YO/ZyIvYNTJTyLQW".encode('utf-8')))
 # print(bcrypt.checkpw('testtest'.encode('utf-8'), "$2b$12$xqLrHQyUN5OOeDlCilkvFOe3GVr0/mG6tckQ2IQjiWgCTz8QhV8Bi".encode('utf-8')))
 
-windows = ttk.Window(themename="superhero")
-windows.title("Test")
-windows.geometry("321x694")
-windows.resizable(False, False)
-
 mainViewCanvas = tk.Canvas(root)
 mainView = MainView(mainViewCanvas, root)
 Navigator().navigateTo(mainView)
