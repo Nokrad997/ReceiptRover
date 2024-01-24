@@ -1,16 +1,21 @@
-from tkinter import filedialog
-from src.controllers.AddReceiptController import AddReceiptController
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
-from src.controllers.SynchronizationController import SynchronizationController
-from src.controllers.HistoryController import HistoryController
-from src.views.View import View
+from tkinter import messagebox
+
+from src.Navigator import Navigator
+
 from src.exceptions.Exceptions import (
     InvalidPasswordException,
     UserDoesntExistException,
     UserAlreadyExistsException,
     InvalidNameException,
 )
+
+from src.controllers.AddReceiptController import AddReceiptController
+from src.controllers.RegistrationController import RegistrationController
+from src.controllers.LoginController import LoginController
+from src.controllers.SynchronizationController import SynchronizationController
+from src.controllers.HistoryController import HistoryController
+
+from src.views.View import View
 
 
 class AppController:
@@ -48,6 +53,9 @@ class AppController:
             print(e)
         except Exception as e:
             print(e)
+        
+        Navigator().navigateBack()
+        messagebox.showinfo("Success", "You have successfully registered!")
 
     def login(self, loginView: View):
         """
