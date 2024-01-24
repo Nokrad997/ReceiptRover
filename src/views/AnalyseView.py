@@ -51,34 +51,16 @@ class AnalyseView(View):
         self.monthLabel = ttk.Label(self.canvas, text="Month")
         self.monthLabel.configure(justify=tk.CENTER)
 
-        self.selected_month = tk.StringVar()  # Create a Tkinter variable
         # Category combobox
         self.monthMenuButton = ttk.Menubutton(
             self.canvas,
             bootstyle="outline-primary",
-            state="readonly",
-            textvariable=self.selected_month,  # Link the variable to the Menubutton
+            state="disabled",
+            textvariable=self.selectedMonth,  # Link the variable to the Menubutton
         )
         self.monthMenuButton.menu = tk.Menu(self.monthMenuButton, tearoff=0)
         self.monthMenuButton["menu"] = self.monthMenuButton.menu
-        for month in [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-        ]:
-            self.monthMenuButton.menu.add_radiobutton(
-                label=month,
-                value=month,
-                variable=self.selected_month,
-                command=lambda: self.prepareChart(self.selected_month.get()),
-            )
+
 
         self.chartFrame = ttk.Frame(self.canvas)
         self.chartFrame.configure(bootstyle="sucess")
@@ -99,10 +81,13 @@ class AnalyseView(View):
 
         self.analyseLabel.place(x=10, y=10, width=300, height=40)
 
-        self.monthLabel.place(x=60, y=170, width=200, height=20)
-        self.monthMenuButton.place(x=60, y=190, width=200, height=30)
+        self.yearLabel.place(x=60, y=170, width=200, height=20)
+        self.yearMenuButton.place(x=60, y=190, width=200, height=30)
 
-        self.chartFrame.place(x=10, y=225, width=300, height=300)
+        self.monthLabel.place(x=60, y=230, width=200, height=20)
+        self.monthMenuButton.place(x=60, y=250, width=200, height=30)
+
+        self.chartFrame.place(x=10, y=290, width=300, height=300)
 
         self.navbarFrame.place(x=0, y=640, width=320, height=50)
         self.backButton.place(x=10, y=10, width=300, height=40)
@@ -110,6 +95,9 @@ class AnalyseView(View):
     def hide(self):
         """Hide the AnalyseView."""
         self.analyseLabel.place_forget()
+
+        self.yearLabel.place_forget()
+        self.yearMenuButton.place_forget()
         
         self.monthLabel.place_forget()
         self.monthMenuButton.place_forget()

@@ -30,7 +30,7 @@ class Receipt(BaseModel):
         Returns:
             str: The shop of the receipt.
         """
-        return self.key
+        return self.shop
 
     @property
     def getProducts(self) -> list[Product]:
@@ -60,7 +60,7 @@ class Receipt(BaseModel):
         Args:
             value (str): The shop to set.
         """
-        self.key = value
+        self.shop = value
 
     @getProducts.setter
     def setProducts(self, value: list[Product]):

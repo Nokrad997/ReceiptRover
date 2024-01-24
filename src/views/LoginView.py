@@ -7,6 +7,7 @@ from src.controllers.AppController import AppController
 
 from src.views.RegistrationView import RegistrationView
 from src.views.View import View
+from src.controllers.AppController import AppController
 
 
 class LoginView(View):

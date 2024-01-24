@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 import ttkbootstrap as ttk
 
+from src.views.AddReceiptView import AddReceiptView
 from src.Navigator import Navigator
 
 from src.controllers.AppController import AppController
@@ -11,6 +12,7 @@ from src.views.AddReceiptView import AddReceiptView
 from src.views.HistoryView import HistoryView
 from src.views.LoginView import LoginView
 from src.views.View import View
+
 
 
 class MainView(View):
