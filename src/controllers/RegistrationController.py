@@ -1,5 +1,5 @@
-from src.views.View import View
 from src.services.RegistrationService import RegistrationService
+from src.views.View import View
 
 
 class RegistrationController:

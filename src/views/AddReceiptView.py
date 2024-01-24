@@ -4,9 +4,10 @@ from PIL import Image, ImageTk
 from ttkbootstrap import ttk
 from ttkbootstrap.scrolled import ScrolledFrame
 
+from src.Navigator import Navigator
+
 from src.controllers.AppController import AppController
 
-from src.Navigator import Navigator
 from src.views.View import View
 
 

@@ -1,5 +1,5 @@
 from src.repositories.UserRepository import UserRepository
-from src.views.RegistrationView import RegistrationView
+from src.views.View import View
 from src.modelsOnline.User import User
 from src.exceptions.Exceptions import (
     UserAlreadyExistsException,
@@ -16,7 +16,7 @@ class RegistrationService:
     def __init__(self):
         self.userRepository = UserRepository()
 
-    def register(self, registrationView: RegistrationView):
+    def register(self, registrationView: View):
         """
         Registers a new user.
 
@@ -54,7 +54,7 @@ class RegistrationService:
         except Exception as e:
             return e
 
-    def validateName(self, registrationView: RegistrationView):
+    def validateName(self, registrationView: View):
         """
         Validates the user's name.
 
@@ -74,7 +74,7 @@ class RegistrationService:
 
         return True
 
-    def validatePassword(self, registrationView: RegistrationView):
+    def validatePassword(self, registrationView: View):
         """
         Validates the user's password.
 
