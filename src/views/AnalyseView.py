@@ -49,7 +49,7 @@ class AnalyseView(View):
                 label=year,
                 value=year,
                 variable=self.selectedYear,
-                command=lambda: self.unlockMonths(self.selectedYear.get()),
+                command=lambda: self.unlockMonths(int(self.selectedYear.get())),
             )
 
         self.monthLabel = ttk.Label(self.canvas, text="Month")
@@ -109,12 +109,11 @@ class AnalyseView(View):
 
     def unlockMonths(self, year: int):
         self.monthMenuButton.configure(state="readonly")
-
-        availableMonths = []
+        self.monthMenuButton.menu.delete(0, tk.END)
 
         if year == datetime.now().year:
             currentMonthIndex = datetime.now().month
-            availableMonths = calendar.month_name[currentMonthIndex:]
+            availableMonths = calendar.month_name[1:currentMonthIndex+1]
         else:
             availableMonths = calendar.month_name[1:]
 

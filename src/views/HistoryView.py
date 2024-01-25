@@ -6,6 +6,7 @@ from src.Navigator import Navigator
 
 from src.controllers.AppController import AppController
 
+from src.views.ReceiptView import ReceiptView
 from src.views.View import View
 
 
@@ -64,13 +65,11 @@ class HistoryView(View):
         """
         appController = AppController()
         receipts, dates = appController.getHistory()
-        # print(receipts, dates)
-        combined_list = list(zip(receipts, dates))
-        # print(combined_list)
 
-        for receipt, date in combined_list:
+        for receipt, date in list(zip(receipts, dates)):
             receiptFrame = ttk.Labelframe(self.scrollableFrame)
             receiptFrame.configure(bootstyle="default")
+            receiptFrame.bind("<Button-1>", lambda event, receipt=receipt: Navigator().navigateTo(ReceiptView(self.canvas, receipt)))
 
             dateLabel = ttk.Label(receiptFrame, text=date.strftime("%d/%m/%Y"))
             dateLabel.configure(font=self.fontDict['small'], justify=tk.LEFT)

@@ -57,3 +57,5 @@ class ReceiptOfflineRepository:
             randomDatetime = startDatetime + randomTimedelta
             
             return randomDatetime.strftime("%Y%m%d%H%M%S")
+    
+    

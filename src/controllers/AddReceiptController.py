@@ -64,4 +64,13 @@ class AddReceiptController:
         """
         Adds the receipt to the view.
         """
-        self.addReceiptService.addReceiptController()
+        return self.addReceiptService.addReceiptController()
+    
+    # def saveReceipt(self, resultList: list) -> None:
+    #     """
+    #     Saves the receipt.
+
+    #     Args:
+    #         resultList (list): The list of products.
+    #     """
+    #     self.addReceiptService.saveReceipt(resultList)
