@@ -31,9 +31,9 @@ class AppController:
     loggedIn = False
     
     def __init__(self):
-        # self.registrationController = RegistrationController()
-        # self.loginController = LoginController()
-        # self.synchronizationController = SynchronizationController()
+        self.registrationController = RegistrationController()
+        self.loginController = LoginController()
+        self.synchronizationController = SynchronizationController()
         self.historyController = HistoryController()
 
     def register(self, registrationView: View):
