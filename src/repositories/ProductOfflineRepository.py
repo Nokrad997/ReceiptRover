@@ -29,3 +29,5 @@ class ProductOfflineRepository(Repository):
             list: The newly created list of products.
         """
         return [Product(name = product[0], price = product[2], quantity = product[1]) for product in products]
+    
+    """zmiany"""
