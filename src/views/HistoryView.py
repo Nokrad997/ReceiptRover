@@ -39,7 +39,7 @@ class HistoryView(View):
         )
 
     def place(self):
-        """Place the AnalyseView on the canvas."""
+        """Place the HistoryView on the canvas."""
         self.canvas.place(x=0, y=0, width=320, height=700)
 
         self.historyLabel.place(x=10, y=10, width=300, height=40)
@@ -50,7 +50,7 @@ class HistoryView(View):
         self.backButton.place(x=10, y=10, width=300, height=40)
 
     def hide(self):
-        """Hide the AnalyseView."""
+        """Hide the HistoryView."""
         self.historyLabel.place_forget()
 
         self.scrollableFrame.place_forget()

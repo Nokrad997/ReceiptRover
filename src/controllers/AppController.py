@@ -10,10 +10,12 @@ from src.exceptions.Exceptions import (
 )
 
 from src.controllers.AddReceiptController import AddReceiptController
-from src.controllers.RegistrationController import RegistrationController
-from src.controllers.LoginController import LoginController
-from src.controllers.SynchronizationController import SynchronizationController
+from src.controllers.DataController import DataController
+from src.controllers.DataAnalysisController import DataAnalysisController
 from src.controllers.HistoryController import HistoryController
+from src.controllers.LoginController import LoginController
+from src.controllers.RegistrationController import RegistrationController
+from src.controllers.SynchronizationController import SynchronizationController
 
 from src.views.View import View
 
@@ -26,9 +28,9 @@ class AppController:
     loggedIn = False
     
     def __init__(self):
-        self.registrationController = RegistrationController()
-        self.loginController = LoginController()
-        self.synchronizationController = SynchronizationController()
+        # self.registrationController = RegistrationController()
+        # self.loginController = LoginController()
+        # self.synchronizationController = SynchronizationController()
         self.historyController = HistoryController()
 
     def register(self, registrationView: View):
@@ -143,3 +145,22 @@ class AppController:
             list: A list of dates.
         """
         return self.historyController.getHistory()
+    
+    @staticmethod
+    def prepareChart(month, year):
+        """
+        Prepares the charts for the history view.
+
+        Args:
+            month (int): The month.
+            year (int): The year.
+
+        Returns:
+            list: A list of labels.
+            list: A list of values.
+        """
+        dataController = DataController()
+        receipts = dataController.loadReceipts()
+
+        dataAnalysisController = DataAnalysisController()
+        return dataAnalysisController.getShopStatement(receipts, month, year)

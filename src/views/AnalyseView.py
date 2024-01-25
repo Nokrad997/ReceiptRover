@@ -1,9 +1,14 @@
 import calendar
+import os
 import tkinter as tk
 from datetime import datetime
+from PIL import Image, ImageTk
 from ttkbootstrap import ttk
 
 from src.Navigator import Navigator
+
+from src.controllers.AppController import AppController
+
 from src.views.View import View
 
 
@@ -60,11 +65,7 @@ class AnalyseView(View):
         self.monthMenuButton.menu = tk.Menu(self.monthMenuButton, tearoff=0)
         self.monthMenuButton["menu"] = self.monthMenuButton.menu
 
-
-        self.chartFrame = ttk.Frame(self.canvas)
-        self.chartFrame.configure(bootstyle="sucess")
-
-        # paste matplotlib chart into frame
+        self.chartLabel = ttk.Label(self.canvas)
 
         self.navbarFrame = ttk.Frame(self.canvas)
         self.navbarFrame.configure(bootstyle="sucess")
@@ -86,7 +87,7 @@ class AnalyseView(View):
         self.monthLabel.place(x=60, y=230, width=200, height=20)
         self.monthMenuButton.place(x=60, y=250, width=200, height=30)
 
-        self.chartFrame.place(x=10, y=290, width=300, height=300)
+        self.chartLabel.place(x=10, y=290, width=300, height=300)
 
         self.navbarFrame.place(x=0, y=640, width=320, height=50)
         self.backButton.place(x=10, y=10, width=300, height=40)
@@ -101,7 +102,7 @@ class AnalyseView(View):
         self.monthLabel.place_forget()
         self.monthMenuButton.place_forget()
 
-        self.chartFrame.place_forget()
+        self.chartLabel.place_forget()
 
         self.navbarFrame.place_forget()
         self.backButton.place_forget()
@@ -122,14 +123,18 @@ class AnalyseView(View):
                 label=month,
                 value=month,
                 variable=self.selectedMonth,
-                command=lambda: self.prepareChart(self.selectedMonth.get()),
+                command=lambda: self.prepareChart(month=int(list(calendar.month_name).index(self.selectedMonth.get())), year=year),
             )
 
-    def prepareChart(self, month):
+    def prepareChart(self, month, year):
         """
         Prepare the chart for the selected month.
 
         Args:
             month (str): The selected month.
         """
-        print(month)
+        chartPath = AppController().prepareChart(month, year)
+        fullPath = os.getcwd() + "/" + chartPath
+        self.image = Image.open(fullPath, mode="r")
+        self.labelImage = ImageTk.PhotoImage(self.image)
+        self.chartLabel.configure(image=self.labelImage, justify=tk.CENTER)
