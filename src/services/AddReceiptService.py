@@ -60,11 +60,11 @@ class AddReceiptService:
             .replace(".", "_")
             .replace("-", "_")
         )
-        messagebox.showinfo("Date", date)
+        # messagebox.showinfo("Date", date)
         pathForApi = scannerController.saveScanned(f"scanned_{date}.jpg")
-        messagebox.showinfo(
-            "Info", f"Image processed successfully. Name: '{pathForApi}'"
-        )
+        # messagebox.showinfo(
+        #     "Info", f"Image processed successfully. Name: '{pathForApi}'"
+        # )
 
         return pathForApi
     
