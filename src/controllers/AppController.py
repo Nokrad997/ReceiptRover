@@ -154,6 +154,8 @@ class AppController:
         dataController = DataController()
         dataController.addReceipt(receipt)
 
+        Navigator().navigateBack()
+
     def getHistory(self):
         """
         Gets the history from the data provider.
