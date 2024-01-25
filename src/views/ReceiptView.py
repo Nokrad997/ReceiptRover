@@ -63,6 +63,10 @@ class ReceiptView(View):
         """Hide the AnalyseView."""
         self.shopLabel.place_forget()
 
+        self.productLabel.place_forget()
+        self.countLabel.place_forget()
+        self.priceLabel.place_forget()
+
         self.scrollableFrame.place_forget()
 
         self.navbarFrame.place_forget()

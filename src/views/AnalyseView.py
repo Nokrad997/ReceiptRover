@@ -109,16 +109,13 @@ class AnalyseView(View):
 
     def unlockMonths(self, year: int):
         self.monthMenuButton.configure(state="readonly")
-
         self.monthMenuButton.menu.delete(0, tk.END)
 
         if year == datetime.now().year:
             currentMonthIndex = datetime.now().month
             availableMonths = calendar.month_name[1:currentMonthIndex+1]
-            messagebox.showinfo("Info", list(year, currentMonthIndex, availableMonths))
         else:
             availableMonths = calendar.month_name[1:]
-            messagebox.showinfo("Info", availableMonths)
 
         for month in availableMonths:
             self.monthMenuButton.menu.add_radiobutton(
