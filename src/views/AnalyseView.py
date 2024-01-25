@@ -125,14 +125,14 @@ class AnalyseView(View):
                 command=lambda: self.prepareChart(month=int(list(calendar.month_name).index(self.selectedMonth.get())), year=year),
             )
 
-    def prepareChart(self, month, year):
+    def prepareChart(self, year, month):
         """
         Prepare the chart for the selected month.
 
         Args:
             month (str): The selected month.
         """
-        chartPath = AppController().prepareChart(month, year)
+        chartPath = AppController().prepareChart(year, month)
         fullPath = os.getcwd() + "/" + chartPath
         self.image = Image.open(fullPath, mode="r")
         self.labelImage = ImageTk.PhotoImage(self.image)

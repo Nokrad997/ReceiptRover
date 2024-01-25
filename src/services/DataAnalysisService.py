@@ -39,7 +39,7 @@ class DataAnalysisService:
             else:
                 data[shopName] += total_cost
 
-        fig, ax = plt.subplots(facecolor="lightgray")
+        # fig, ax = plt.subplots(facecolor="lightgray")
 
         # od danej ceny
         data = {key: value for key, value in data.items() if value > 10}
@@ -51,6 +51,8 @@ class DataAnalysisService:
         shops = list(data.keys())
         costs = list(data.values())
 
+        plt.figure(figsize=(4, 4))
+
         plt.bar(
             shops,
             costs,
@@ -61,20 +63,18 @@ class DataAnalysisService:
             alpha=0.5,
         )
 
-        plt.figure(figsize=(3, 3))
-
         plt.title(
             "Suma wydatków w poszczególnych sklepach",
-            fontdict={"fontsize": 10, "fontweight": "bold"},
+            fontdict={"fontsize": 9, "fontweight": "bold"},
         )
-        plt.xlabel("Sklepy", fontdict={"fontsize": 8})
-        plt.ylabel("Suma wydatków(PLN)", fontdict={"fontsize": 8})
+        plt.xlabel("Sklepy", fontdict={"fontsize": 7})
+        plt.ylabel("Suma wydatków(PLN)", fontdict={"fontsize": 7})
 
         now = datetime.now()
         date_time = now.strftime("%m%d%Y%H%M%S%f")
         path = self.path + date_time + ".jpg"  
 
-        plt.savefig(path, dpi=90)
+        plt.savefig(path, dpi=75)
         # plt.show()
         plt.close()
 

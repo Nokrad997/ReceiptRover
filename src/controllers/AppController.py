@@ -165,7 +165,7 @@ class AppController:
         return self.historyController.getHistory()
     
     @staticmethod
-    def prepareChart(month, year):
+    def prepareChart(year, month):
         """
         Prepares the charts for the history view.
 
@@ -181,4 +181,4 @@ class AppController:
         receipts = dataController.loadReceipts()
 
         dataAnalysisController = DataAnalysisController()
-        return dataAnalysisController.getShopStatement(receipts, month, year)
+        return dataAnalysisController.getShopStatement(receipts, year, month)
